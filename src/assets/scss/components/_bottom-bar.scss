@@ -1,0 +1,69 @@
+@mixin bottom-bar {
+  // Top bar container
+  .bottom-bar {
+    
+    @include top-bar-container;
+
+    // Stack on small screens by default
+    @include top-bar-stacked;
+
+    @include breakpoint($topbar-unstack-breakpoint) {
+      @include top-bar-unstack;
+    }
+
+    // Generate classes for stacking on each screen size (defined in $breakpoint-classes)
+    @each $size in $breakpoint-classes {
+      @if $size != $-zf-zero-breakpoint {
+        &.stacked-for-#{$size} {
+          @include breakpoint($size down) {
+            @include top-bar-stacked;
+          }
+        }
+      }
+    }
+    
+    @include bottom-sticky;
+  }
+
+  // Sub-sections
+  @if $global-flexbox {
+    .top-bar-title {
+      flex: 0 0 auto;
+      margin: $topbar-title-spacing;
+    }
+
+    .top-bar-left,
+    .top-bar-right {
+      flex: 0 0 auto;
+    }
+  }
+  @else {
+    .top-bar-title {
+      display: inline-block;
+      float: left;
+      padding: $topbar-title-spacing;
+
+      .menu-icon {
+        bottom: 2px;
+      }
+    }
+
+    .top-bar-left {
+      float: left;
+    }
+
+    .top-bar-right {
+      float: right;
+    }
+  }
+  
+  
+}
+
+/// Makes sections of a top bar stack on top of each other.
+@mixin bottom-sticky {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 5;
+}

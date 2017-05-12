@@ -1,0 +1,33 @@
+@mixin branding {
+  .menu-home {
+    font-family: $header-font-family
+  }
+  
+  .author {
+    font-size: .875em;
+    font-style: normal;
+    text-transform: uppercase;
+    margin-bottom: $paragraph-margin-bottom;
+  }
+  
+  .intro-page {
+    height: 100vh;
+//    position: absolute;
+  }
+  
+  .intro-content {
+    margin-bottom: 10em;
+  }
+  
+  .intro-header {
+    margin-bottom: 2 * $paragraph-margin-bottom;
+  }
+  
+  .button {
+    font-weight: 400;
+    font-family: $body-font-family;
+    text-transform: uppercase;
+    padding-right: 4em;
+    padding-left: 4em;
+  }
+}

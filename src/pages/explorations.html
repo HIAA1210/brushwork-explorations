@@ -1,0 +1,44 @@
+<body>
+
+  <!-- Start Bottom Bar -->
+  <nav class="bottom-bar">
+    <div class="top-bar-left">
+      <ul class="menu">
+        <li class="menu-home"><a href="#">Brushwork Explorations</a></li>
+        <li><a href="#">1. Zhao Lingrang</a></li>
+        <li><a href="#">2. Zhao Boju</a></li>
+        <li><a href="#">3. Mi Youren</a></li>
+      </ul>
+    </div>
+  </nav>
+  <!-- End Bottom Bar -->
+
+  <div class="intro-page row align-left">
+    <div class="intro-content small-16 medium-12 large-8 large-offset-1 align-self-bottom columns">
+      <header class="intro-header">
+        <h1>Brushwork Explorations</h1>
+        <p class="lead">The RISD Museum owns three Chinese landscape paintings, all attributed to artists of the Song Dynasty. But upon more detailed analysis, not all is what it seems.</p>
+        <address class="author">By <a rel="author" href="http://cye.me/">Chen Ye</a> &amp; the 2017 HIAA1201 class</address>
+
+      </header>
+      <button class="hollow button" href="#">Begin</button>
+    </div>
+  </div>
+
+  <div class="svg-container">
+    <svg class="svg-fullscreen d3-content"></svg>
+  </div>
+
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script>
+    var width = 1920;
+    var height = 1080;
+    
+    var svg = d3.select(".d3-content")
+      //            .attr("preserveAspectRatio", "xMinYMin meet")
+      .attr("viewBox", "0 0 " + width + " " + height);
+
+
+    
+  </script>
+</body>
