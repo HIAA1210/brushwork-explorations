@@ -1,0 +1,19 @@
+<svg class="d3-content">
+    <g class="root paintings">
+      <g id="painting-zhaolingrang" class="painting transform-container">
+        <g class="painting-container">
+          <image class="painting-base" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://raw.githubusercontent.com/HIAA1210/brushwork-explorations/master/img/Zhao_Lingrang/Zhao_Lingrang_RISD_full_optimized.png" x="0" y="0" height="2048" transform="scale(.5)"></image>
+        </g>
+      </g>
+      <g id="painting-zhaoboju" class="painting transform-container">
+        <g class="painting-container">
+          <image class="painting-base" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://raw.githubusercontent.com/HIAA1210/brushwork-explorations/master/img/Zhao_Boju/Zhao_Boju_RISD_optimized.png" x="0" y="0" height="2048" transform="scale(.5)"></image>
+        </g>
+      </g>
+      <g id="painting-miyouren" class="painting transform-container">
+        <g class="painting-container">
+          <image class="painting-base" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://raw.githubusercontent.com/HIAA1210/brushwork-explorations/master/img/Mi_Youren/Mi_Youren_RISD_optimized.png" x="0" y="0" height="2048" transform="scale(.5)"></image>
+        </g>
+      </g>
+    </g>
+  </svg>
