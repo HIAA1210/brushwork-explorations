@@ -1,4 +1,6 @@
 /*global d3*/
+/*global dataPaintings*/
+/*global Image*/
 
 //---- Configuration + Constants + Data
 const paintingHeight = 2048;
@@ -16,7 +18,32 @@ const durationLong = 1000;
 const durationVLong = 2000;
 const defaultEase = d3.easeCubicInOut;
 
-const mainPaintings = dataPaintings;
+const mainPaintings = dataPaintings.mainPaintings;
+
+
+//---- Load
+var loaded = false;
+
+function loadImage(src) {
+  return new Promise(function(resolve, reject) {
+    var img = new Image();
+    img.onload = function() {
+      resolve(img);
+    };
+    img.onerror = img.onabort = function() {
+      reject(src);
+    };
+    img.src = src;
+  });
+}
+
+function preloadThumbnails() {
+  var promises = [];
+  for (var i = 0; i < mainPaintings.length; i++) {
+    promises.push(loadImage(mainPaintings[i].painting.thumbUrl));
+  }
+  return Promise.all(promises);
+}
 
 
 
@@ -119,17 +146,20 @@ function zoomTourStep(d, i, nodes) {
 }
 
 function rezoom() {
-  if (state.activePainting === undefined) {
-    zoomContain.bind(svg.select("#frame-splash").node())();
-  }
-  else {
-    if (state.activeTour === undefined) {
-      zoomCoverVerticalRight.bind(state.activePainting.node)();
+  if (loaded) {
+    if (state.activePainting === undefined) {
+      zoomContain.bind(svg.select("#frame-splash").node())();
     }
     else {
-      zoomTourStep.bind(d3.select(state.activeTour.node).select(".painting-step.step-" + state.activeTour.step).node())();
+      if (state.activeTour === undefined) {
+        zoomCoverVerticalRight.bind(state.activePainting.node)();
+      }
+      else {
+        zoomTourStep.bind(d3.select(state.activeTour.node).select(".painting-step.step-" + state.activeTour.step).node())();
+      }
     }
   }
+
 }
 
 //  --Paintings
@@ -195,8 +225,10 @@ var state = {
 
 //---- Master Render
 function render() {
-  renderPaintings();
-  renderInterface();
+  if (loaded) {
+    renderPaintings();
+    renderInterface();
+  }
 }
 
 function renderPaintings() {
@@ -234,6 +266,9 @@ function renderPaintings() {
       return d.painting.fullUrl;
     })
     .attr("height", paintingHeight)
+    .attr("width", function(d) {
+      return d.painting.aspectRatio * paintingHeight;
+    })
     .attr("transform", "scale(" + paintingScale + ")");
 
   var newPaintingTour = newPaintingContainers.append("g")
@@ -417,7 +452,7 @@ function keyNav(evt) {
   }
 }
 
-document.addEventListener('keydown',keyNav);
+document.addEventListener('keydown', keyNav);
 
 
 d3.select("#button-begin").on("click", resetHome);
@@ -435,6 +470,14 @@ d3.select("#button-prev").on("click", function() {
 
 
 //---- Main
+
+preloadThumbnails().then(function(imgs) {
+  for(var i = 0; i<imgs.length; i++) {
+    mainPaintings[i].painting.aspectRatio = (imgs[i].width / imgs[i].height);
+  }
+  loaded = true;
+  console.log(mainPaintings);
+  render();
+  rezoom();
+});
 resize();
-render();
-rezoom();
