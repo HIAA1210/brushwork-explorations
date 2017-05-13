@@ -292,15 +292,25 @@ const dataPaintings = [{
       header: "Cliffs",
       html: "<p>But these cliffs <em>are</em> painted with a wash. This style might point to this painting having a 14th or 15th century date. At the very least, the inconsistency in how rocks and river banks are painted within this piece point to it being a copy.</p>", //TODO It would be fruitful to compare this area to a high resolution image of the same area on the National Palace Museum piece, which appears to have cliffs painted more similarly to the rest of the banks in <em>Winter Landscape</em>.",
       bounds: [{
-        x: 611,
-        y: 1000,
-        width: 536,
-        height: 607,
+        x: 96,
+        y: 504,
+        width: 526,
+        height: 500,
         framed: true
       }]
     }, {
       header: "Closing Thoughts",
-      html: "<p>So what conclusions can we draw overall from this painting?</p><p>There are telltales scattered throughout this painting pointing to it being painted by someone mimicing the style of someone else. We know, however, that Zhao Lingrang painted in the style of Wang Wei. But based on the other paintings attributed to him, as well as remarks by contemporaries, it seems like Zhao Lingrang was quite comfortable and natural with the brush, and took pains to render coherent, evocative scenes. The forced nature of some aspects of this painting, its lack of mist, and plain non-sensical brushstrokes means that the visual evidence points to this painting not being an original.</p><p>The prevelance of this composition, however, suggests that the composition itself might be a Zhao Lingrang original.</p>",
+      html: "<p>So what conclusions can we draw overall from this painting?</p><p>There are telltales scattered throughout this painting pointing to it being painted by someone mimicing the style of someone else. We know that Zhao Lingrang painted in the style of Wang Wei.</p><p>But based on the other paintings attributed to him, as well as remarks by contemporaries, it seems like Zhao Lingrang was quite comfortable and natural with the brush, and took pains to render coherent, evocative scenes.</p><p>The forced nature of some aspects of this painting, its lack of mist, and plain non-sensical brushstrokes means that the visual evidence points to this painting not being an original.</p>",
+      bounds: [{
+        x: 0,
+        y: 0,
+        width: 5271,
+        height: 1024,
+        framed: false
+      }]
+    },{
+      header: "Closing Thoughts",
+      html: "<p>The prevelance of this composition, however, suggests that the composition itself might be a Zhao Lingrang original.</p>",
       bounds: [{
         x: 0,
         y: 0,
