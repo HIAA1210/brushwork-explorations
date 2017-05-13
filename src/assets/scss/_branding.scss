@@ -13,7 +13,7 @@
     opacity: 0;
     transition: opacity 1s;
     pointer-events: none;
-    
+
   }
   .intro-page.active {
     opacity: 1;
@@ -67,10 +67,7 @@
     opacity: 0;
     pointer-events: none;
   }
-  #tour-text {
-    color: black;
-  }
-  
+
   .overlay {
     bottom: 40px;
     right: 40px;
@@ -82,5 +79,5 @@
   .overlay.active {
     opacity: 1;
   }
-  
+
 }
