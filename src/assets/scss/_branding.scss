@@ -29,6 +29,8 @@
     font-weight: 400;
     font-family: $body-font-family;
     text-transform: uppercase;
+  }
+  .button.cta {
     padding-right: 4em;
     padding-left: 4em;
   }
@@ -75,9 +77,11 @@
     z-index: 1;
     opacity: 0;
     transition: opacity 1s;
+    pointer-events: none;
   }
   .overlay.active {
     opacity: 1;
+    pointer-events: auto;
   }
   .tour.card h1 {
     font-family: $body-font-family;
