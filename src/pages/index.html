@@ -4,7 +4,7 @@
   <nav class="bottom-bar">
     <div class="top-bar-left">
       <ul class="menu">
-        <li class="menu-home"><a href="#">Brushwork Explorations</a></li>
+        <li id="menu-home" class="menu-home"><a href="#">Brushwork Explorations</a></li>
         <li><a href="#">1. Zhao Lingrang</a></li>
         <li><a href="#">2. Zhao Boju</a></li>
         <li><a href="#">3. Mi Youren</a></li>
@@ -29,15 +29,14 @@
   </div>
 
   <div class="overlay">
-    <div class="card" style="width: 300px;">
-  <div class="card-divider">
-    This is a header
-  </div>
-  <div class="card-section">
-<!--    <h4>This is a card.</h4>-->
-    <p id="tour-text">It has an easy to override visual style, and is appropriately subdued.</p>
-  </div>
-</div>
+    <div class="tour card" style="width: 300px;">
+      <div class="card-divider">
+        <h1 id="tour-header"></h1>
+      </div>
+      <div class="card-section">
+        <div id="tour-text"></div>
+      </div>
+    </div>
   </div>
 
 
@@ -54,6 +53,8 @@
     </g>
     </svg>
   </div>
-
+  <script src="{{root}}assets/js/app.js"></script>
   <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="https://raw.githubusercontent.com/RasCarlito/url-composer/master/dist/url-composer.min.js"></script>
+  <script src="{{root}}assets/js/single-page/main.js"></script>
 </body>

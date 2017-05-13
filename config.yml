@@ -57,6 +57,10 @@ PATHS:
     - "bower_components/foundation-sites/js/foundation.toggler.js"
     - "bower_components/foundation-sites/js/foundation.tooltip.js"
     - "bower_components/foundation-sites/js/foundation.zf.responsiveAccordionTabs.js"
+    # Paths to other libraries
+    # - "bower_components/d3/d3.js"
+    # - "bower_components/url-composer/dist/url-composer.js"
     # Paths to your own project code are here
     - "src/assets/js/!(app).js"
+    - "!src/assets/js/single-page/**/*"
     - "src/assets/js/app.js"

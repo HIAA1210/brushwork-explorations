@@ -16,7 +16,8 @@
   ],
   "dependencies": {
     "foundation-sites": "~6.3.0",
-    "motion-ui": "~1.2.2"
+    "motion-ui": "~1.2.2",
+    "url-composer": "^1.14.0"
   },
   "private": true
 }

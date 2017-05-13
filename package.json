@@ -38,7 +38,9 @@
     "url": "https://github.com/HIAA1210/brushwork-explorations.git"
   },
   "babel": {
-    "presets": ["es2015"]
+    "presets": [
+      "es2015"
+    ]
   },
   "private": true
 }
