@@ -353,8 +353,10 @@ function keyNav(evt) {
 
   if (evt.keyCode === 37) {
     prevTourStep();
+    evt.preventDefault();
   } else if (evt.keyCode === 39) {
     nextTourStep();
+    evt.preventDefault();
   }
 }
 
