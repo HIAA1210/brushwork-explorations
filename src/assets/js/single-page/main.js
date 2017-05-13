@@ -317,7 +317,7 @@ function renderPaintingTour(paintingTourSelection) {
     .attr("width", function(d) {
       return d.width
     })
-    .classed("outlined",function(d,i) {
+    .classed("outlined", function(d, i) {
       console.log(d);
       return d.framed === true;
     });
@@ -333,14 +333,13 @@ function renderInterface() {
     })
   if (state.activeTour !== undefined) {
     d3.select('#tour-header')
-    .html(function() {
-      return decodeURI(state.activeTour.data.steps[state.activeTour.step].header);
-    })
+      .html(function() {
+        return decodeURI(state.activeTour.data.steps[state.activeTour.step].header);
+      })
     d3.select("#tour-text")
-    .html(function() {
+      .html(function() {
         return decodeURI(state.activeTour.data.steps[state.activeTour.step].html);
-      }
-    );
+      });
   }
 
 
@@ -405,6 +404,19 @@ function prevTourStep() {
   }
 }
 
+function keyNav(evt) {
+  evt = evt || window.event;
+
+  if (evt.keyCode === 37) {
+    prevTourStep();
+  }
+  else if (evt.keyCode === 39) {
+    nextTourStep();
+  }
+}
+
+document.addEventListener('keydown',keyNav);
+
 
 d3.select("#button-begin").on("click", resetHome);
 d3.select("#menu-home").on("click", resetHome);
@@ -417,6 +429,8 @@ d3.select("#button-next").on("click", function() {
 d3.select("#button-prev").on("click", function() {
   prevTourStep();
 });
+
+
 
 //---- Main
 resize();

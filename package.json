@@ -5,7 +5,8 @@
   "main": "gulpfile.js",
   "scripts": {
     "start": "gulp",
-    "build": "gulp build --production"
+    "build": "gulp build --production",
+    "postinstall": "bower install"
   },
   "author": "Chen Ye <cye@brown.edu>",
   "license": "MIT",
