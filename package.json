@@ -42,5 +42,8 @@
       "es2015"
     ]
   },
-  "private": true
+  "private": true,
+  "dependencies": {
+    "harp": "^0.23.0"
+  }
 }
