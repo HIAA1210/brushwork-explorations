@@ -1,151 +1,517 @@
-<div class="row">
-  <div class="large-12 columns">
-    <h1>Welcome to Foundation for Sites</h1>
-  </div>
-</div> 
+<body>
 
-<div class="row">
-  <div class="large-12 columns">
-    <div class="callout">
-      <h3>We&rsquo;re stoked you want to try Foundation! </h3>
-      <p>To get going, this file (index.html) includes some basic styles you can modify, play around with, or totally destroy to get going.</p>
-      <p>Once you've exhausted the fun in this document, you should check out:</p>
-      <div class="row">
-        <div class="large-4 medium-4 columns">
-          <p><a href="http://foundation.zurb.com/docs">Foundation Documentation</a><br />Everything you need to know about using the framework.</p>
-        </div>
-        <div class="large-4 medium-4 columns">
-          <p><a href="http://zurb.com/university/code-skills">Foundation Code Skills</a><br />These online courses offer you a chance to better understand how Foundation works and how you can master it to create awesome projects.</p>
-        </div>
-        <div class="large-4 medium-4 columns">
-          <p><a href="http://foundation.zurb.com/forum">Foundation Forum</a><br />Join the Foundation community to ask a question or show off your knowledge.</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="large-4 medium-4 medium-push-2 columns">
-          <p><a href="http://github.com/zurb/foundation">Foundation on Github</a><br />Latest code, issue reports, feature requests and more.</p>
-        </div>
-        <div class="large-4 medium-4 medium-pull-2 columns">
-          <p><a href="https://twitter.com/ZURBfoundation">@zurbfoundation</a><br />Ping us on Twitter if you have questions. When you build something with this we'd love to see it (and send you a totally boss sticker).</p>
-        </div>        
-      </div>
+  <!-- Start Bottom Bar -->
+  <nav class="bottom-bar">
+    <div class="top-bar-left">
+      <ul class="menu">
+        <li class="menu-home"><a href="#">Brushwork Explorations</a></li>
+        <li><a href="#">1. Zhao Lingrang</a></li>
+        <li><a href="#">2. Zhao Boju</a></li>
+        <li><a href="#">3. Mi Youren</a></li>
+        <button id="button-start-visual-analysis" class="hollow button" href="#">Visual Analysis</button>
+        <button id="button-prev" class="hollow button" href="#">Prev</button>
+        <button id="button-next" class="hollow button" href="#">Next</button>
+      </ul>
+    </div>
+  </nav>
+  <!-- End Bottom Bar -->
+
+  <div class="intro-page row align-left">
+    <div class="intro-content small-16 medium-12 large-8 large-offset-1 align-self-bottom columns">
+      <header class="intro-header">
+        <h1>Brushwork Explorations</h1>
+        <p class="lead">The RISD Museum owns three Chinese landscape paintings, all attributed to artists of the Song Dynasty. But upon more detailed analysis, not all is what it seems.</p>
+        <address class="author">By <a rel="author" href="http://cye.me/">Chen Ye</a> &amp; the 2017 HIAA1201 class</address>
+
+      </header>
+      <button id="button-begin" class="hollow button" href="#">Begin</button>
     </div>
   </div>
-</div>
-
-<div class="row">
-  <div class="large-8 medium-8 columns">
-    <h5>Here&rsquo;s your basic grid:</h5>
-    <!-- Grid Example -->
-
-    <div class="row">
-      <div class="large-12 columns">
-        <div class="primary callout">
-          <p><strong>This is a twelve column section in a row.</strong> Each of these includes a div.callout element so you can see where the columns are - it's not required at all for the grid.</p>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="large-6 medium-6 columns">
-        <div class="primary callout">
-          <p>Six columns</p>
-        </div>
-      </div>
-      <div class="large-6 medium-6 columns">
-        <div class="primary callout">
-          <p>Six columns</p>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="large-4 medium-4 small-4 columns">
-        <div class="primary callout">
-          <p>Four columns</p>
-        </div>
-      </div>
-      <div class="large-4 medium-4 small-4 columns">
-        <div class="primary callout">
-          <p>Four columns</p>
-        </div>
-      </div>
-      <div class="large-4 medium-4 small-4 columns">
-        <div class="primary callout">
-          <p>Four columns</p>
-        </div>
-      </div>
-    </div>
-    
-    <hr />
-            
-    <h5>We bet you&rsquo;ll need a form somewhere:</h5>
-    <form>
-      <div class="row">
-        <div class="large-12 columns">
-          <label>Input Label</label>
-          <input type="text" placeholder="large-12.columns" />
-        </div>
-      </div>
-      <div class="row">
-        <div class="large-4 medium-4 columns">
-          <label>Input Label</label>
-          <input type="text" placeholder="large-4.columns" />
-        </div>
-        <div class="large-4 medium-4 columns">
-          <label>Input Label</label>
-          <input type="text" placeholder="large-4.columns" />
-        </div>
-        <div class="large-4 medium-4 columns">
-          <div class="row collapse">
-            <label>Input Label</label>
-            <div class="input-group">
-              <input class="input-group-field" type="text" placeholder="input-group" />
-              <span class="input-group-label">.com</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="large-12 columns">
-          <label>Select Box</label>
-          <select>
-            <option value="husker">Husker</option>
-            <option value="starbuck">Starbuck</option>
-            <option value="hotdog">Hot Dog</option>
-            <option value="apollo">Apollo</option>
-          </select>
-        </div>
-      </div>
-      <div class="row">
-        <div class="large-6 medium-6 columns">
-          <label>Choose Your Favorite</label>
-          <input type="radio" name="pokemon" value="Red" id="pokemonRed"><label for="pokemonRed">Radio 1</label>
-          <input type="radio" name="pokemon" value="Blue" id="pokemonBlue"><label for="pokemonBlue">Radio 2</label>
-        </div>
-        <div class="large-6 medium-6 columns">
-          <label>Check these out</label>
-          <input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
-          <input id="checkbox2" type="checkbox"><label for="checkbox2">Checkbox 2</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="large-12 columns">
-          <label>Textarea Label</label>
-          <textarea placeholder="small-12.columns"></textarea>
-        </div>
-      </div>
-    </form>
-  </div>     
-
-  <div class="large-4 medium-4 columns">
-    <h5>Try one of these buttons:</h5>
-    <p><a href="explorations.html" class="small button">Simple Button</a><br/>          
-    <a href="#" class="medium success button">Success Btn</a><br/>
-    <a href="#" class="medium alert button">Alert Btn</a><br/>
-    <a href="#" class="medium secondary button">Secondary Btn</a></p>           
-    <div class="callout">
-      <h5>So many components, girl!</h5>
-      <p>A whole kitchen sink of goodies comes with Foundation. Check out the docs to see them all, along with details on making them your own.</p>
-      <a href="http://foundation.zurb.com/docs/" class="small button">Go to Foundation Docs</a>          
-    </div>
+  
+  <div class="overlay">
+    <div class="card" style="width: 300px;">
+  <div class="card-divider">
+    This is a header
+  </div>
+  <div class="card-section">
+<!--    <h4>This is a card.</h4>-->
+    <p id="tour-text">It has an easy to override visual style, and is appropriately subdued.</p>
   </div>
 </div>
+  </div>
+  
+
+  <div class="svg-container">
+    <svg class="svg-fullscreen d3-content">
+      <defs>
+    </defs>
+    <g class="root">
+      <g class="camera-frames">
+        <rect id="frame-splash" class="camera-frame" x="-1888" y="-320" width="4032" height="4032"></rect>
+      </g>
+      <g class="paintings">
+      </g>
+    </g>
+    </svg>
+  </div>
+
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script>
+    //---- Configuration + Constants + Data
+    const paintingHeight = 2048;
+    const paintingScale = 0.5;
+    const paintingDisplayHeight = paintingHeight * paintingScale;
+    const paintingMargin = 40 * 4;
+    const paintingCascadeLength = 236 * 4;
+
+    const minScale = 0.05;
+    const maxScale = 2;
+
+    const durationShort = 500;
+    const durationMed = 750;
+    const durationLong = 1000;
+    const durationVLong = 2000;
+    const defaultEase = d3.easeCubicInOut;
+
+    const mainPaintings = [{
+      painting: {
+        painter: "Zhao Lingrang",
+        name: "Winter Landscape",
+        key: "painting-zhaolingrang-risd",
+        fullUrl: "https://raw.githubusercontent.com/HIAA1210/brushwork-explorations/master/img/Zhao_Lingrang/Zhao_Lingrang_RISD_full_optimized.png"
+      },
+      visualTour: {
+        key: "visual-tour-zhaolingrang-risd",
+        steps: [{
+          html: encodeURI("These tree trunks are painted with more noticeable outlines than the tree trunks in Whiling Away the Summer by a Lakeside Retreat. In that painting, the tree trunks appear to be painted with single wet brushstrokes rather than with multiple brushstrokes. This method of painting, lacking outlines, is called the “boneless method.”"),
+          bounds: [{
+            x: 1684,
+            y: 138,
+            width: 1096,
+            height: 685
+          }]
+        }, {
+          html: encodeURI("In Winter Landscape, delicate tree branches extend above leafy trees. We see similar kinds of delicate branches extending above leaves in pieces attributed to Zhao Lingrang, such as in Whiling Away the Summer by a Lakeside Retreat and in River Village in Autumn."),
+          bounds: [{
+            x: 1984,
+            y: 162,
+            width: 770,
+            height: 342
+          }]
+        }, {
+          html: encodeURI("Some of the leaves in Whiling Away the Summer by a Lakeside Retreat are painted similarly to the leaves in Winter Landscape. But, as is common in comparisons between the two paintings, the leaves in Whiling away the Summer are more random and organic than the leaves in Winter Landscape that form more of a repeating pattern than an organic mass."),
+          bounds: [{
+            x: 1461,
+            y: 490,
+            width: 504,
+            height: 234
+          }]
+        }]
+      }
+    }, {
+      painting: {
+        painter: "Zhao Boju",
+        name: "Landscape with Buildings",
+        key: "painting-zhaoboju-risd",
+        fullUrl: "https://raw.githubusercontent.com/HIAA1210/brushwork-explorations/master/img/Zhao_Boju/Zhao_Boju_RISD_optimized.png"
+      },
+      visualTour: {
+        key: "visual-tour-zhaoboju-risd",
+        steps: []
+      }
+    }, {
+      painting: {
+        painter: "Mi Youren",
+        name: "Mountain Mists",
+        key: "painting-miyouren-risd",
+        fullUrl: "https://raw.githubusercontent.com/HIAA1210/brushwork-explorations/master/img/Mi_Youren/Mi_Youren_RISD_optimized.png"
+      },
+      visualTour: {
+        key: "visual-tour-miyouren-risd",
+        steps: []
+      }
+    }];
+
+
+
+    //---- Initialize
+    const svgContainer = d3.select(".svg-container");
+    const svgContainerNode = svgContainer.node();
+
+    var width, height;
+
+    const svg = d3.select(".svg-fullscreen");
+    const root = svg.select(".root");
+
+
+    //  --Resize
+    d3.select(window).on("resize", resize);
+
+    function resize() {
+      const rect = svgContainerNode.getBoundingClientRect();
+      width = rect.width;
+      height = rect.height;
+    }
+
+    //---- Zooming
+    var zoom = d3.zoom()
+      .scaleExtent([minScale, maxScale])
+      .on("zoom", zoomed);
+
+    svg.call(zoom);
+
+    function zoomed() {
+      root.attr("transform", d3.event.transform);
+      //TODO: scale-independent step outlines
+    }
+
+    function zoomContain(d, i, nodes) {
+      var t = d3.transition()
+        .duration(durationLong)
+        .ease(defaultEase);
+
+      var bounds = this.parentNode.getBBox(),
+        dx = bounds.width,
+        dy = bounds.height,
+        x = (bounds.x + bounds.width / 2),
+        y = (bounds.y + bounds.height / 2),
+        scale = Math.max(minScale, Math.min(maxScale, 1 / Math.max(dx / width, dy / height))),
+        translateX = (width / 2) / scale - x,
+        translateY = (height / 2) / scale - y;
+
+      function transform() {
+        return d3.zoomIdentity.scale(scale).translate(translateX, translateY);
+      }
+
+      svg.transition(t)
+        .call(zoom.transform, transform);
+    }
+
+    function zoomCoverVerticalRight(d, i, nodes) {
+      var t = d3.transition()
+        .duration(durationLong)
+        .ease(defaultEase);
+
+      var bounds = this.parentNode.getBBox(),
+        dx = bounds.width,
+        dy = bounds.height,
+        x = (bounds.x + bounds.width),
+        y = (bounds.y + bounds.height / 2),
+        scale = Math.max(minScale, Math.min(maxScale, 1 / (dy / height))),
+        translateX = (width) / scale - x,
+        translateY = (height / 2) / scale - y;
+
+      function transform() {
+        return d3.zoomIdentity.scale(scale).translate(translateX, translateY);
+      }
+
+      svg.transition(t)
+        .call(zoom.transform, transform);
+    }
+
+    function zoomTourStep(d, i, nodes) {
+      var t = d3.transition()
+        .duration(durationLong)
+        .ease(defaultEase);
+
+      var paintingBounds = this.parentNode.parentNode.parentNode.getBBox(),
+        bounds = this.getBBox(),
+        dx = bounds.width,
+        dy = bounds.height,
+        x = (bounds.x + bounds.width / 2) + paintingBounds.x,
+        y = (bounds.y + bounds.height / 2) + paintingBounds.y,
+        scale = Math.max(minScale, Math.min(maxScale, 1 / Math.max(dx / width, dy / height))),
+        translateX = (width / 2) / scale - x,
+        translateY = (height / 2) / scale - y;
+
+      function transform() {
+        return d3.zoomIdentity.scale(scale).translate(translateX, translateY);
+      }
+
+      svg.transition(t)
+        .call(zoom.transform, transform);
+    }
+
+    function rezoom() {
+      if (state.activePainting === undefined) {
+        zoomContain.bind(svg.select("#frame-splash").node())();
+      } else {
+        if (state.activeTour === undefined) {
+          zoomCoverVerticalRight.bind(state.activePainting.node)();
+        } else {
+          zoomTourStep.bind(d3.select(state.activeTour.node).select(".painting-step.step-" + state.activeTour.step).node())();
+        }
+      }
+    }
+
+    //  --Paintings
+    const paintingsContainer = svg.select(".paintings");
+    var paintings;
+
+    function paintingIsInactive(d) {
+      if (state.activePainting !== undefined) {
+        return d.painting.key !== state.activePainting.data.painting.key;
+      } else {
+        return false;
+      }
+    }
+
+    function tourIsActive(d) {
+      if (state.activeTour !== undefined) {
+        return d.key === state.activeTour.key;
+      } else {
+        return false;
+      }
+    }
+
+    function stepIsActive(d, i) {
+      if (state.activeTour !== undefined) {
+        return state.activeTour.step === i;
+      } else {
+        return false;
+      }
+    }
+
+    //---- Transforms
+    function transformCascaded(d, i) {
+      return "translate(" + (i * paintingCascadeLength) + "," + (i * (paintingDisplayHeight + paintingMargin)) + ")";
+    }
+
+    function transformAlignRight(d, i) {
+      return "translate(" + (-this.getBBox().width) + "," + (i * (paintingDisplayHeight + paintingMargin)) + ")";
+    }
+
+    function transformConditional(d, i) {
+      if (state.showSplash) {
+        return transformCascaded.bind(this)(d, i);
+      } else {
+        return transformAlignRight.bind(this)(d, i);
+      }
+    }
+
+    //---- State
+    var state = {
+      activePainting: undefined,
+      activeTour: undefined,
+      showSplash: true //TODO
+    };
+
+    //---- Master Render
+    function render() {
+      renderPaintings();
+      renderInterface();
+    }
+
+    function renderPaintings() {
+      const t = d3.transition()
+        .duration(durationVLong)
+        .ease(defaultEase);
+
+      //Rebind
+      paintings = paintingsContainer.selectAll(".painting")
+        .data(mainPaintings, function(d, i) {
+          return d.painting.key;
+        });
+
+      //Modification
+      paintings.select(".painting-container")
+        .transition(t)
+        .attr("transform", transformConditional);
+
+      renderPaintingTour(paintings.select(".painting-tour-container"));
+
+      //Entry
+      var newPaintings = paintings.enter()
+        .append("g")
+        .attr("class", "painting transform-container")
+        .attr("id", function(d) {
+          return d.painting.key;
+        });
+      var newPaintingContainers = newPaintings
+        .append("g")
+        .attr("class", "painting-container");
+
+      var newPaintingBases = newPaintingContainers.append("image")
+        .attr("class", "painting-base")
+        .attr("xlink:href", function(d) {
+          return d.painting.fullUrl;
+        })
+        .attr("height", paintingHeight)
+        .attr("transform", "scale(" + paintingScale + ")");
+
+      var newPaintingTour = newPaintingContainers.append("g")
+        .attr("class", "painting-tour-container");
+
+      renderPaintingTour(newPaintingTour);
+
+      newPaintingContainers.attr("transform", transformConditional);
+
+      //Exit
+      var exitingPaintings = paintings.exit();
+      exitingPaintings.remove();
+
+      //All
+      var allPaintings = newPaintings.merge(paintings);
+      allPaintings.classed("inactive", paintingIsInactive);
+      if (!state.showSplash && state.activePainting === undefined) {
+        allPaintings.select(".painting-container").on("click", selectPainting);
+      } else {
+        allPaintings.select(".painting-container").on("click", null);
+      }
+    }
+
+    function renderPaintingTour(paintingTourSelection) {
+      //Rebind
+      var paintingTours = paintingTourSelection
+        .selectAll("g")
+        .data(function(d) {
+          if (tourIsActive(d)) {
+            return d.visualTour.steps;
+          } else {
+            return [];
+          }
+        });
+
+      //Modification
+
+      //Entry
+      var newPaintingTours = paintingTours.enter()
+        .append("g")
+        .attr("class", function(d, i) {
+          return "painting-step step-" + i
+        });
+
+
+      //Exit
+      paintingTours.exit().remove();
+
+      //All
+      var allPaintingTours = newPaintingTours.merge(paintingTours)
+
+      //Tour Bounds
+      var tourBounds = allPaintingTours
+        .selectAll("rect")
+        .data(function(d, i) {
+          console.log(i, state.activeTour.i);
+          if (stepIsActive(d, i)) {
+            return d.bounds;
+          } else {
+            return [];
+          }
+          //TODO: conditionally render based on step visibility
+
+        })
+
+      //Entry
+      var newTourBounds = tourBounds
+        .enter()
+        .append("rect")
+        .attr("x", function(d) {
+          return d.x
+        })
+        .attr("y", function(d) {
+          return d.y
+        })
+        .attr("height", function(d) {
+          return d.height
+        })
+        .attr("width", function(d) {
+          return d.width
+        });
+
+      //Exit
+      tourBounds.exit().remove();
+    }
+
+    function renderInterface() {
+      d3.select(".overlay")
+      .classed("active", function() {
+          return state.activeTour !== undefined;
+        })
+      d3.select("#tour-text")
+        .html(function() {
+          if (state.activeTour !== undefined) {
+            return decodeURI(state.activeTour.data.steps[state.activeTour.step].html);
+          }
+        })
+
+      d3.select(".intro-page")
+        .classed("active", function() {
+          return state.showSplash;
+        })
+    }
+
+    //---- Interaction
+    function resetHome() {
+      state.activePainting = undefined;
+      state.activeTour = undefined;
+      state.showSplash = false;
+      render();
+      rezoom();
+    }
+
+    function selectPainting(d, i, nodes) {
+      //TODO set drag zoom constraints
+      state.activePainting = {
+        data: d,
+        i: i,
+        node: this
+      };
+      render();
+      rezoom();
+    }
+
+    function selectVisualAnalysis() {
+      console.log(state.activePainting);
+      if (state.activePainting !== undefined) {
+        selectTour(state.activePainting.data.visualTour, 0); //TODO
+      }
+    }
+
+    function selectTour(tour, step) {
+      console.log(tour);
+      //TODO Nodes bound to current active painting
+      state.activeTour = {
+        data: tour,
+        step: step,
+        node: d3.select(state.activePainting.node).select(".painting-tour-container").node()
+      }
+      render();
+      rezoom();
+    }
+
+    function nextTourStep() {
+      if (state.activeTour !== undefined && state.activeTour.step < (state.activeTour.data.steps.length - 1)) {
+        state.activeTour.step++;
+        render();
+        rezoom();
+      }
+    }
+
+    function prevTourStep() {
+      if (state.activeTour !== undefined && state.activeTour.step > 0) {
+        state.activeTour.step--;
+        render();
+        rezoom();
+      }
+    }
+
+
+    d3.select("#button-begin").on("click", resetHome);
+    d3.select("#button-start-visual-analysis").on("click", function() {
+      selectVisualAnalysis();
+    });
+    d3.select("#button-next").on("click", function() {
+      nextTourStep();
+    })
+    d3.select("#button-prev").on("click", function() {
+      prevTourStep();
+    })
+
+    //---- Main
+    resize();
+    render();
+    rezoom();
+
+  </script>
+</body>
