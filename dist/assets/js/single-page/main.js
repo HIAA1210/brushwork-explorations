@@ -348,6 +348,18 @@ function prevTourStep() {
   }
 }
 
+function keyNav(evt) {
+  evt = evt || window.event;
+
+  if (evt.keyCode === 37) {
+    prevTourStep();
+  } else if (evt.keyCode === 39) {
+    nextTourStep();
+  }
+}
+
+document.addEventListener('keydown', keyNav);
+
 d3.select("#button-begin").on("click", resetHome);
 d3.select("#menu-home").on("click", resetHome);
 d3.select("#button-start-visual-analysis").on("click", function () {
