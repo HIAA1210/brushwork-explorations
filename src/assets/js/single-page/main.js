@@ -1,6 +1,8 @@
-/*global d3*/
-/*global dataPaintings*/
 /*global Image*/
+/*global d3*/
+/*global Url*/
+
+/*global dataPaintings*/
 
 //---- Configuration + Constants + Data
 const paintingHeight = 2048;
@@ -211,12 +213,17 @@ function transformConditional(d, i) {
   }
 }
 
-//---- State
+//---- State + URL Save/Load
 const defaultState = {
   activePainting: undefined,
   activeTour: undefined,
   showSplash: true //TODO
 };
+
+function loadFromUrl() {
+  console.log(Url.parseQuery());
+}
+
 var state = {
   activePainting: undefined,
   activeTour: undefined,
@@ -353,7 +360,6 @@ function renderPaintingTour(paintingTourSelection) {
       return d.width
     })
     .classed("outlined", function(d, i) {
-      console.log(d);
       return d.framed === true;
     });
 
@@ -405,14 +411,12 @@ function selectPainting(d, i, nodes) {
 }
 
 function selectVisualAnalysis() {
-  console.log(state.activePainting);
   if (state.activePainting !== undefined) {
     selectTour(state.activePainting.data.visualTour, 0); //TODO
   }
 }
 
 function selectTour(tour, step) {
-  console.log(tour);
   //TODO Nodes bound to current active painting
   state.activeTour = {
     data: tour,
@@ -476,7 +480,6 @@ preloadThumbnails().then(function(imgs) {
     mainPaintings[i].painting.aspectRatio = (imgs[i].width / imgs[i].height);
   }
   loaded = true;
-  console.log(mainPaintings);
   render();
   rezoom();
 });
