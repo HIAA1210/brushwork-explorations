@@ -2,6 +2,17 @@
   .menu-home {
     font-family: $header-font-family
   }
+  .menu-home > a {
+    padding: $menu-item-padding;
+  }
+  .menu.numbered {
+    counter-reset:li;
+  }
+  .menu.numbered > li > a:before {
+    content:counter(li) ".";
+    counter-increment:li;
+    padding-right:.2em;
+  }
   .author {
     font-size: .875em;
     font-style: normal;

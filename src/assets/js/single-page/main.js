@@ -112,7 +112,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
       .duration(durationLong)
       .ease(defaultEase);
 
-    var bounds = this.parentNode.getBBox(),
+    var bounds = this.getBBox(),
       dx = bounds.width,
       dy = bounds.height,
       x = (bounds.x + bounds.width),
@@ -173,18 +173,27 @@ d3.json("assets/json/paintings.json", function(paintingData) {
   const paintingsContainer = svg.select(".paintings");
   var paintings;
 
-  function paintingIsInactive(d) {
+  function paintingIsActive(mainPainting) {
     if (state.activePainting !== undefined) {
-      return d.painting.key !== state.activePainting.data.painting.key;
+      return mainPainting.painting.key === state.activePainting.data.painting.key;
     }
     else {
       return false;
     }
   }
 
-  function tourIsActive(d) {
+  function paintingIsInactive(mainPainting) {
+    if (state.activePainting !== undefined) {
+      return mainPainting.painting.key !== state.activePainting.data.painting.key;
+    }
+    else {
+      return false;
+    }
+  }
+
+  function tourIsActive(mainPainting) {
     if (state.activeTour !== undefined) {
-      return d.key === state.activePainting.key;
+      return mainPainting.painting.key === state.activePainting.data.painting.key;
     }
     else {
       return false;
@@ -442,6 +451,15 @@ d3.json("assets/json/paintings.json", function(paintingData) {
   }
 
   function renderInterface() {
+    var navMenu = d3.select("#menu-painters")
+      .selectAll("li")
+      .data(mainPaintings);
+
+    navMenu.enter()
+      .append("li").append("a").text(function(d) {
+        return d.painting.painter;
+      }).merge(navMenu).classed("active", paintingIsActive).on("click", selectPainting.bind(undefined));
+
     d3.select(".overlay")
       .classed("active", function() {
         return state.activeTour !== undefined;
@@ -479,7 +497,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
     state.activePainting = {
       data: d,
       i: i,
-      node: this
+      node: this !== undefined ? this.parentNode : undefined
     };
     render();
     rezoom();
