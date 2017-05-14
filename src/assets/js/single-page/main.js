@@ -8,6 +8,10 @@
 const paintingHeight = 2048;
 const paintingScale = 0.5;
 const paintingDisplayHeight = paintingHeight * paintingScale;
+
+const paintingThumbHeight = 512;
+const paintingThumbScale = paintingDisplayHeight/paintingThumbHeight;
+
 const paintingMargin = 40 * 4;
 const paintingCascadeLength = 236 * 4;
 
@@ -271,11 +275,11 @@ d3.json("assets/json/paintings.json", function(paintingData) {
       .attr("xlink:href", function(d) {
         return d.painting.thumbUrl;
       })
-      .attr("height", paintingHeight)
+      .attr("height", paintingThumbHeight)
       .attr("width", function(d) {
-        return d.painting.aspectRatio * paintingHeight;
+        return d.painting.aspectRatio * paintingThumbHeight;
       })
-      .attr("transform", "scale(" + paintingScale + ")");
+      .attr("transform", "scale(" + paintingThumbScale + ")");
 
     var newPaintingBases = newPaintingContainers.append("image")
       .attr("class", "painting-base")
