@@ -131,6 +131,9 @@
   g.painting.active {
     cursor: grab;
   }
+  .intro-page.active ~ .svg-container g.painting {
+    cursor: auto;
+  }
   // g.painting.active:active {
   //   cursor: grabbing;
   // } TODO: implement grabbing
