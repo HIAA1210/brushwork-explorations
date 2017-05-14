@@ -1,4 +1,5 @@
 /*global Image*/
+/*global _*/
 /*global d3*/
 /*global Url*/
 
@@ -10,7 +11,7 @@ const paintingScale = 0.5;
 const paintingDisplayHeight = paintingHeight * paintingScale;
 
 const paintingThumbHeight = 512;
-const paintingThumbScale = paintingDisplayHeight/paintingThumbHeight;
+const paintingThumbScale = paintingDisplayHeight / paintingThumbHeight;
 
 const paintingMargin = 40 * 4;
 const paintingCascadeLength = 236 * 4;
@@ -29,6 +30,7 @@ const defaultEase = d3.easeCubicInOut;
 var loaded = false;
 d3.json("assets/json/paintings.json", function(paintingData) {
   const mainPaintings = paintingData.mainPaintings;
+
   function loadImage(src) {
     return new Promise(function(resolve, reject) {
       var img = new Image();
@@ -157,10 +159,10 @@ d3.json("assets/json/paintings.json", function(paintingData) {
       }
       else {
         if (state.activeTour === undefined) {
-          zoomCoverVerticalRight.bind(state.activePainting.node)();
+          zoomCoverVerticalRight.bind(getActivePaintingNode())();
         }
         else {
-          zoomTourStep.bind(d3.select(state.activeTour.node).select(".painting-step.step-" + state.activeTour.step).node())();
+          zoomTourStep.bind(d3.select(getActiveTourNode()).select(".painting-step.step-" + state.activeTour.step).node())();
         }
       }
     }
@@ -182,7 +184,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
 
   function tourIsActive(d) {
     if (state.activeTour !== undefined) {
-      return d.key === state.activeTour.key;
+      return d.key === state.activePainting.key;
     }
     else {
       return false;
@@ -217,21 +219,79 @@ d3.json("assets/json/paintings.json", function(paintingData) {
   }
 
   //---- State + URL Save/Load
-  const defaultState = {
-    activePainting: undefined,
-    activeTour: undefined,
-    showSplash: true //TODO
-  };
-
-  function loadFromUrl() {
-    console.log(Url.parseQuery());
-  }
-
   var state = {
     activePainting: undefined,
     activeTour: undefined,
     showSplash: true //TODO
   };
+
+  function getActivePaintingNode() {
+    if (state.activePainting.node === undefined) {
+      state.activePainting.node = d3.select("#" + state.activePainting.data.painting.key).node();
+    }
+    return state.activePainting.node;
+  }
+
+  function getActiveTourNode() {
+    if (state.activeTour.node === undefined) {
+      state.activeTour.node = d3.select(getActivePaintingNode()).select(".painting-tour-container").node();
+    }
+    return state.activeTour.node;
+
+  }
+
+
+  function loadFromUrl() {
+    const queries = Url.parseQuery();
+    const activePaintingKey = queries["activePainting"];
+    if (activePaintingKey) {
+      const activePaintingData = _.find(mainPaintings, function(mainPainting) {
+        return mainPainting.painting.key === activePaintingKey;
+      });
+      if (activePaintingData !== undefined) {
+        state.showSplash = false;
+        state.activePainting = {
+          data: activePaintingData
+        };
+        const activeTourKey = queries["activeTour"];
+        if (activeTourKey) {
+          const activeTourData = _.find(state.activePainting.data.tours, function(tour) {
+            return tour.key === activeTourKey;
+          });
+          if (activeTourData !== undefined) {
+            state.activeTour = {
+              data: activeTourData,
+              step: 0
+            };
+            const step = parseInt(queries["step"]);
+            if (!isNaN(step) && step >= 0 && step < state.activeTour.data.steps.length) {
+              state.activeTour.step = step;
+            }
+          }
+        }
+      }
+
+    }
+  }
+
+  function updateUrl() {
+    if (state.activePainting !== undefined) {
+      Url.updateSearchParam("activePainting", state.activePainting.data.painting.key);
+      if (state.activeTour !== undefined) {
+        Url.updateSearchParam("activeTour", state.activeTour.data.key);
+        Url.updateSearchParam("step", state.activeTour.step)
+      }
+      else {
+        Url.updateSearchParam("activeTour");
+        Url.updateSearchParam("step");
+      }
+    }
+    else {
+      Url.updateSearchParam("activePainting");
+      Url.updateSearchParam("activeTour");
+      Url.updateSearchParam("step");
+    }
+  }
 
   //---- Master Render
   function render() {
@@ -320,7 +380,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
       .selectAll("g")
       .data(function(d) {
         if (tourIsActive(d)) {
-          return d.visualTour.steps;
+          return state.activeTour.data.steps;
         }
         else {
           return [];
@@ -411,6 +471,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
     state.showSplash = false;
     render();
     rezoom();
+    updateUrl();
   }
 
   function selectPainting(d, i, nodes) {
@@ -422,23 +483,23 @@ d3.json("assets/json/paintings.json", function(paintingData) {
     };
     render();
     rezoom();
+    updateUrl();
   }
 
   function selectVisualAnalysis() {
     if (state.activePainting !== undefined) {
-      selectTour(state.activePainting.data.visualTour, 0); //TODO
+      selectTour(state.activePainting.data.tours.visualTour, 0); //TODO
     }
   }
 
   function selectTour(tour, step) {
-    //TODO Nodes bound to current active painting
     state.activeTour = {
       data: tour,
-      step: step,
-      node: d3.select(state.activePainting.node).select(".painting-tour-container").node()
+      step: step
     }
     render();
     rezoom();
+    updateUrl();
   }
 
   function nextTourStep() {
@@ -446,6 +507,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
       state.activeTour.step++;
       render();
       rezoom();
+      updateUrl();
     }
   }
 
@@ -454,6 +516,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
       state.activeTour.step--;
       render();
       rezoom();
+      updateUrl();
     }
   }
 
@@ -488,7 +551,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
 
 
   //---- Main
-
+  loadFromUrl();
   preloadThumbnails().then(function(imgs) {
     for (var i = 0; i < imgs.length; i++) {
       mainPaintings[i].painting.aspectRatio = (imgs[i].width / imgs[i].height);

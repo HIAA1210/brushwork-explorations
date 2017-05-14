@@ -1,1 +1,491 @@
-"use strict";var paintingHeight=2048,paintingScale=.5,paintingDisplayHeight=paintingHeight*paintingScale,paintingThumbHeight=512,paintingThumbScale=paintingDisplayHeight/paintingThumbHeight,paintingMargin=160,paintingCascadeLength=944,minScale=.05,maxScale=2,durationShort=500,durationMed=750,durationLong=1e3,durationVLong=2e3,defaultEase=d3.easeCubicInOut,loaded=!1;d3.json("assets/json/paintings.json",function(t){function n(t){return new Promise(function(n,i){var e=new Image;e.onload=function(){n(e)},e.onerror=e.onabort=function(){i(t)},e.src=t})}function i(){for(var t=[],i=0;i<B.length;i++)t.push(n(B[i].painting.thumbUrl));return Promise.all(t)}function e(){var t=E.getBoundingClientRect();H=t.width,M=t.height}function a(){z.attr("transform",d3.event.transform)}function o(t,n,i){function e(){return d3.zoomIdentity.scale(d).translate(l,g)}var a=d3.transition().duration(durationLong).ease(defaultEase),o=this.parentNode.getBBox(),r=o.width,c=o.height,s=o.x+o.width/2,u=o.y+o.height/2,d=Math.max(minScale,Math.min(maxScale,1/Math.max(r/H,c/M))),l=H/2/d-s,g=M/2/d-u;I.transition(a).call(C.transform,e)}function r(t,n,i){function e(){return d3.zoomIdentity.scale(u).translate(d,l)}var a=d3.transition().duration(durationLong).ease(defaultEase),o=this.parentNode.getBBox(),r=(o.width,o.height),c=o.x+o.width,s=o.y+o.height/2,u=Math.max(minScale,Math.min(maxScale,1/(r/M))),d=H/u-c,l=M/2/u-s;I.transition(a).call(C.transform,e)}function c(t,n,i){function e(){return d3.zoomIdentity.scale(l).translate(g,p)}var a=d3.transition().duration(durationLong).ease(defaultEase),o=this.parentNode.parentNode.parentNode.getBBox(),r=this.getBBox(),c=r.width,s=r.height,u=r.x+r.width/2+o.x,d=r.y+r.height/2+o.y,l=Math.max(minScale,Math.min(maxScale,1/Math.max(c/H,s/M))),g=H/2/l-u,p=M/2/l-d;I.transition(a).call(C.transform,e)}function s(){loaded&&(void 0===N.activePainting?o.bind(I.select("#frame-splash").node())():void 0===N.activeTour?r.bind(N.activePainting.node)():c.bind(d3.select(N.activeTour.node).select(".painting-step.step-"+N.activeTour.step).node())())}function u(t){return void 0!==N.activePainting&&t.painting.key!==N.activePainting.data.painting.key}function d(t){return void 0!==N.activeTour&&t.key===N.activeTour.key}function l(t,n){return void 0!==N.activeTour&&N.activeTour.step===n}function g(t,n){return"translate("+n*paintingCascadeLength+","+n*(paintingDisplayHeight+paintingMargin)+")"}function p(t,n){return"translate("+-this.getBBox().width+","+n*(paintingDisplayHeight+paintingMargin)+")"}function h(t,n){return N.showSplash?g.bind(this)(t,n):p.bind(this)(t,n)}function v(){loaded&&(f(),T())}function f(){var t=d3.transition().duration(durationVLong).ease(defaultEase);D=R.selectAll(".painting").data(B,function(t,n){return t.painting.key}),D.select(".painting-container").transition(t).attr("transform",h),m(D.select(".painting-tour-container"));var n=D.enter().append("g").attr("class","painting transform-container").attr("id",function(t){return t.painting.key}),i=n.append("g").attr("class","painting-container"),e=(i.append("image").attr("class","painting-base").attr("xlink:href",function(t){return t.painting.thumbUrl}).attr("height",paintingThumbHeight).attr("width",function(t){return t.painting.aspectRatio*paintingThumbHeight}).attr("transform","scale("+paintingThumbScale+")"),i.append("image").attr("class","painting-base").attr("xlink:href",function(t){return t.painting.fullUrl}).attr("height",paintingHeight).attr("width",function(t){return t.painting.aspectRatio*paintingHeight}).attr("transform","scale("+paintingScale+")"),i.append("g").attr("class","painting-tour-container"));m(e),i.attr("transform",h);var a=D.exit();a.remove();var o=n.merge(D);o.classed("inactive",u),N.showSplash||void 0!==N.activePainting?o.select(".painting-container").on("click",null):o.select(".painting-container").on("click",w)}function m(t){var n=t.selectAll("g").data(function(t){return d(t)?t.visualTour.steps:[]}),i=n.enter().append("g").attr("class",function(t,n){return"painting-step step-"+n});n.exit().remove();var e=i.merge(n),a=e.selectAll("rect").data(function(t,n){return l(t,n)?t.bounds:[]});a.enter().append("rect").attr("x",function(t){return t.x}).attr("y",function(t){return t.y}).attr("height",function(t){return t.height}).attr("width",function(t){return t.width}).classed("outlined",function(t,n){return t.framed===!0});a.exit().remove()}function T(){d3.select(".overlay").classed("active",function(){return void 0!==N.activeTour}),void 0!==N.activeTour&&(d3.select("#tour-header").html(function(){return decodeURI(N.activeTour.data.steps[N.activeTour.step].header)}),d3.select("#tour-text").html(function(){return decodeURI(N.activeTour.data.steps[N.activeTour.step].html)})),d3.select(".intro-page").classed("active",function(){return N.showSplash})}function x(){N.activePainting=void 0,N.activeTour=void 0,N.showSplash=!1,v(),s()}function w(t,n,i){N.activePainting={data:t,i:n,node:this},v(),s()}function y(){void 0!==N.activePainting&&b(N.activePainting.data.visualTour,0)}function b(t,n){N.activeTour={data:t,step:n,node:d3.select(N.activePainting.node).select(".painting-tour-container").node()},v(),s()}function S(){void 0!==N.activeTour&&N.activeTour.step<N.activeTour.data.steps.length-1&&(N.activeTour.step++,v(),s())}function k(){void 0!==N.activeTour&&N.activeTour.step>0&&(N.activeTour.step--,v(),s())}function P(t){t=t||window.event,37===t.keyCode?(k(),t.preventDefault()):39===t.keyCode&&(S(),t.preventDefault())}var H,M,B=t.mainPaintings,L=d3.select(".svg-container"),E=L.node(),I=d3.select(".svg-fullscreen"),z=I.select(".root");d3.select(window).on("resize",e);var C=d3.zoom().scaleExtent([minScale,maxScale]).on("zoom",a);I.call(C);var D,R=I.select(".paintings"),N={activePainting:void 0,activeTour:void 0,showSplash:!0};document.addEventListener("keydown",P),d3.select("#button-begin").on("click",x),d3.select("#menu-home").on("click",x),d3.select("#button-start-visual-analysis").on("click",function(){y()}),d3.select("#button-next").on("click",function(){S()}),d3.select("#button-prev").on("click",function(){k()}),i().then(function(t){for(var n=0;n<t.length;n++)B[n].painting.aspectRatio=t[n].width/t[n].height;loaded=!0,v(),s()}),e()});
+"use strict";
+
+/*global Image*/
+/*global _*/
+/*global d3*/
+/*global Url*/
+
+/*global dataPaintings*/
+
+//---- Configuration + Constants + Data
+var paintingHeight = 2048;
+var paintingScale = 0.5;
+var paintingDisplayHeight = paintingHeight * paintingScale;
+
+var paintingThumbHeight = 512;
+var paintingThumbScale = paintingDisplayHeight / paintingThumbHeight;
+
+var paintingMargin = 40 * 4;
+var paintingCascadeLength = 236 * 4;
+
+var minScale = 0.05;
+var maxScale = 2;
+
+var durationShort = 500;
+var durationMed = 750;
+var durationLong = 1000;
+var durationVLong = 2000;
+var defaultEase = d3.easeCubicInOut;
+
+//---- Load
+var loaded = false;
+d3.json("assets/json/paintings.json", function (paintingData) {
+  var mainPaintings = paintingData.mainPaintings;
+
+  function loadImage(src) {
+    return new Promise(function (resolve, reject) {
+      var img = new Image();
+      img.onload = function () {
+        resolve(img);
+      };
+      img.onerror = img.onabort = function () {
+        reject(src);
+      };
+      img.src = src;
+    });
+  }
+
+  function preloadThumbnails() {
+    var promises = [];
+    for (var i = 0; i < mainPaintings.length; i++) {
+      promises.push(loadImage(mainPaintings[i].painting.thumbUrl));
+    }
+    return Promise.all(promises);
+  }
+
+  //---- Initialize
+  var svgContainer = d3.select(".svg-container");
+  var svgContainerNode = svgContainer.node();
+
+  var width, height;
+
+  var svg = d3.select(".svg-fullscreen");
+  var root = svg.select(".root");
+
+  //  --Resize
+  d3.select(window).on("resize", resize);
+
+  function resize() {
+    var rect = svgContainerNode.getBoundingClientRect();
+    width = rect.width;
+    height = rect.height;
+  }
+
+  //---- Zooming
+  var zoom = d3.zoom().scaleExtent([minScale, maxScale]).on("zoom", zoomed);
+
+  svg.call(zoom);
+
+  function zoomed() {
+    root.attr("transform", d3.event.transform);
+    //TODO: scale-independent step outlines
+  }
+
+  function zoomContain(d, i, nodes) {
+    var t = d3.transition().duration(durationLong).ease(defaultEase);
+
+    var bounds = this.parentNode.getBBox(),
+        dx = bounds.width,
+        dy = bounds.height,
+        x = bounds.x + bounds.width / 2,
+        y = bounds.y + bounds.height / 2,
+        scale = Math.max(minScale, Math.min(maxScale, 1 / Math.max(dx / width, dy / height))),
+        translateX = width / 2 / scale - x,
+        translateY = height / 2 / scale - y;
+
+    function transform() {
+      return d3.zoomIdentity.scale(scale).translate(translateX, translateY);
+    }
+
+    svg.transition(t).call(zoom.transform, transform);
+  }
+
+  function zoomCoverVerticalRight(d, i, nodes) {
+    var t = d3.transition().duration(durationLong).ease(defaultEase);
+
+    var bounds = this.parentNode.getBBox(),
+        dx = bounds.width,
+        dy = bounds.height,
+        x = bounds.x + bounds.width,
+        y = bounds.y + bounds.height / 2,
+        scale = Math.max(minScale, Math.min(maxScale, 1 / (dy / height))),
+        translateX = width / scale - x,
+        translateY = height / 2 / scale - y;
+
+    function transform() {
+      return d3.zoomIdentity.scale(scale).translate(translateX, translateY);
+    }
+
+    svg.transition(t).call(zoom.transform, transform);
+  }
+
+  function zoomTourStep(d, i, nodes) {
+    var t = d3.transition().duration(durationLong).ease(defaultEase);
+
+    var paintingBounds = this.parentNode.parentNode.parentNode.getBBox(),
+        bounds = this.getBBox(),
+        dx = bounds.width,
+        dy = bounds.height,
+        x = bounds.x + bounds.width / 2 + paintingBounds.x,
+        y = bounds.y + bounds.height / 2 + paintingBounds.y,
+        scale = Math.max(minScale, Math.min(maxScale, 1 / Math.max(dx / width, dy / height))),
+        translateX = width / 2 / scale - x,
+        translateY = height / 2 / scale - y;
+
+    function transform() {
+      return d3.zoomIdentity.scale(scale).translate(translateX, translateY);
+    }
+
+    svg.transition(t).call(zoom.transform, transform);
+  }
+
+  function rezoom() {
+    if (loaded) {
+      if (state.activePainting === undefined) {
+        zoomContain.bind(svg.select("#frame-splash").node())();
+      } else {
+        if (state.activeTour === undefined) {
+          zoomCoverVerticalRight.bind(getActivePaintingNode())();
+        } else {
+          zoomTourStep.bind(d3.select(getActiveTourNode()).select(".painting-step.step-" + state.activeTour.step).node())();
+        }
+      }
+    }
+  }
+
+  //  --Paintings
+  var paintingsContainer = svg.select(".paintings");
+  var paintings;
+
+  function paintingIsInactive(d) {
+    if (state.activePainting !== undefined) {
+      return d.painting.key !== state.activePainting.data.painting.key;
+    } else {
+      return false;
+    }
+  }
+
+  function tourIsActive(d) {
+    if (state.activeTour !== undefined) {
+      return d.key === state.activePainting.key;
+    } else {
+      return false;
+    }
+  }
+
+  function stepIsActive(d, i) {
+    if (state.activeTour !== undefined) {
+      return state.activeTour.step === i;
+    } else {
+      return false;
+    }
+  }
+
+  //---- Transforms
+  function transformCascaded(d, i) {
+    return "translate(" + i * paintingCascadeLength + "," + i * (paintingDisplayHeight + paintingMargin) + ")";
+  }
+
+  function transformAlignRight(d, i) {
+    return "translate(" + -this.getBBox().width + "," + i * (paintingDisplayHeight + paintingMargin) + ")";
+  }
+
+  function transformConditional(d, i) {
+    if (state.showSplash) {
+      return transformCascaded.bind(this)(d, i);
+    } else {
+      return transformAlignRight.bind(this)(d, i);
+    }
+  }
+
+  //---- State + URL Save/Load
+  var state = {
+    activePainting: undefined,
+    activeTour: undefined,
+    showSplash: true //TODO
+  };
+
+  function getActivePaintingNode() {
+    if (state.activePainting.node === undefined) {
+      state.activePainting.node = d3.select("#" + state.activePainting.data.painting.key).node();
+    }
+    return state.activePainting.node;
+  }
+
+  function getActiveTourNode() {
+    if (state.activeTour.node === undefined) {
+      state.activeTour.node = d3.select(getActivePaintingNode()).select(".painting-tour-container").node();
+    }
+    return state.activeTour.node;
+  }
+
+  function loadFromUrl() {
+    var queries = Url.parseQuery();
+    var activePaintingKey = queries["activePainting"];
+    if (activePaintingKey) {
+      var activePaintingData = _.find(mainPaintings, function (mainPainting) {
+        return mainPainting.painting.key === activePaintingKey;
+      });
+      if (activePaintingData !== undefined) {
+        state.showSplash = false;
+        state.activePainting = {
+          data: activePaintingData
+        };
+        var activeTourKey = queries["activeTour"];
+        if (activeTourKey) {
+          var activeTourData = _.find(state.activePainting.data.tours, function (tour) {
+            return tour.key === activeTourKey;
+          });
+          if (activeTourData !== undefined) {
+            state.activeTour = {
+              data: activeTourData,
+              step: 0
+            };
+            var step = parseInt(queries["step"]);
+            if (!isNaN(step) && step >= 0 && step < state.activeTour.data.steps.length) {
+              state.activeTour.step = step;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  function updateUrl() {
+    if (state.activePainting !== undefined) {
+      Url.updateSearchParam("activePainting", state.activePainting.data.painting.key);
+      if (state.activeTour !== undefined) {
+        Url.updateSearchParam("activeTour", state.activeTour.data.key);
+        Url.updateSearchParam("step", state.activeTour.step);
+      } else {
+        Url.updateSearchParam("activeTour");
+        Url.updateSearchParam("step");
+      }
+    } else {
+      Url.updateSearchParam("activePainting");
+      Url.updateSearchParam("activeTour");
+      Url.updateSearchParam("step");
+    }
+  }
+
+  //---- Master Render
+  function render() {
+    if (loaded) {
+      renderPaintings();
+      renderInterface();
+    }
+  }
+
+  function renderPaintings() {
+    var t = d3.transition().duration(durationVLong).ease(defaultEase);
+
+    //Rebind
+    paintings = paintingsContainer.selectAll(".painting").data(mainPaintings, function (d, i) {
+      return d.painting.key;
+    });
+
+    //Modification
+    paintings.select(".painting-container").transition(t).attr("transform", transformConditional);
+
+    renderPaintingTour(paintings.select(".painting-tour-container"));
+
+    //Entry
+    var newPaintings = paintings.enter().append("g").attr("class", "painting transform-container").attr("id", function (d) {
+      return d.painting.key;
+    });
+    var newPaintingContainers = newPaintings.append("g").attr("class", "painting-container");
+
+    var newPaintingThumb = newPaintingContainers.append("image").attr("class", "painting-base").attr("xlink:href", function (d) {
+      return d.painting.thumbUrl;
+    }).attr("height", paintingThumbHeight).attr("width", function (d) {
+      return d.painting.aspectRatio * paintingThumbHeight;
+    }).attr("transform", "scale(" + paintingThumbScale + ")");
+
+    var newPaintingBases = newPaintingContainers.append("image").attr("class", "painting-base").attr("xlink:href", function (d) {
+      return d.painting.fullUrl;
+    }).attr("height", paintingHeight).attr("width", function (d) {
+      return d.painting.aspectRatio * paintingHeight;
+    }).attr("transform", "scale(" + paintingScale + ")");
+
+    var newPaintingTour = newPaintingContainers.append("g").attr("class", "painting-tour-container");
+
+    renderPaintingTour(newPaintingTour);
+
+    newPaintingContainers.attr("transform", transformConditional);
+
+    //Exit
+    var exitingPaintings = paintings.exit();
+    exitingPaintings.remove();
+
+    //All
+    var allPaintings = newPaintings.merge(paintings);
+    allPaintings.classed("inactive", paintingIsInactive);
+    if (!state.showSplash && state.activePainting === undefined) {
+      allPaintings.select(".painting-container").on("click", selectPainting);
+    } else {
+      allPaintings.select(".painting-container").on("click", null);
+    }
+  }
+
+  function renderPaintingTour(paintingTourSelection) {
+    //Rebind
+    var paintingTours = paintingTourSelection.selectAll("g").data(function (d) {
+      if (tourIsActive(d)) {
+        return state.activeTour.data.steps;
+      } else {
+        return [];
+      }
+    });
+
+    //Modification
+
+    //Entry
+    var newPaintingTours = paintingTours.enter().append("g").attr("class", function (d, i) {
+      return "painting-step step-" + i;
+    });
+
+    //Exit
+    paintingTours.exit().remove();
+
+    //All
+    var allPaintingTours = newPaintingTours.merge(paintingTours);
+
+    //Tour Bounds
+    var tourBounds = allPaintingTours.selectAll("rect").data(function (d, i) {
+      if (stepIsActive(d, i)) {
+        return d.bounds;
+      } else {
+        return [];
+      }
+      //TODO: conditionally render based on step visibility
+    });
+
+    //Entry
+    var newTourBounds = tourBounds.enter().append("rect").attr("x", function (d) {
+      return d.x;
+    }).attr("y", function (d) {
+      return d.y;
+    }).attr("height", function (d) {
+      return d.height;
+    }).attr("width", function (d) {
+      return d.width;
+    }).classed("outlined", function (d, i) {
+      return d.framed === true;
+    });
+
+    //Exit
+    tourBounds.exit().remove();
+  }
+
+  function renderInterface() {
+    d3.select(".overlay").classed("active", function () {
+      return state.activeTour !== undefined;
+    });
+    if (state.activeTour !== undefined) {
+      d3.select('#tour-header').html(function () {
+        return decodeURI(state.activeTour.data.steps[state.activeTour.step].header);
+      });
+      d3.select("#tour-text").html(function () {
+        return decodeURI(state.activeTour.data.steps[state.activeTour.step].html);
+      });
+    }
+
+    d3.select(".intro-page").classed("active", function () {
+      return state.showSplash;
+    });
+  }
+
+  //---- Interaction
+  function resetHome() {
+    state.activePainting = undefined;
+    state.activeTour = undefined;
+    state.showSplash = false;
+    render();
+    rezoom();
+    updateUrl();
+  }
+
+  function selectPainting(d, i, nodes) {
+    //TODO set drag zoom constraints
+    state.activePainting = {
+      data: d,
+      i: i,
+      node: this
+    };
+    render();
+    rezoom();
+    updateUrl();
+  }
+
+  function selectVisualAnalysis() {
+    if (state.activePainting !== undefined) {
+      selectTour(state.activePainting.data.tours.visualTour, 0); //TODO
+    }
+  }
+
+  function selectTour(tour, step) {
+    state.activeTour = {
+      data: tour,
+      step: step
+    };
+    render();
+    rezoom();
+    updateUrl();
+  }
+
+  function nextTourStep() {
+    if (state.activeTour !== undefined && state.activeTour.step < state.activeTour.data.steps.length - 1) {
+      state.activeTour.step++;
+      render();
+      rezoom();
+      updateUrl();
+    }
+  }
+
+  function prevTourStep() {
+    if (state.activeTour !== undefined && state.activeTour.step > 0) {
+      state.activeTour.step--;
+      render();
+      rezoom();
+      updateUrl();
+    }
+  }
+
+  function keyNav(evt) {
+    evt = evt || window.event;
+
+    if (evt.keyCode === 37) {
+      prevTourStep();
+      evt.preventDefault();
+    } else if (evt.keyCode === 39) {
+      nextTourStep();
+      evt.preventDefault();
+    }
+  }
+
+  document.addEventListener('keydown', keyNav);
+
+  d3.select("#button-begin").on("click", resetHome);
+  d3.select("#menu-home").on("click", resetHome);
+  d3.select("#button-start-visual-analysis").on("click", function () {
+    selectVisualAnalysis();
+  });
+  d3.select("#button-next").on("click", function () {
+    nextTourStep();
+  });
+  d3.select("#button-prev").on("click", function () {
+    prevTourStep();
+  });
+
+  //---- Main
+  loadFromUrl();
+  preloadThumbnails().then(function (imgs) {
+    for (var i = 0; i < imgs.length; i++) {
+      mainPaintings[i].painting.aspectRatio = imgs[i].width / imgs[i].height;
+    }
+    loaded = true;
+    render();
+    rezoom();
+  });
+  resize();
+});
