@@ -72,7 +72,9 @@ d3.json("assets/json/paintings.json", function (paintingData) {
   }
 
   //---- Zooming
-  var zoom = d3.zoom().scaleExtent([minScale, maxScale]).on("zoom", zoomed);
+  var zoom = d3.zoom().scaleExtent([minScale, maxScale]).on("zoom", zoomed).filter(function () {
+    return state.activePainting !== undefined && !event.button;
+  });
 
   svg.call(zoom);
 
@@ -84,7 +86,7 @@ d3.json("assets/json/paintings.json", function (paintingData) {
   function zoomContain(d, i, nodes) {
     var t = d3.transition().duration(durationLong).ease(defaultEase);
 
-    var bounds = this.parentNode.getBBox(),
+    var bounds = this.getBBox(),
         dx = bounds.width,
         dy = bounds.height,
         x = bounds.x + bounds.width / 2,
@@ -144,6 +146,9 @@ d3.json("assets/json/paintings.json", function (paintingData) {
       if (state.activePainting === undefined) {
         zoomContain.bind(svg.select("#frame-splash").node())();
       } else {
+        var bounds = getActivePaintingNode().getBBox();
+        console.log(bounds);
+        zoom.translateExtent([[bounds.x, bounds.y], [bounds.x + bounds.width, bounds.y + bounds.height]]);
         if (state.activeTour === undefined) {
           zoomCoverVerticalRight.bind(getActivePaintingNode())();
         } else {
