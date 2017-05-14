@@ -191,8 +191,8 @@ d3.json("assets/json/paintings.json", function(paintingData) {
         const paintingBounds = getActivePaintingNode().getElementsByClassName("base-container")[0].getBBox();
         if (state.activeTour === undefined) {
           zoom.translateExtent([
-            [anchorBounds.x - translateExtentBuffer, anchorBounds.y - translateExtentBuffer],
-            [anchorBounds.x + anchorBounds.width, anchorBounds.y + paintingBounds.height + translateExtentBuffer]
+            [anchorBounds.x, anchorBounds.y],
+            [anchorBounds.x + anchorBounds.width, anchorBounds.y + paintingBounds.height]
           ]);
         }
         else {
@@ -414,6 +414,19 @@ d3.json("assets/json/paintings.json", function(paintingData) {
       })
       .attr("transform", function(d) {
         return "scale(" + paintingScale + ") translate(" + d.painting.aspectRatio * paintingHeight + ",0) rotate (90)";
+      });
+
+    var newPaintingBlurImage = newPaintingBaseContainers.append("image")
+      .attr("class", "painting-blur")
+      .attr("xlink:href", function(d) {
+        return d.painting.thumbUrl;
+      })
+      .attr("width", paintingThumbHeight)
+      .attr("height", function(d) {
+        return d.painting.aspectRatio * paintingThumbHeight;
+      })
+      .attr("transform", function(d) {
+        return "scale(" + paintingThumbScale + ") translate(" + d.painting.aspectRatio * paintingThumbHeight + ",0) rotate (90)";
       });
 
     var newPaintingTour = newPaintingContainers.append("g")

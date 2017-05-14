@@ -14,7 +14,7 @@
     <!-- Start Bottom Bar -->
     <nav class="bottom-bar">
       <div class="top-bar-title">
-          <div id="menu-home" class="menu-home"><a href="#">Brushwork Explorations</a></div>
+        <div id="menu-home" class="menu-home"><a href="#">Brushwork Explorations</a></div>
       </div>
       <div class="top-bar-left">
         <ol id="menu-painters" class="menu numbered">
@@ -61,7 +61,13 @@
     
     <div class="svg-container">
       <svg class="svg-fullscreen d3-content">
-          <defs>
+        <defs>
+          <g id="filters">
+            <filter id="filter-painting-blur">
+              <feGaussianBlur stdDeviation="5" />
+            </filter>
+          </g>
+    
         </defs>
         <g class="root">
           <g class="camera-frames">
