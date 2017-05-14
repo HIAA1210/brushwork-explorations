@@ -266,6 +266,17 @@ d3.json("assets/json/paintings.json", function(paintingData) {
       .append("g")
       .attr("class", "painting-container");
 
+    var newPaintingThumb = newPaintingContainers.append("image")
+      .attr("class", "painting-base")
+      .attr("xlink:href", function(d) {
+        return d.painting.thumbUrl;
+      })
+      .attr("height", paintingHeight)
+      .attr("width", function(d) {
+        return d.painting.aspectRatio * paintingHeight;
+      })
+      .attr("transform", "scale(" + paintingScale + ")");
+
     var newPaintingBases = newPaintingContainers.append("image")
       .attr("class", "painting-base")
       .attr("xlink:href", function(d) {
