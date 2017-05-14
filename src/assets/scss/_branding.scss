@@ -66,12 +66,13 @@
     right: 0;
     width: 100%;
     height: 100%;
+    transform: translateZ(0);
     z-index: 0; //-1;
   }
   .painting-step {
     fill: none;
   }
-  .painting-step rect.outlined {
+  .painting-step .outlined {
     stroke: white;
   }
   .camera-frame {
@@ -118,30 +119,32 @@
     font-weight: $header-font-weight;
     color: $header-color;
   }
-  g.painting {
+  .painting {
     opacity: 1;
     transition: opacity 1s;
     cursor: pointer;
+    transform: translateZ(0);
   }
-  g.painting.inactive {
+  .painting.inactive {
     opacity: 0;
     cursor: auto;
     pointer-events: none;
   }
-  g.painting.active {
+  .painting.active {
+    cursor: move;
     cursor: grab;
   }
-  .intro-page.active ~ .svg-container g.painting {
+  .intro-page.active ~ .svg-container .painting {
     cursor: auto;
   }
   // g.painting.active:active {
   //   cursor: grabbing;
   // } TODO: implement grabbing
-  g.painting-ui-position-container {
+  .painting-ui-position-container {
     transform: translate(30em, 12em);
     transition: transform 1s;
   }
-  g.painting.active g.painting-ui-position-container {
+  .painting.active .painting-ui-position-container {
     transform: translate(2em, 6em);
   }
   // .painting-ui-container > .info > tspan {

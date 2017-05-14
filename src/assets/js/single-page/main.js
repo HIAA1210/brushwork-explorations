@@ -33,6 +33,19 @@ const durationLong = 1000;
 const durationVLong = 2000;
 const defaultEase = d3.easeCubicInOut;
 
+//---- Utility
+function getRootElementFontSize() {
+    // Returns a number
+    return parseFloat(
+        // of the computed font-size, so in px
+        getComputedStyle(
+            // for the root <html> element
+            document.documentElement
+        )
+        .fontSize
+    );
+}
+
 
 //---- Load
 var loaded = false;
@@ -63,6 +76,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
 
 
   //---- Initialize
+  var remToPixelRatio = getRootElementFontSize();
   const svgContainer = d3.select(".svg-container");
   const svgContainerNode = svgContainer.node();
 
@@ -92,10 +106,10 @@ d3.json("assets/json/paintings.json", function(paintingData) {
   svg.call(zoom);
 
   function zoomed() {
+    // svgContainer.attr("style", "transform: " + d3.event.transform);
     root.attr("transform", d3.event.transform);
     paintingUIContainers.attr("transform", "scale(" + 1 / d3.event.transform.k + ") translate(16, 0)");
     paintingVisibleTourBounds.attr("stroke-width", tourBoundsWidth / d3.event.transform.k);
-    //TODO: scale-independent step outlines
   }
 
   function zoomContain(d, i, nodes) {
@@ -377,7 +391,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
       .attr("class", "base-container");
 
     var newPaintingThumbImage = newPaintingBaseContainers.append("image")
-      .attr("class", "painting-base")
+      .attr("class", "painting-thumb")
       .attr("xlink:href", function(d) {
         return d.painting.thumbUrl;
       })
@@ -445,7 +459,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
 
     const newInfoBlock = newPaintingUIContainer.append("text")
       .attr("class", "info")
-      .attr("y", "2.5rem");
+      .attr("y", 2.5 * remToPixelRatio); //"2.5rem");
 
     newInfoBlock.append("tspan")
       .attr("class", "name header")
@@ -457,7 +471,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
     newInfoBlock.append("tspan")
       .attr("class", "painter")
       .attr("x", 0)
-      .attr("dy", "3rem")
+      .attr("dy", 3*remToPixelRatio)//"3rem")
       .text(function(d) {
         return "Attributed to " + d.painting.painter;
       })
@@ -472,9 +486,9 @@ d3.json("assets/json/paintings.json", function(paintingData) {
     newContents.append("line")
       .attr("class", "divider")
       .attr("x1", 0)
-      .attr("y1", contentsYRem + "rem")
+      .attr("y1", contentsYRem * remToPixelRatio) //+ "rem")
       .attr("x2", 350)
-      .attr("y2", contentsYRem + "rem");
+      .attr("y2", contentsYRem * remToPixelRatio) //+ "rem");
 
     const newVisualTour = newContents.append("g")
       .attr("class", "contents-entry visual-tour")
@@ -483,7 +497,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
     newVisualTour
       .append("text").text("Visual Analysis")
       .attr("x", 0)
-      .attr("y", (contentsFirstItemYRem + 1 * contentsItemHeightRem) + "rem");
+      .attr("y", (contentsFirstItemYRem + 1 * contentsItemHeightRem) * remToPixelRatio); //+ "rem");
   }
 
   function renderPaintingTour(paintingTourSelection) {
