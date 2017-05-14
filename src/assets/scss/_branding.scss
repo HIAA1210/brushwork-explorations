@@ -1,17 +1,22 @@
 @mixin branding {
+  .bottom-bar {
+    background-color: rgba($black, .5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
   .menu-home {
     font-family: $header-font-family
   }
-  .menu-home > a {
+  .menu-home>a {
     padding: $menu-item-padding;
   }
   .menu.numbered {
-    counter-reset:li;
+    counter-reset: li;
   }
-  .menu.numbered > li > a:before {
-    content:counter(li) ".";
-    counter-increment:li;
-    padding-right:.2em;
+  .menu.numbered>li>a:before {
+    content: counter(li) ".";
+    counter-increment: li;
+    padding-right: .2em;
   }
   .author {
     font-size: .875em;
@@ -68,19 +73,11 @@
   }
   .painting-step rect.outlined {
     stroke: white;
-    stroke-width: 3;
   }
   .camera-frame {
     fill: none;
   }
-  .painting {
-    opacity: 1;
-    transition: opacity 1s;
-  }
-  .painting.inactive {
-    opacity: 0;
-    pointer-events: none;
-  }
+
   .overlay {
     bottom: 40px;
     right: 40px;
@@ -100,5 +97,85 @@
     font-weight: 500;
     font-style: normal;
     text-transform: uppercase;
+  }
+  text {
+    font-family: $body-font-family;
+    fill: currentColor;
+    font-size: 1em;
+  }
+  text .em {
+    font-style: italic;
+  }
+  text .strong {
+    font-weight: $global-weight-bold;
+  }
+  text .small {
+    font-size: $small-font-size;
+  }
+  text .header {
+    font-family: $header-font-family;
+    font-style: $header-font-style;
+    font-weight: $header-font-weight;
+    color: $header-color;
+  }
+  g.painting {
+    opacity: 1;
+    transition: opacity 1s;
+    cursor: pointer;
+  }
+  g.painting.inactive {
+    opacity: 0;
+    cursor: auto;
+    pointer-events: none;
+  }
+  g.painting.active {
+    cursor: grab;
+  }
+  // g.painting.active:active {
+  //   cursor: grabbing;
+  // } TODO: implement grabbing
+  g.painting-ui-position-container {
+    transform: translate(30em, 12em);
+    transition: transform 1s;
+  }
+  g.painting.active g.painting-ui-position-container {
+    transform: translate(2em, 6em);
+  }
+  // .painting-ui-container > .info > tspan {
+  // }
+  .painting-ui-container>.info>.name {
+    font-family: $header-alt-font-family;
+    font-size: 2.5rem;
+    font-style: italic;
+  }
+  .painting-ui-container>.info>.painter {
+    font-size: .875em;
+    text-transform: uppercase;
+  }
+  .painting-ui-container .divider {
+    stroke: $dark-gray;
+    stroke-width: 1px;
+  }
+  .painting-right.edge {
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity 1s;
+  }
+  .painting-tour-container.active+.painting-right-edge {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .painting .painting-ui-contents-container {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1s;
+  }
+  .painting.active .painting-ui-contents-container {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .painting-ui-contents-container .contents-entry {
+    font-size: 1.125em;
+    cursor: pointer;
   }
 }

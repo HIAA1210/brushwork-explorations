@@ -16,7 +16,7 @@ const $ = plugins();
 // Check for --production flag
 const PRODUCTION = !!(yargs.argv.production);
 
-// Load settings from settings.yml
+// Load settings from config.yml
 const {
   COMPATIBILITY,
   PORT,
@@ -141,12 +141,12 @@ function json() {
 // Copy images to the "dist" folder
 // In production, the images are compressed
 function images() {
-  gulp.src('src/assets/img/**/*')
+  gulp.src('src/assets/img/**/*.{png,jpg}')
     .pipe($.changed(PATHS.dist))
     .pipe($.imageResize({
-      height: 512,
+      width: 512,
       upscale: false,
-      quality: .6,
+      quality: .4,
       format: "jpeg",
       filter: "Lanczos",
       noProfile: true,
@@ -169,6 +169,35 @@ function images() {
       progressive: true
     })))
     .pipe(gulp.dest(PATHS.dist + '/assets/img'));
+
+  // return gulp.src('src/assets/img/**/*optimized.{png,jpg}')
+  //   // .pipe($.changed(PATHS.dist))
+  //   .pipe($.responsive({
+  //     "*": [{
+  //       height: 512,
+  //       format: 'jpeg',
+  //       skipOnEnlargement: true,
+  //       quality: 50,
+  //       // rotate: 90,
+  //       rename: {
+  //         suffix: '_thumb',
+  //         extname: '.jpg'
+  //       },
+  //       withMetadata: false,
+  //       progressive: true
+  //     }, {
+  //       // rotate: 90,
+  //       withMetadata: false,
+  //       progressive: true,
+  //       compressionLevel: 9
+  //     }]
+  //   }, {
+  //     strictMatchImages: false
+  //   }))
+  //   .pipe($.if(PRODUCTION, $.imagemin({
+  //     progressive: true
+  //   })))
+  //   .pipe(gulp.dest(PATHS.dist + '/assets/img'));
 }
 
 // Start a server with BrowserSync to preview the site in

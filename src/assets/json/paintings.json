@@ -272,7 +272,7 @@
                     }]
                 }, {
                     "header": "Rocks?",
-                    "html": "<p>Now let's take a look at the rocks and riverbanks – these dots, possibly depicting rocks, seem to be out of place within the composition. There does not seem to be a good reason for them to be here, and they are not repeated elsewhere in the composition. These marks are present in the National Palace Museum copy as well. Perhaps they are intended to be a reference to Zhao Lingrang&rsquo;s signature rock dots that he painted on the banks of rivers.</p>",
+                    "html": "<p>Now let’s take a look at the rocks and riverbanks – these dots, possibly depicting rocks, seem to be out of place within the composition. There does not seem to be a good reason for them to be here, and they are not repeated elsewhere in the composition. These marks are present in the National Palace Museum copy as well. Perhaps they are intended to be a reference to Zhao Lingrang&rsquo;s signature rock dots that he painted on the banks of rivers.</p>",
                     "bounds": [{
                         "x": 1319,
                         "y": 611,
@@ -335,7 +335,17 @@
         "tours": {
             "visualTour": {
                 "key": "visual-tour-zhaoboju-risd",
-                "steps": []
+                "steps": [{
+                    "header": "Coming Soon",
+                    "html": "<p>Unfortunately, this part of the site isn’t complete yet. Stay tuned!</p>",
+                    "bounds": [{
+                        "x": 0,
+                        "y": 0,
+                        "width": 3901.36,
+                        "height": 1024,
+                        "framed": false
+                    }]
+                }]
             }
         }
 
@@ -350,7 +360,17 @@
         "tours": {
             "visualTour": {
                 "key": "visual-tour-miyouren-risd",
-                "steps": []
+                "steps": [{
+                    "header": "Coming Soon",
+                    "html": "<p>Unfortunately, this part of the site isn’t complete yet. Stay tuned!</p>",
+                    "bounds": [{
+                        "x": 0,
+                        "y": 0,
+                        "width": 6246.77,
+                        "height": 1024,
+                        "framed": false
+                    }]
+                }]
             }
         }
 

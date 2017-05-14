@@ -16,6 +16,14 @@ const paintingThumbScale = paintingDisplayHeight / paintingThumbHeight;
 const paintingMargin = 40 * 4;
 const paintingCascadeLength = 236 * 4;
 
+const paintingUIStaticWidthPadding = 32;
+const paintingUIWidthPadding = 32;
+
+const tourBoundsWidth = 3;
+
+const translateExtentBuffer = 256;
+const translateExtentTourBuffer = 1024;
+
 const minScale = 0.05;
 const maxScale = 2;
 
@@ -77,7 +85,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
   var zoom = d3.zoom()
     .scaleExtent([minScale, maxScale])
     .on("zoom", zoomed)
-    .filter(function () {
+    .filter(function() {
       return state.activePainting !== undefined && !event.button;
     });
 
@@ -85,6 +93,8 @@ d3.json("assets/json/paintings.json", function(paintingData) {
 
   function zoomed() {
     root.attr("transform", d3.event.transform);
+    paintingUIContainers.attr("transform", "scale(" + 1 / d3.event.transform.k + ") translate(16, 0)");
+    paintingVisibleTourBounds.attr("stroke-width", tourBoundsWidth / d3.event.transform.k);
     //TODO: scale-independent step outlines
   }
 
@@ -110,17 +120,19 @@ d3.json("assets/json/paintings.json", function(paintingData) {
       .call(zoom.transform, transform);
   }
 
-  function zoomCoverVerticalRight(d, i, nodes) {
+  function zoomPaintingCoverVerticalRight(d, i, nodes) {
     var t = d3.transition()
       .duration(durationLong)
       .ease(defaultEase);
 
-    var bounds = this.getBBox(),
-      dx = bounds.width,
-      dy = bounds.height,
-      x = (bounds.x + bounds.width),
-      y = (bounds.y + bounds.height / 2),
+    var anchorBounds = this.getBBox(),
+      paintingBounds = this.getElementsByClassName("base-container")[0].getBBox(),
+      textBounds = this.getElementsByClassName("painting-ui-container")[0].getBBox(),
+      dx = paintingBounds.width,
+      dy = paintingBounds.height,
       scale = Math.max(minScale, Math.min(maxScale, 1 / (dy / height))),
+      x = anchorBounds.x + dx + textBounds.width / scale + paintingUIWidthPadding * 2.5,
+      y = (anchorBounds.y + dy / 2),
       translateX = (width) / scale - x,
       translateY = (height / 2) / scale - y;
 
@@ -161,11 +173,24 @@ d3.json("assets/json/paintings.json", function(paintingData) {
         zoomContain.bind(svg.select("#frame-splash").node())();
       }
       else {
-        const bounds = getActivePaintingNode().getBBox();
-        console.log(bounds);
-        zoom.translateExtent([[bounds.x,bounds.y],[bounds.x + bounds.width, bounds.y + bounds.height]]);
+        const anchorBounds = getActivePaintingNode().getBBox();
+        const paintingBounds = getActivePaintingNode().getElementsByClassName("base-container")[0].getBBox();
         if (state.activeTour === undefined) {
-          zoomCoverVerticalRight.bind(getActivePaintingNode())();
+          zoom.translateExtent([
+            [anchorBounds.x - translateExtentBuffer, anchorBounds.y - translateExtentBuffer],
+            [anchorBounds.x + anchorBounds.width, anchorBounds.y + paintingBounds.height + translateExtentBuffer]
+          ]);
+        }
+        else {
+          zoom.translateExtent([
+            [anchorBounds.x - translateExtentTourBuffer, anchorBounds.y - translateExtentTourBuffer],
+            [anchorBounds.x + paintingBounds.width + translateExtentTourBuffer, anchorBounds.y + paintingBounds.height + translateExtentTourBuffer]
+          ]);
+        }
+        var extentBuffer = (state.activeTour === undefined) ? translateExtentBuffer : translateExtentTourBuffer;
+
+        if (state.activeTour === undefined) {
+          zoomPaintingCoverVerticalRight.bind(getActivePaintingNode())();
         }
         else {
           zoomTourStep.bind(d3.select(getActiveTourNode()).select(".painting-step.step-" + state.activeTour.step).node())();
@@ -176,8 +201,10 @@ d3.json("assets/json/paintings.json", function(paintingData) {
   }
 
   //  --Paintings
-  const paintingsContainer = svg.select(".paintings");
+  const paintingsContainer = root.select(".paintings");
   var paintings;
+  var paintingUIContainers = root.selectAll(".painting-ui-container");
+  var paintingVisibleTourBounds = root.selectAll("rect.outlined");
 
   function paintingIsActive(mainPainting) {
     if (state.activePainting !== undefined) {
@@ -221,7 +248,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
   }
 
   function transformAlignRight(d, i) {
-    return "translate(" + (-this.getBBox().width) + "," + (i * (paintingDisplayHeight + paintingMargin)) + ")";
+    return "translate(" + (-this.getElementsByClassName("base-container")[0].getBBox().width) + "," + (i * (paintingDisplayHeight + paintingMargin)) + ")";
   }
 
   function transformConditional(d, i) {
@@ -345,32 +372,50 @@ d3.json("assets/json/paintings.json", function(paintingData) {
       .append("g")
       .attr("class", "painting-container");
 
-    var newPaintingThumb = newPaintingContainers.append("image")
+    var newPaintingBaseContainers = newPaintingContainers
+      .append("g")
+      .attr("class", "base-container");
+
+    var newPaintingThumbImage = newPaintingBaseContainers.append("image")
       .attr("class", "painting-base")
       .attr("xlink:href", function(d) {
         return d.painting.thumbUrl;
       })
-      .attr("height", paintingThumbHeight)
-      .attr("width", function(d) {
+      .attr("width", paintingThumbHeight)
+      .attr("height", function(d) {
         return d.painting.aspectRatio * paintingThumbHeight;
       })
-      .attr("transform", "scale(" + paintingThumbScale + ")");
+      .attr("transform", function(d) {
+        return "scale(" + paintingThumbScale + ") translate(" + d.painting.aspectRatio * paintingThumbHeight + ",0) rotate (90)";
+      });
 
-    var newPaintingBases = newPaintingContainers.append("image")
+    var newPaintingFullImage = newPaintingBaseContainers.append("image")
       .attr("class", "painting-base")
       .attr("xlink:href", function(d) {
         return d.painting.fullUrl;
       })
-      .attr("height", paintingHeight)
-      .attr("width", function(d) {
+      .attr("width", paintingHeight)
+      .attr("height", function(d) {
         return d.painting.aspectRatio * paintingHeight;
       })
-      .attr("transform", "scale(" + paintingScale + ")");
+      .attr("transform", function(d) {
+        return "scale(" + paintingScale + ") translate(" + d.painting.aspectRatio * paintingHeight + ",0) rotate (90)";
+      });
 
     var newPaintingTour = newPaintingContainers.append("g")
       .attr("class", "painting-tour-container");
 
+    var newPaintingUI = newPaintingContainers.append("g")
+      .attr("class", "painting-right-edge")
+      .attr("transform", function(d) {
+        return "translate(" + d.painting.aspectRatio * paintingDisplayHeight + ", 0)";
+      })
+      .append("g")
+      .attr("class", "painting-ui-position-container");
+
+    renderPaintingUI(newPaintingUI);
     renderPaintingTour(newPaintingTour);
+
 
     newPaintingContainers.attr("transform", transformConditional);
 
@@ -380,7 +425,9 @@ d3.json("assets/json/paintings.json", function(paintingData) {
 
     //All
     var allPaintings = newPaintings.merge(paintings);
-    allPaintings.classed("inactive", paintingIsInactive);
+    allPaintings
+      .classed("inactive", paintingIsInactive)
+      .classed("active", paintingIsActive);
     if (!state.showSplash && state.activePainting === undefined) {
       allPaintings.select(".painting-container").on("click", selectPainting);
     }
@@ -389,8 +436,59 @@ d3.json("assets/json/paintings.json", function(paintingData) {
     }
   }
 
+  function renderPaintingUI(paintingUISelection) {
+    const newPaintingUIContainer = paintingUISelection
+      .append("g")
+      .attr("class", "painting-ui-container")
+
+    paintingUIContainers = root.selectAll(".painting-ui-container");
+
+    const newInfoBlock = newPaintingUIContainer.append("text")
+      .attr("class", "info")
+      .attr("y", "2.5rem");
+
+    newInfoBlock.append("tspan")
+      .attr("class", "name header")
+      .attr("x", 0)
+      .text(function(d) {
+        return d.painting.name;
+      })
+
+    newInfoBlock.append("tspan")
+      .attr("class", "painter")
+      .attr("x", 0)
+      .attr("dy", "3rem")
+      .text(function(d) {
+        return "Attributed to " + d.painting.painter;
+      })
+
+    const newContents = newPaintingUIContainer.append("g")
+      .attr("class", "painting-ui-contents-container");
+
+    const contentsYRem = 6.5;
+    const contentsFirstItemYRem = contentsYRem + .5;
+    const contentsItemHeightRem = 2;
+
+    newContents.append("line")
+      .attr("class", "divider")
+      .attr("x1", 0)
+      .attr("y1", contentsYRem + "rem")
+      .attr("x2", 350)
+      .attr("y2", contentsYRem + "rem");
+
+    const newVisualTour = newContents.append("g")
+      .attr("class", "contents-entry visual-tour")
+      .on("click", selectVisualAnalysis);
+
+    newVisualTour
+      .append("text").text("Visual Analysis")
+      .attr("x", 0)
+      .attr("y", (contentsFirstItemYRem + 1 * contentsItemHeightRem) + "rem");
+  }
+
   function renderPaintingTour(paintingTourSelection) {
     //Rebind
+    paintingTourSelection.classed("active", tourIsActive);
     var paintingTours = paintingTourSelection
       .selectAll("g")
       .data(function(d) {
@@ -448,12 +546,15 @@ d3.json("assets/json/paintings.json", function(paintingData) {
       .attr("width", function(d) {
         return d.width
       })
+      .attr("stroke-width", 3)
       .classed("outlined", function(d, i) {
         return d.framed === true;
       });
 
     //Exit
     tourBounds.exit().remove();
+
+    paintingVisibleTourBounds = root.selectAll("rect.outlined");
   }
 
   function renderInterface() {
@@ -499,12 +600,13 @@ d3.json("assets/json/paintings.json", function(paintingData) {
   }
 
   function selectPainting(d, i, nodes) {
-    //TODO set drag zoom constraints
     state.activePainting = {
       data: d,
       i: i,
       node: this !== undefined ? this.parentNode : undefined
     };
+    state.activeTour = undefined;
+    state.showSplash = false;
     render();
     rezoom();
     updateUrl();
@@ -562,9 +664,6 @@ d3.json("assets/json/paintings.json", function(paintingData) {
 
   d3.select("#button-begin").on("click", resetHome);
   d3.select("#menu-home").on("click", resetHome);
-  d3.select("#button-start-visual-analysis").on("click", function() {
-    selectVisualAnalysis();
-  });
   d3.select("#button-next").on("click", function() {
     nextTourStep();
   });
@@ -578,7 +677,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
   loadFromUrl();
   preloadThumbnails().then(function(imgs) {
     for (var i = 0; i < imgs.length; i++) {
-      mainPaintings[i].painting.aspectRatio = (imgs[i].width / imgs[i].height);
+      mainPaintings[i].painting.aspectRatio = (imgs[i].height / imgs[i].width);
     }
     loaded = true;
     render();
