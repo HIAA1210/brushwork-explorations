@@ -96,7 +96,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
     width = rect.width;
     height = rect.height;
 
-    if(state.showSplash) {
+    if (state.showSplash) {
       rezoom();
     }
   }
@@ -147,7 +147,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
 
     var anchorBounds = this.getBBox(),
       paintingBounds = d3.select(this).select(".base-container").node().getBBox(),
-      textBounds = d3.select(".painting-ui-container").node().getBBox(),
+      textBounds = d3.select(this).select(".painting-ui-container").node().getBBox(),
       dx = paintingBounds.width,
       dy = paintingBounds.height,
       scale = Math.max(minScale, Math.min(maxScale, 1 / (dy / height))),
