@@ -71,7 +71,16 @@
     transform: translateZ(0);
     z-index: 0; //-1;
   }
-  .painting-step {
+  .painting-bounds {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .5s, visibility .5s;
+  }
+  .painting-bounds.active {
+    visibility: visible;
+    opacity: 1;
+  }
+  .bounds-display-container {
     fill: none;
   }
   .painting-step .outlined {
@@ -138,13 +147,15 @@
   }
   .painting-blur {
     opacity: 0;
-    filter: url(#filter-painting-blur);
     visibility: hidden;
     transition: opacity 1s, visibility 1s;
   }
   .painting-blur.active {
     opacity: 1;
     visibility: visible;
+  }
+  .painting-blur-base {
+    filter: url(#filter-painting-blur);
   }
   .intro-page.active ~ .svg-container .painting {
     cursor: auto;

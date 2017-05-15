@@ -3,7 +3,6 @@
 /*global d3*/
 /*global Url*/
 
-/*global dataPaintings*/
 
 //---- Configuration + Constants + Data
 const paintingHeight = 2048;
@@ -12,6 +11,9 @@ const paintingDisplayHeight = paintingHeight * paintingScale;
 
 const paintingThumbHeight = 512;
 const paintingThumbScale = paintingDisplayHeight / paintingThumbHeight;
+
+const paintingBlurHeight = 32;
+const paintingBlurScale = paintingDisplayHeight / paintingBlurHeight;
 
 const paintingMargin = 40 * 4;
 const paintingCascadeLength = 236 * 4;
@@ -35,15 +37,15 @@ const defaultEase = d3.easeCubicInOut;
 
 //---- Utility
 function getRootElementFontSize() {
-    // Returns a number
-    return parseFloat(
-        // of the computed font-size, so in px
-        getComputedStyle(
-            // for the root <html> element
-            document.documentElement
-        )
-        .fontSize
-    );
+  // Returns a number
+  return parseFloat(
+    // of the computed font-size, so in px
+    getComputedStyle(
+      // for the root <html> element
+      document.documentElement
+    )
+    .fontSize
+  );
 }
 
 
@@ -282,18 +284,30 @@ d3.json("assets/json/paintings.json", function(paintingData) {
   };
 
   function getActivePaintingNode() {
+    console.log(state.activePainting.data);
+    console.log(state.activePainting.node);
     if (state.activePainting.node === undefined) {
-      state.activePainting.node = d3.select("#" + state.activePainting.data.painting.key).node();
+      state.activePainting.node = root.select("#" + state.activePainting.data.painting.key).node();
+      if (state.activePainting.node === null) {
+        state.activePainting.node === undefined;
+        throw ("getActivePaintingNode(): Could not find active painting node");
+      }
+
     }
     return state.activePainting.node;
   }
 
   function getActiveTourNode() {
     if (state.activeTour.node === undefined) {
+
       state.activeTour.node = d3.select(getActivePaintingNode()).select(".painting-tour-container").node();
+      if (state.activeTour.node === null) {
+        state.activeTour.node === undefined;
+        throw ("getActiveTourNode: Could not find active tour node");
+      }
+
     }
     return state.activeTour.node;
-
   }
 
 
@@ -319,7 +333,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
               data: activeTourData,
               step: 0
             };
-            const step = parseInt(queries["step"]);
+            const step = parseInt(queries["step"], 10);
             if (!isNaN(step) && step >= 0 && step < state.activeTour.data.steps.length) {
               state.activeTour.step = step;
             }
@@ -335,7 +349,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
       Url.updateSearchParam("activePainting", state.activePainting.data.painting.key);
       if (state.activeTour !== undefined) {
         Url.updateSearchParam("activeTour", state.activeTour.data.key);
-        Url.updateSearchParam("step", state.activeTour.step)
+        Url.updateSearchParam("step", state.activeTour.step);
       }
       else {
         Url.updateSearchParam("activeTour");
@@ -390,6 +404,16 @@ d3.json("assets/json/paintings.json", function(paintingData) {
       .append("g")
       .attr("class", "base-container");
 
+    var newPaintingBaseRect = newPaintingBaseContainers.append("rect")
+      .attr("class", "painting-baserect")
+      .attr("id", function(d) {
+        return "baserect-" + d.painting.key;
+      })
+      .attr("height", paintingDisplayHeight)
+      .attr("width", function(d) {
+        return d.painting.aspectRatio * paintingDisplayHeight;
+      });
+
     var newPaintingThumbImage = newPaintingBaseContainers.append("image")
       .attr("class", "painting-thumb")
       .attr("xlink:href", function(d) {
@@ -416,17 +440,20 @@ d3.json("assets/json/paintings.json", function(paintingData) {
         return "scale(" + paintingScale + ") translate(" + d.painting.aspectRatio * paintingHeight + ",0) rotate (90)";
       });
 
-    var newPaintingBlurImage = newPaintingBaseContainers.append("image")
+    var newPaintingBlurImage = newPaintingBaseContainers
+      .append("g")
       .attr("class", "painting-blur")
+      .append("image")
+      .attr("class", "painting-blur-base")
       .attr("xlink:href", function(d) {
         return d.painting.thumbUrl;
       })
-      .attr("width", paintingThumbHeight)
+      .attr("width", paintingBlurHeight)
       .attr("height", function(d) {
-        return d.painting.aspectRatio * paintingThumbHeight;
+        return d.painting.aspectRatio * paintingBlurHeight;
       })
       .attr("transform", function(d) {
-        return "scale(" + paintingThumbScale + ") translate(" + d.painting.aspectRatio * paintingThumbHeight + ",0) rotate (90)";
+        return "scale(" + paintingBlurScale + ") translate(" + d.painting.aspectRatio * paintingBlurHeight + ",0) rotate (90)";
       });
 
     var newPaintingTour = newPaintingContainers.append("g")
@@ -455,8 +482,20 @@ d3.json("assets/json/paintings.json", function(paintingData) {
     allPaintings
       .classed("inactive", paintingIsInactive)
       .classed("active", paintingIsActive);
-    if (!state.showSplash && state.activePainting === undefined) {
-      allPaintings.select(".painting-container").on("click", selectPainting);
+    if (!state.showSplash) {
+      if (state.activePainting === undefined) {
+        allPaintings.select(".painting-container").on("click", selectPainting);
+      }
+      else {
+        allPaintings.select(".painting-container").on("click", null);
+        if (state.activeTour !== undefined) {
+          allPaintings.select(".painting-blur")
+            .classed("active", function(d) {
+              return paintingIsActive(d) && tourIsActive(d);
+            })
+            .attr("mask", "url(#cutout-mask-" + state.activeTour.step + ")");
+        }
+      }
     }
     else {
       allPaintings.select(".painting-container").on("click", null);
@@ -466,7 +505,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
   function renderPaintingUI(paintingUISelection) {
     const newPaintingUIContainer = paintingUISelection
       .append("g")
-      .attr("class", "painting-ui-container")
+      .attr("class", "painting-ui-container");
 
     paintingUIContainers = root.selectAll(".painting-ui-container");
 
@@ -479,15 +518,15 @@ d3.json("assets/json/paintings.json", function(paintingData) {
       .attr("x", 0)
       .text(function(d) {
         return d.painting.name;
-      })
+      });
 
     newInfoBlock.append("tspan")
       .attr("class", "painter")
       .attr("x", 0)
-      .attr("dy", 3*remToPixelRatio)//"3rem")
+      .attr("dy", 3 * remToPixelRatio) //"3rem")
       .text(function(d) {
         return "Attributed to " + d.painting.painter;
-      })
+      });
 
     const newContents = newPaintingUIContainer.append("g")
       .attr("class", "painting-ui-contents-container");
@@ -501,7 +540,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
       .attr("x1", 0)
       .attr("y1", contentsYRem * remToPixelRatio) //+ "rem")
       .attr("x2", 350)
-      .attr("y2", contentsYRem * remToPixelRatio) //+ "rem");
+      .attr("y2", contentsYRem * remToPixelRatio); //+ "rem");
 
     const newVisualTour = newContents.append("g")
       .attr("class", "contents-entry visual-tour")
@@ -517,7 +556,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
     //Rebind
     paintingTourSelection.classed("active", tourIsActive);
     var paintingTours = paintingTourSelection
-      .selectAll("g")
+      .selectAll(".painting-step")
       .data(function(d) {
         if (tourIsActive(d)) {
           return state.activeTour.data.steps;
@@ -527,60 +566,115 @@ d3.json("assets/json/paintings.json", function(paintingData) {
         }
       });
 
-    //Modification
-
-    //Entry
-    var newPaintingTours = paintingTours.enter()
-      .append("g")
-      .attr("class", function(d, i) {
-        return "painting-step step-" + i
-      });
-
-
     //Exit
     paintingTours.exit().remove();
 
-    //All
-    var allPaintingTours = newPaintingTours.merge(paintingTours)
+    if (state.activePainting !== undefined && state.activeTour !== undefined) {
 
-    //Tour Bounds
-    var tourBounds = allPaintingTours
-      .selectAll("rect")
-      .data(function(d, i) {
-        if (stepIsActive(d, i)) {
-          return d.bounds;
-        }
-        else {
-          return [];
-        }
-        //TODO: conditionally render based on step visibility
 
-      })
+      //Modification
 
-    //Entry
-    var newTourBounds = tourBounds
-      .enter()
-      .append("rect")
-      .attr("x", function(d) {
-        return d.x
-      })
-      .attr("y", function(d) {
-        return d.y
-      })
-      .attr("height", function(d) {
-        return d.height
-      })
-      .attr("width", function(d) {
-        return d.width
-      })
-      .attr("stroke-width", 3)
-      .classed("outlined", function(d, i) {
-        return d.framed === true;
-      });
+      //Entry
+      var newPaintingTours = paintingTours.enter()
+        .append("g")
+        .attr("class", function(d, i) {
+          return "painting-step step-" + i;
+        });
 
-    //Exit
-    tourBounds.exit().remove();
+      //Defs
+      var defs = newPaintingTours
+        .append("defs")
+        .attr("class", "tour-def");
 
+      var mask = defs
+        .append("mask")
+        .attr("id", function(d, i) {
+          return "cutout-mask-" + i;
+        });
+
+      var newBoundsContainer = defs.append("g")
+        .attr("class", "bounds-container")
+        .attr("id", function(d, i) {
+          return "bounds-container-" + i;
+        });
+
+      var newBoundsDisplayContainer = newPaintingTours.append("use")
+        .attr("xlink:href", function(d, i) {
+          return "#bounds-container-" + i;
+        })
+        .attr("class", "bounds-display-container");
+
+      //All
+      var allPaintingTours = newPaintingTours.merge(paintingTours);
+
+      //Tour Bounds
+      var tourBounds = allPaintingTours
+        .select(".bounds-container")
+        .selectAll("rect")
+        .data(function(d, i) {
+          if (stepIsActive(d, i)) {
+            return d.bounds;
+          }
+          else {
+            return [];
+          }
+
+        });
+
+      //Entry
+      var newTourBounds = tourBounds
+        .enter()
+        .append("rect")
+        .attr("id", function(d, i) {
+          return "bounds-" + i;
+        })
+        .attr("x", function(d) {
+          return d.x;
+        })
+        .attr("y", function(d) {
+          return d.y;
+        })
+        .attr("height", function(d) {
+          return d.height;
+        })
+        .attr("width", function(d) {
+          return d.width;
+        })
+        .attr("stroke-width", 3)
+        .attr("class", "painting-bounds")
+        .classed("outlined", function(d, i) {
+          return d.framed === true;
+        });
+
+      newTourBounds
+        .transition()
+        .duration(1)
+        .on("end", function() {
+          this.classList.add("active");
+        });
+
+      //Exit
+      tourBounds.exit()
+        .transition()
+        .duration(durationShort)
+        // .style("opacity", 0)
+        .on("start", function() {
+          this.classList.remove("active");
+        })
+        .remove();
+
+
+
+      mask.append("use")
+        .attr("xlink:href", "#baserect-" + state.activePainting.data.painting.key)
+        .attr("fill", "white");
+
+      mask.append("use")
+        .attr("xlink:href", function(d, i) {
+          return "#bounds-container-" + i;
+        })
+        .attr("fill", "black");
+    }
     paintingVisibleTourBounds = root.selectAll("rect.outlined");
   }
 
@@ -597,12 +691,12 @@ d3.json("assets/json/paintings.json", function(paintingData) {
     d3.select(".overlay")
       .classed("active", function() {
         return state.activeTour !== undefined;
-      })
+      });
     if (state.activeTour !== undefined) {
       d3.select('#tour-header')
         .html(function() {
           return decodeURI(state.activeTour.data.steps[state.activeTour.step].header);
-        })
+        });
       d3.select("#tour-text")
         .html(function() {
           return decodeURI(state.activeTour.data.steps[state.activeTour.step].html);
@@ -613,7 +707,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
     d3.select(".intro-page")
       .classed("active", function() {
         return state.showSplash;
-      })
+      });
   }
 
   //---- Interaction
@@ -649,7 +743,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
     state.activeTour = {
       data: tour,
       step: step
-    }
+    };
     render();
     rezoom();
     updateUrl();
