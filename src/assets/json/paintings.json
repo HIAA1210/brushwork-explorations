@@ -5,7 +5,8 @@
             "name": "Winter Landscape",
             "key": "painting-zhaolingrang-risd",
             "thumbUrl": "assets/img/Zhao_Lingrang/Zhao_Lingrang_RISD_optimized_thumb.jpg",
-            "fullUrl": "assets/img/Zhao_Lingrang/Zhao_Lingrang_RISD_optimized.png"
+            "fullUrl": "assets/img/Zhao_Lingrang/Zhao_Lingrang_RISD_optimized.png",
+            "blurredUrl": "assets/img/Zhao_Lingrang/Zhao_Lingrang_RISD_optimized_blurred.jpg"
         },
         "tours": {
             "visualTour": {
@@ -330,7 +331,8 @@
             "name": "Landscape with Buildings",
             "key": "painting-zhaoboju-risd",
             "thumbUrl": "assets/img/Zhao_Boju/Zhao_Boju_RISD_optimized_thumb.jpg",
-            "fullUrl": "assets/img/Zhao_Boju/Zhao_Boju_RISD_optimized.png"
+            "fullUrl": "assets/img/Zhao_Boju/Zhao_Boju_RISD_optimized.png",
+            "blurredUrl": "assets/img/Zhao_Boju/Zhao_Boju_RISD_optimized_blurred.jpg"
         },
         "tours": {
             "visualTour": {
@@ -355,7 +357,8 @@
             "name": "Mountain Mists",
             "key": "painting-miyouren-risd",
             "thumbUrl": "assets/img/Mi_Youren/Mi_Youren_RISD_optimized_thumb.jpg",
-            "fullUrl": "assets/img/Mi_Youren/Mi_Youren_RISD_optimized.png"
+            "fullUrl": "assets/img/Mi_Youren/Mi_Youren_RISD_optimized.png",
+            "blurredUrl": "assets/img/Mi_Youren/Mi_Youren_RISD_optimized_blurred.jpg"
         },
         "tours": {
             "visualTour": {

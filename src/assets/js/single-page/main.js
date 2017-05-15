@@ -446,7 +446,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
       .append("image")
       .attr("class", "painting-blur-base")
       .attr("xlink:href", function(d) {
-        return d.painting.thumbUrl;
+        return d.painting.blurredUrl;
       })
       .attr("width", paintingBlurHeight)
       .attr("height", function(d) {
