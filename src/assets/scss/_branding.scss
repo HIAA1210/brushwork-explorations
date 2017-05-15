@@ -209,6 +209,14 @@
   }
   .painting-ui-contents-container .contents-entry {
     font-size: 1.125em;
-    cursor: pointer;
+    cursor: pointer!important;
+  }
+
+  .prevent-zoom.reset-cursor {
+    cursor: auto;
+  }
+
+  .grabbing {
+    cursor: grabbing!important;
   }
 }

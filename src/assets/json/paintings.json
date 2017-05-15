@@ -4,16 +4,16 @@
             "painter": "Zhao Lingrang",
             "name": "Winter Landscape",
             "key": "painting-zhaolingrang-risd",
-            "thumbUrl": "assets/img/Zhao_Lingrang/Zhao_Lingrang_RISD_optimized_thumb.jpg",
-            "fullUrl": "assets/img/Zhao_Lingrang/Zhao_Lingrang_RISD_optimized.png",
-            "blurredUrl": "assets/img/Zhao_Lingrang/Zhao_Lingrang_RISD_optimized_blurred.jpg"
+            "thumbUrl": "assets/img/Zhao_Lingrang/painting_Zhao_Lingrang_RISD_thumb.jpg",
+            "fullUrl": "assets/img/Zhao_Lingrang/painting_Zhao_Lingrang_RISD_base.png",
+            "blurredUrl": "assets/img/Zhao_Lingrang/painting_Zhao_Lingrang_RISD_blurred.jpg"
         },
         "tours": {
             "visualTour": {
                 "key": "visual-tour-zhaolingrang-risd",
                 "steps": [{
                     "header": "Zhao Lingrang",
-                    "html": "<p>A member of the Song Imperial Family, Zhao Lingrang (also known by his &ldquo;artist name&rdquo;, Zhao Danian) lived a luxurious life, but was forbidden from travelling far from the capital. Undeterred by a lack of access to nature, he developed his painting skills and style by studying the works of ancient masters from the vast archives of the Song imperial collection.</p>",
+                    "html": "<p>A member of the Song Imperial Family, Zhao Lingrang (also known by his &ldquo;artist name&rdquo;, Zhao Danian) lived a luxurious life, but was forbidden from travelling far from the capital, Bianjing (now Kaifeng).</p><p>Undeterred by a lack of access to nature, he developed his painting skills and style by studying the works of ancient masters from the vast archives of the Song imperial collection.</p>",
                     "bounds": [{
                         "x": 0,
                         "y": 0,
@@ -23,7 +23,7 @@
                     }]
                 }, {
                     "header": "Diving In",
-                    "html": "<p>It's difficult to authenticate paintings from the Song dynasty, but this landscape from the Boston MFA, <em>Whiling Away the Summer by a Lakeside Retreat </em>, is probably the most reliable Zhao Lingrang attribution that exists today.</p>",
+                    "html": "<p>It's difficult to authenticate paintings from the Song dynasty, but this landscape from the Boston MFA, <em>Whiling Away the Summer by a Lakeside Retreat </em>, is probably the most reliably attributed Zhao Lingrang painting which exists today.</p>",
                     "bounds": [{
                         "x": 0,
                         "y": 0,
@@ -33,7 +33,17 @@
                     }]
                 }, {
                     "header": "&ldquo;Small Landscapes&rdquo;",
-                    "html": "<p>Rather than painting the monumental landscapes done by contemporaries such as Guo Xi, Zhao Lingrang focused on the environments available to him, depicting the more intimate &ldquo;small landscapes&rdquo; surrounding the capital. Comparing Guo Xi’s [insert painting here] with <em>Whiling Away the Summer by a Lakeside Retreat </em>, we note the unified space, atmospheric and temporal quality, and more zoomed in feel which characterize a &ldquo;small landscape&rdquo;</p>",
+                    "html": "<p>Rather than the monumental landscapes painted by contemporaries such as Guo Xi, Zhao Lingrang focused on the environments available to him, depicting the more intimate &ldquo;small landscapes&rdquo; surrounding the capital.</p>",
+                    "bounds": [{
+                        "x": 0,
+                        "y": 0,
+                        "width": 5271,
+                        "height": 1024,
+                        "framed": false
+                    }]
+                }, {
+                    "header": "&ldquo;Small Landscapes&rdquo;",
+                    "html": "<p>We compare Guo Xi’s <em>Old Trees, Level Distance</em>, characterized by isolated elements, a high vantage poinst, and discrete steps of distance, to <em>Whiling Away the Summer by a Lakeside Retreat</em>.</p><p>Note the unified space, atmospheric and temporal quality, and more zoomed in feel which characterize a &ldquo;small landscape&rdquo; in Zhao Lingrang’s Painting.</p>",
                     "bounds": [{
                         "x": 0,
                         "y": 0,
@@ -43,7 +53,7 @@
                     }]
                 }, {
                     "header": "Zhao Lingrang and Wang Wei",
-                    "html": "<p>Zhao Lingrang was noted to have an attention to detail, and a &ldquo;contemporary, Mi Fei, wrote that some small snow landscapes by [him] were comparable to [Tang dynasty master] Wang Wei's work&rdquo;.</p>",
+                    "html": "<p>Zhao Lingrang was noted for his attention to detail, and a &ldquo;contemporary, Mi Fei, wrote that some small snow landscapes by [him] were comparable to [Tang dynasty master] Wang Wei's work&rdquo;.</p>",
                     "bounds": [{
                         "x": 0,
                         "y": 0,
@@ -52,18 +62,8 @@
                         "framed": false
                     }]
                 }, {
-                    "header": "Copies...",
-                    "html": "<p>There are no more reliably authenticated Wang Wei paintings today. But three paintings attributed to Wang Wei share an odd relationship with our painting at RISD – </p>",
-                    "bounds": [{
-                        "x": 0,
-                        "y": 0,
-                        "width": 5271,
-                        "height": 1024,
-                        "framed": false
-                    }]
-                }, {
-                    "header": "and Compositions",
-                    "html": "<p>They share compositions!</p>",
+                    "header": "Copies and Compositions",
+                    "html": "<p>There are no more reliably authenticated Wang Wei paintings today. But three paintings attributed to Wang Wei share an odd relationship with our painting at RISD – they share compositions!</p>",
                     "bounds": [{
                         "x": 0,
                         "y": 0,
@@ -83,7 +83,7 @@
                     }]
                 }, {
                     "header": "Wang no way!",
-                    "html": "<p>But upon closer examination, it’s obvious that this painting is from much later – probably the 15th or 16th centuries – the Ming-dynasty. The rock texturing in particular is prototypical Ming-dynasty brushwork.</p>",
+                    "html": "<p>But upon closer examination, it’s obvious that this painting is from much later – probably the 15<sup>th</sup> or 16<sup>th</sup> centuries – the Ming-dynasty. The rock texturing in particular is quintessential Ming-dynasty brushwork.</p>",
                     "bounds": [{
                         "x": 0,
                         "y": 0,
@@ -330,9 +330,9 @@
             "painter": "Zhao Boju",
             "name": "Landscape with Buildings",
             "key": "painting-zhaoboju-risd",
-            "thumbUrl": "assets/img/Zhao_Boju/Zhao_Boju_RISD_optimized_thumb.jpg",
-            "fullUrl": "assets/img/Zhao_Boju/Zhao_Boju_RISD_optimized.png",
-            "blurredUrl": "assets/img/Zhao_Boju/Zhao_Boju_RISD_optimized_blurred.jpg"
+            "thumbUrl": "assets/img/Zhao_Boju/painting_Zhao_Boju_RISD_thumb.jpg",
+            "fullUrl": "assets/img/Zhao_Boju/painting_Zhao_Boju_RISD_base.png",
+            "blurredUrl": "assets/img/Zhao_Boju/painting_Zhao_Boju_RISD_blurred.jpg"
         },
         "tours": {
             "visualTour": {
@@ -356,9 +356,9 @@
             "painter": "Mi Youren",
             "name": "Mountain Mists",
             "key": "painting-miyouren-risd",
-            "thumbUrl": "assets/img/Mi_Youren/Mi_Youren_RISD_optimized_thumb.jpg",
-            "fullUrl": "assets/img/Mi_Youren/Mi_Youren_RISD_optimized.png",
-            "blurredUrl": "assets/img/Mi_Youren/Mi_Youren_RISD_optimized_blurred.jpg"
+            "thumbUrl": "assets/img/Mi_Youren/painting_Mi_Youren_RISD_thumb.jpg",
+            "fullUrl": "assets/img/Mi_Youren/painting_Mi_Youren_RISD_base.png",
+            "blurredUrl": "assets/img/Mi_Youren/painting_Mi_Youren_RISD_blurred.jpg"
         },
         "tours": {
             "visualTour": {

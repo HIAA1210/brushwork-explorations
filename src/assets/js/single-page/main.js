@@ -21,6 +21,8 @@ const paintingCascadeLength = 236 * 4;
 const paintingUIStaticWidthPadding = 32;
 const paintingUIWidthPadding = 32;
 
+const zoomTourMargin = 32;
+
 const tourBoundsWidth = 3;
 
 const translateExtentBuffer = 256;
@@ -101,15 +103,6 @@ d3.json("assets/json/paintings.json", function(paintingData) {
     }
   }
 
-  //---- Zooming
-  var zoom = d3.zoom()
-    .scaleExtent([minScale, maxScale])
-    .on("zoom", zoomed)
-    .filter(function() {
-      return state.activePainting !== undefined && !event.button;
-    });
-
-  svg.call(zoom);
 
   function zoomed() {
     // svgContainer.attr("style", "transform: " + d3.event.transform);
@@ -171,8 +164,8 @@ d3.json("assets/json/paintings.json", function(paintingData) {
 
     var paintingBounds = this.parentNode.parentNode.parentNode.getBBox(),
       bounds = this.getBBox(),
-      dx = bounds.width,
-      dy = bounds.height,
+      dx = bounds.width + 2 * zoomTourMargin,
+      dy = bounds.height + 2 * zoomTourMargin,
       x = (bounds.x + bounds.width / 2) + paintingBounds.x,
       y = (bounds.y + bounds.height / 2) + paintingBounds.y,
       scale = Math.max(minScale, Math.min(maxScale, 1 / Math.max(dx / width, dy / height))),
@@ -288,8 +281,6 @@ d3.json("assets/json/paintings.json", function(paintingData) {
   };
 
   function getActivePaintingNode() {
-    console.log(state.activePainting.data);
-    console.log(state.activePainting.node);
     if (state.activePainting.node === undefined) {
       state.activePainting.node = root.select("#" + state.activePainting.data.painting.key).node();
       if (state.activePainting.node === null) {
@@ -517,18 +508,18 @@ d3.json("assets/json/paintings.json", function(paintingData) {
     paintingUIContainers = root.selectAll(".painting-ui-container");
 
     const newInfoBlock = newPaintingUIContainer.append("text")
-      .attr("class", "info")
+      .attr("class", "info prevent-zoom")
       .attr("y", 2.5 * remToPixelRatio); //"2.5rem");
 
     newInfoBlock.append("tspan")
-      .attr("class", "name header")
+      .attr("class", "name header prevent-zoom reset-cursor")
       .attr("x", 0)
       .text(function(d) {
         return d.painting.name;
       });
 
     newInfoBlock.append("tspan")
-      .attr("class", "painter")
+      .attr("class", "painter prevent-zoom reset-cursor")
       .attr("x", 0)
       .attr("dy", 3 * remToPixelRatio) //"3rem")
       .text(function(d) {
@@ -550,11 +541,12 @@ d3.json("assets/json/paintings.json", function(paintingData) {
       .attr("y2", contentsYRem * remToPixelRatio); //+ "rem");
 
     const newVisualTour = newContents.append("g")
-      .attr("class", "contents-entry visual-tour")
-      .on("click", selectVisualAnalysis);
+      .attr("class", "contents-entry visual-tour-button prevent-zoom")
+      .on("click", selectVisualAnalysis, true);
 
     newVisualTour
       .append("text").text("Visual Analysis")
+      .attr("class", "prevent-zoom")
       .attr("x", 0)
       .attr("y", (contentsFirstItemYRem + 1 * contentsItemHeightRem) * remToPixelRatio); //+ "rem");
   }
@@ -790,14 +782,38 @@ d3.json("assets/json/paintings.json", function(paintingData) {
   document.addEventListener('keydown', keyNav);
 
 
-  d3.select("#button-begin").on("click", resetHome);
-  d3.select("#menu-home").on("click", resetHome);
+  d3.select("#button-begin").on("click", resetHome, true);
+  d3.select("#menu-home").on("click", resetHome, true);
   d3.select("#button-next").on("click", function() {
     nextTourStep();
-  });
+  }, true);
   d3.select("#button-prev").on("click", function() {
     prevTourStep();
-  });
+  }, true);
+
+  //---- Zooming
+  function unGrab(evt) {
+    // console.log("ungrab");
+    document.body.classList.remove("grabbing");
+    document.removeEventListener("mouseup", unGrab);
+  }
+
+  var zoom = d3.zoom()
+    .scaleExtent([minScale, maxScale])
+    .on("zoom", zoomed)
+    .filter(function() {
+      const filter = state.activePainting !== undefined && !event.button && !event.target.classList.contains("prevent-zoom");
+      // if (filter && event.type === "mousedown") {
+      //   document.body.classList.add("grabbing");
+      //   document.addEventListener("mouseup", unGrab, true);
+      // }
+      // console.log(event);
+      // console.log(event.target, event.target.classList, !event.target.classList.contains("preventZoom"));
+      return filter;
+    });
+  // zoom.clickDistance(2);
+
+  svg.call(zoom);
 
 
 

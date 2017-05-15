@@ -141,7 +141,7 @@ function json() {
 // Copy images to the "dist" folder
 // In production, the images are compressed
 function images() {
-  gulp.src('src/assets/img/**/*.{png,jpg}')
+  gulp.src('src/assets/img/**/painting_*_base.{png,jpg}')
     .pipe($.changed(PATHS.dist))
     .pipe($.imageResize({
       width: 512,
@@ -159,7 +159,7 @@ function images() {
     .pipe($.rename(function(path) {
       if (path.extname === ".jpeg") {
         path.extname = ".jpg";
-        path.basename += "_thumb";
+        path.basename = path.basename.substr(0,path.basename.lastIndexOf("_base")) + "_thumb";
       }
     }))
     .pipe(gulp.dest(PATHS.dist + '/assets/img'));
