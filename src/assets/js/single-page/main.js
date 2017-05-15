@@ -95,6 +95,10 @@ d3.json("assets/json/paintings.json", function(paintingData) {
     const rect = svgContainerNode.getBoundingClientRect();
     width = rect.width;
     height = rect.height;
+
+    if(state.showSplash) {
+      rezoom();
+    }
   }
 
   //---- Zooming
@@ -142,8 +146,8 @@ d3.json("assets/json/paintings.json", function(paintingData) {
       .ease(defaultEase);
 
     var anchorBounds = this.getBBox(),
-      paintingBounds = this.getElementsByClassName("base-container")[0].getBBox(),
-      textBounds = this.getElementsByClassName("painting-ui-container")[0].getBBox(),
+      paintingBounds = d3.select(this).select(".base-container").node().getBBox(),
+      textBounds = d3.select(".painting-ui-container").node().getBBox(),
       dx = paintingBounds.width,
       dy = paintingBounds.height,
       scale = Math.max(minScale, Math.min(maxScale, 1 / (dy / height))),
@@ -190,7 +194,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
       }
       else {
         const anchorBounds = getActivePaintingNode().getBBox();
-        const paintingBounds = getActivePaintingNode().getElementsByClassName("base-container")[0].getBBox();
+        const paintingBounds = d3.select(getActivePaintingNode()).select(".base-container").node().getBBox();
         if (state.activeTour === undefined) {
           zoom.translateExtent([
             [anchorBounds.x, anchorBounds.y],
@@ -264,7 +268,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
   }
 
   function transformAlignRight(d, i) {
-    return "translate(" + (-this.getElementsByClassName("base-container")[0].getBBox().width) + "," + (i * (paintingDisplayHeight + paintingMargin)) + ")";
+    return "translate(" + (-d3.select(this).select(".base-container").node().getBBox().width) + "," + (i * (paintingDisplayHeight + paintingMargin)) + ")";
   }
 
   function transformConditional(d, i) {
@@ -482,6 +486,13 @@ d3.json("assets/json/paintings.json", function(paintingData) {
     allPaintings
       .classed("inactive", paintingIsInactive)
       .classed("active", paintingIsActive);
+
+    var paintingBlur = allPaintings.select(".painting-blur")
+      .classed("active", function(d) {
+        return paintingIsActive(d) && tourIsActive(d);
+      })
+
+
     if (!state.showSplash) {
       if (state.activePainting === undefined) {
         allPaintings.select(".painting-container").on("click", selectPainting);
@@ -489,11 +500,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
       else {
         allPaintings.select(".painting-container").on("click", null);
         if (state.activeTour !== undefined) {
-          allPaintings.select(".painting-blur")
-            .classed("active", function(d) {
-              return paintingIsActive(d) && tourIsActive(d);
-            })
-            .attr("mask", "url(#cutout-mask-" + state.activeTour.step + ")");
+          paintingBlur.attr("mask", "url(#cutout-mask-" + state.activeTour.step + ")");
         }
       }
     }
