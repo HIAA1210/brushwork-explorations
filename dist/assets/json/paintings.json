@@ -2,8 +2,10 @@
     "mainPaintings": [{
         "painting": {
             "painter": "Zhao Lingrang",
+            "painterNote": "attributed",
             "name": "Winter Landscape",
             "key": "painting-zhaolingrang-risd",
+            "rotated": true,
             "thumbUrl": "assets/img/Zhao_Lingrang/painting_Zhao_Lingrang_RISD_thumb.jpg",
             "fullUrl": "assets/img/Zhao_Lingrang/painting_Zhao_Lingrang_RISD_base.png",
             "blurredUrl": "assets/img/Zhao_Lingrang/painting_Zhao_Lingrang_RISD_blurred.jpg"
@@ -20,10 +22,16 @@
                         "width": 5271,
                         "height": 1024,
                         "framed": false
+                    }],
+                    "paintings": [{
+                        "x": 5439,
+                        "y": 0,
+                        "paintingKey": "painting_Zhao-Lingrang_River-Landscape-in-Autumn"
                     }]
                 }, {
                     "header": "Diving In",
                     "html": "<p>It's difficult to authenticate paintings from the Song dynasty, but this landscape from the Boston MFA, <em>Whiling Away the Summer by a Lakeside Retreat </em>, is probably the most reliably attributed Zhao Lingrang painting which exists today.</p>",
+                    "mainHidden": true,
                     "bounds": [{
                         "x": 0,
                         "y": 0,
@@ -34,6 +42,7 @@
                 }, {
                     "header": "&ldquo;Small Landscapes&rdquo;",
                     "html": "<p>Rather than the monumental landscapes painted by contemporaries such as Guo Xi, Zhao Lingrang focused on the environments available to him, depicting the more intimate &ldquo;small landscapes&rdquo; surrounding the capital.</p>",
+                    "mainHidden": true,
                     "bounds": [{
                         "x": 0,
                         "y": 0,
@@ -42,8 +51,9 @@
                         "framed": false
                     }]
                 }, {
-                    "header": "&ldquo;Small Landscapes&rdquo;",
-                    "html": "<p>We compare Guo Xi’s <em>Old Trees, Level Distance</em>, characterized by isolated elements, a high vantage poinst, and discrete steps of distance, to <em>Whiling Away the Summer by a Lakeside Retreat</em>.</p><p>Note the unified space, atmospheric and temporal quality, and more zoomed in feel which characterize a &ldquo;small landscape&rdquo; in Zhao Lingrang’s Painting.</p>",
+                    "header": "…and Level Distance",
+                    "html": "<p>We compare Guo Xi’s <em>Old Trees, Level Distance</em>, characterized by isolated elements, a high vantage poinst, and discrete steps of distance, to <em>Whiling Away the Summer by a Lakeside Retreat</em>.</p><p>Note the unified space, atmospheric and temporal quality, and more zoomed in feel which characterize a &ldquo;small landscape&rdquo; in Zhao Lingrang’s painting.</p>",
+                    "mainHidden": true,
                     "bounds": [{
                         "x": 0,
                         "y": 0,
@@ -54,6 +64,7 @@
                 }, {
                     "header": "Zhao Lingrang and Wang Wei",
                     "html": "<p>Zhao Lingrang was noted for his attention to detail, and a &ldquo;contemporary, Mi Fei, wrote that some small snow landscapes by [him] were comparable to [Tang dynasty master] Wang Wei's work&rdquo;.</p>",
+                    "mainHidden": true,
                     "bounds": [{
                         "x": 0,
                         "y": 0,
@@ -63,7 +74,7 @@
                     }]
                 }, {
                     "header": "Copies and Compositions",
-                    "html": "<p>There are no more reliably authenticated Wang Wei paintings today. But three paintings attributed to Wang Wei share an odd relationship with our painting at RISD – they share compositions!</p>",
+                    "html": "<p>There are no more reliably authenticated Wang Wei paintings today. But these three paintings attributed to Wang Wei share an odd relationship with our painting at RISD – they share compositions!</p>",
                     "bounds": [{
                         "x": 0,
                         "y": 0,
@@ -73,7 +84,7 @@
                     }]
                 }, {
                     "header": "Wang wait…",
-                    "html": "<p>Take a look at the longest painting, <em>Clearing After Snowfall Along the River</em>: it seems like someone took the two other paintings attributed to Wang Wei, and smashed them together.</p>",
+                    "html": "<p>Take a look at the longest painting, <em>Clearing After Snowfall Along the River</em>: it seems like someone took the two other paintings, and composited them together.</p>",
                     "bounds": [{
                         "x": 0,
                         "y": 0,
@@ -82,7 +93,7 @@
                         "framed": false
                     }]
                 }, {
-                    "header": "Wang no way!",
+                    "header": "Wang no way",
                     "html": "<p>But upon closer examination, it’s obvious that this painting is from much later – probably the 15<sup>th</sup> or 16<sup>th</sup> centuries – the Ming-dynasty. The rock texturing in particular is quintessential Ming-dynasty brushwork.</p>",
                     "bounds": [{
                         "x": 0,
@@ -92,8 +103,8 @@
                         "framed": false
                     }]
                 }, {
-                    "header": "A Tale of Two Compositions",
-                    "html": "<p>So that leaves these two other paintings – and our own. Note the extremely different compositions of the two Wang Wei attributed paintings – <em>Rivers and Mountains after Snow</em> contains isolated landmasses, seperated by large amounts of whitespace, whereas <em>The Feeling of Snow on the River Bank</em>, and our own RISD painting is much more typical of a Zhao Lingrang-style &ldquo;small landscape&rdquo;</p>",
+                    "header": "Wang three way",
+                    "html": "<p>So that leaves these two other paintings – and our own.</p><p>Note the two different compositions at play here: <em>Rivers and Mountains after Snow</em> contains isolated landmasses, seperated by large amounts of whitespace, whereas the composition of <em>The Feeling of Snow on the River Bank</em>, and our own RISD painting is much more typical of a Zhao Lingrang-style &ldquo;small landscape&rdquo;.</p>",
                     "bounds": [{
                         "x": 0,
                         "y": 0,
@@ -102,8 +113,8 @@
                         "framed": false
                     }]
                 }, {
-                    "header": "Small Landscape?",
-                    "html": "<p>It’s possible, then, that <em>Rivers and Mountains after Snow’s</em> composition is a Wang Wei original, while <em>The Feeling of Snow on the River Bank</em> was created by an later artist mimicing the style of Wang Wei – like Zhao Lingrang!</p>",
+                    "header": "A Tale of Two Compositions",
+                    "html": "<p>It’s possible, then, that <em>Rivers and Mountains after Snow’s</em> composition is a Wang Wei original, while <em>The Feeling of Snow on the River Bank</em> was created by an later artist mimicing the style of Wang Wei – like Zhao Lingrang!</p><p>And it’s of course fun to compare with the Ming-dynasty take on both compositions.</p>",
                     "bounds": [{
                         "x": 0,
                         "y": 0,
@@ -328,8 +339,10 @@
     }, {
         "painting": {
             "painter": "Zhao Boju",
+            "painterNote": "attributed",
             "name": "Landscape with Buildings",
             "key": "painting-zhaoboju-risd",
+            "rotated": true,
             "thumbUrl": "assets/img/Zhao_Boju/painting_Zhao_Boju_RISD_thumb.jpg",
             "fullUrl": "assets/img/Zhao_Boju/painting_Zhao_Boju_RISD_base.png",
             "blurredUrl": "assets/img/Zhao_Boju/painting_Zhao_Boju_RISD_blurred.jpg"
@@ -354,8 +367,10 @@
     }, {
         "painting": {
             "painter": "Mi Youren",
+            "painterNote": "attributed",
             "name": "Mountain Mists",
             "key": "painting-miyouren-risd",
+            "rotated": true,
             "thumbUrl": "assets/img/Mi_Youren/painting_Mi_Youren_RISD_thumb.jpg",
             "fullUrl": "assets/img/Mi_Youren/painting_Mi_Youren_RISD_base.png",
             "blurredUrl": "assets/img/Mi_Youren/painting_Mi_Youren_RISD_blurred.jpg"
@@ -377,5 +392,12 @@
             }
         }
 
-    }]
+    }],
+    "tourPaintings": {
+        "painting_Zhao-Lingrang_River-Landscape-in-Autumn": {
+            "painter": "Zhao Lingrang",
+            "painterNote": "attributed",
+
+        }
+    }
 }
