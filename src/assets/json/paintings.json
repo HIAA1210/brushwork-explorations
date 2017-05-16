@@ -25,9 +25,35 @@
                         "framed": false
                     }],
                     "paintings": [{
+                        "paintingKey": "painting_Zhao-Lingrang_River-Landscape-in-Autumn",
                         "x": 5439,
                         "y": 0,
-                        "paintingKey": "painting_Zhao-Lingrang_River-Landscape-in-Autumn"
+                        "height": 1024
+                    }, {
+                        "paintingKey": "painting_Zhao-Lingrang_Willows-and-Geese",
+                        "x": 6637,
+                        "y": 0,
+                        "height": 1024
+                    }, {
+                        "paintingKey": "painting_Zhao-Lingrang_MFA_Trimmed",
+                        "x": 0,
+                        "y": 1152,
+                        "height": 1077
+                    }, {
+                        "paintingKey": "painting_Zhao-Lingrang_Attrib_Met",
+                        "x": 0,
+                        "y": 2357,
+                        "height": 1077
+                    }, {
+                        "paintingKey": "painting_Zhao-Lingrang_Yellow-of-Oranges-and-Green-of-Tangerines",
+                        "x": 0,
+                        "y": 3562,
+                        "height": 1024
+                    }, {
+                        "paintingKey": "painting_Zhao_Lingrang_Attrib_Travellers-by-a-Willow-shaded-Pavilion",
+                        "x": 2182,
+                        "y": 3562,
+                        "height": 1024
                     }]
                 }, {
                     "header": "Diving In",
@@ -425,6 +451,16 @@
             "thumbUrl": "assets/img/Zhao-Lingrang/Tour/painting_Zhao-Lingrang_MFA_Trimmed_thumb.jpg",
             "baseUrl": "assets/img/Zhao-Lingrang/Tour/painting_Zhao-Lingrang_MFA_Trimmed_base.png"
         },
+        "painting_Zhao-Lingrang_Attrib_Met": {
+            "painter": "Zhao Lingrang",
+            "painterNote": "attributed",
+            "name": "River Village in Autumn Dawn",
+            "location": "Metropolitan Museum of Art, New York",
+            "key": "painting_Zhao-Lingrang_Attrib_Met",
+            "rotated": true,
+            "thumbUrl": "assets/img/Zhao-Lingrang/Tour/painting_Zhao-Lingrang_Attrib_Met_Trimmed_thumb.jpg",
+            "baseUrl": "assets/img/Zhao-Lingrang/Tour/painting_Zhao-Lingrang_Attrib_Met_Trimmed_base.png"
+        }
         "painting_Zhao-Lingrang_Yellow-of-Oranges-and-Green-of-Tangerines": {
             "painter": "Zhao Lingrang",
             "name": "Yellow of Oranges and Green of Tangerines",
