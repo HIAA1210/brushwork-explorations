@@ -210,7 +210,6 @@ d3.json("assets/json/paintings.json", function(paintingData) {
         }
       }
     }
-
   }
 
   //  --Paintings
