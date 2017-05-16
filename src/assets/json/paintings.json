@@ -460,7 +460,7 @@
             "rotated": true,
             "thumbUrl": "assets/img/Zhao-Lingrang/Tour/painting_Zhao-Lingrang_Attrib_Met_Trimmed_thumb.jpg",
             "baseUrl": "assets/img/Zhao-Lingrang/Tour/painting_Zhao-Lingrang_Attrib_Met_Trimmed_base.png"
-        }
+        },
         "painting_Zhao-Lingrang_Yellow-of-Oranges-and-Green-of-Tangerines": {
             "painter": "Zhao Lingrang",
             "name": "Yellow of Oranges and Green of Tangerines",
@@ -517,7 +517,6 @@
             "rotated": true,
             "thumbUrl": "assets/img/Zhao-Lingrang/Tour/painting_Wang-Wei_Attrib_NPM_thumb.jpg",
             "baseUrl": "assets/img/Zhao-Lingrang/Tour/painting_Wang-Wei_Attrib_NPM_base.png"
-
         },
         "painting_Wang-Wei_Attrib_Ogawa": {
             "painter": "Wang Wei",

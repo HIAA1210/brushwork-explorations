@@ -164,11 +164,11 @@ d3.json("assets/json/paintings.json", function(paintingData) {
 
     var paintingBounds = this.parentNode.parentNode.parentNode.getBBox(),
       bounds = this.getBBox(),
-      dx = bounds.width + 2 * zoomTourMargin,
-      dy = bounds.height + 2 * zoomTourMargin,
+      dx = bounds.width,
+      dy = bounds.height,
       x = (bounds.x + bounds.width / 2) + paintingBounds.x,
       y = (bounds.y + bounds.height / 2) + paintingBounds.y,
-      scale = Math.max(minScale, Math.min(maxScale, 1 / Math.max(dx / width, dy / height))),
+      scale = Math.max(minScale, Math.min(maxScale, 1 / Math.max(dx / (width - 2 * zoomTourMargin), dy / (height - 2 * zoomTourMargin)))),
       translateX = (width / 2) / scale - x,
       translateY = (height / 2) / scale - y;
 
@@ -197,7 +197,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
         else {
           zoom.translateExtent([
             [anchorBounds.x - translateExtentTourBuffer, anchorBounds.y - translateExtentTourBuffer],
-            [anchorBounds.x + paintingBounds.width + translateExtentTourBuffer, anchorBounds.y + paintingBounds.height + translateExtentTourBuffer]
+            [anchorBounds.x + anchorBounds.width + translateExtentTourBuffer, anchorBounds.y + anchorBounds.height + translateExtentTourBuffer]
           ]);
         }
         var extentBuffer = (state.activeTour === undefined) ? translateExtentBuffer : translateExtentTourBuffer;
