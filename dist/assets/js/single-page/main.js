@@ -125,16 +125,15 @@ d3.json("assets/json/paintings.json", function (paintingData) {
   function preloadTourStep(step) {
     // console.log("preload step", step);
     if (step.loaded) {
-      console.log("step already loaded");
+      // console.log("step already loaded");
       return Promise.resolve();
     } else {
       var promises = [];
       if (step.objects !== undefined) {
         var numObjects = step.objects.length;
         for (var j = 0; j < numObjects; j++) {
-          console.log(j, step.objects[j]);
+          // console.log(j, step.objects[j]);
           if (step.objects[j].type == "painting") {
-
             promises.push(loadPainting(tourPaintings[step.objects[j].key], true));
           }
         }
@@ -550,14 +549,22 @@ d3.json("assets/json/paintings.json", function (paintingData) {
       return d.key;
     });
 
+    var t = d3.transition().duration(durationMed);
+
+    paintingTourObjects.select(".tour-object-base-container").transition(t).attr("transform", function (d) {
+      return "translate(" + d.x + ", " + d.y + ")";
+    });
+
     if (state.activeTour !== undefined) {
       preloadTourStep(state.activeTour.data.steps[state.activeTour.step]).then(function () {
         //Entry
-        var newPaintingTourObjects = paintingTourObjects.enter().append("g").attr("class", "tour-object active").append("g").attr("class", "tour-object-base-container").attr("transform", function (d) {
+        var newPaintingTourObjects = paintingTourObjects.enter().append("g").attr("class", "tour-object");
+
+        var newPaintingBaseContainer = newPaintingTourObjects.append("g").attr("class", "tour-object-base-container").attr("transform", function (d) {
           return "translate(" + d.x + ", " + d.y + ")";
         });
 
-        newPaintingTourObjects.append("image").attr("class", "object-thumb").attr("xling:href", function (d) {
+        newPaintingBaseContainer.append("image").attr("class", "object-thumb").attr("xling:href", function (d) {
           //TODO handle not found
           return tourPaintings[d.key].thumbUrl;
         }).attr("width", paintingThumbHeight).attr("height", function (d) {
@@ -572,7 +579,7 @@ d3.json("assets/json/paintings.json", function (paintingData) {
           }
         });
 
-        // newPaintingTourObjects.append("image")
+        // newPaintingBaseContainer.append("image")
         //   .attr("class", "object-base")
         //   .attr("xling:href", function(d) {
         //     console.log(d);
@@ -590,7 +597,7 @@ d3.json("assets/json/paintings.json", function (paintingData) {
     }
 
     //Exit
-    paintingTourObjects.exit().transition().duration(durationShort)
+    paintingTourObjects.exit().transition(t)
     // .style("opacity", 0)
     .on("start", function () {
       this.classList.remove("active");
