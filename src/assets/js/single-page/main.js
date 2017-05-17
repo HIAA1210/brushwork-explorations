@@ -55,26 +55,102 @@ function getRootElementFontSize() {
 var loaded = false;
 d3.json("assets/json/paintings.json", function(paintingData) {
   const mainPaintings = paintingData.mainPaintings;
+  const tourPaintings = paintingData.tourPaintings;
 
-  function loadImage(src) {
+  function loadPainting(painting, wait) {
     return new Promise(function(resolve, reject) {
-      var img = new Image();
-      img.onload = function() {
-        resolve(img);
-      };
-      img.onerror = img.onabort = function() {
-        reject(src);
-      };
-      img.src = src;
+      if (painting.loaded) {
+        resolve();
+      }
+      else {
+        const thumb = new Image();
+        const base = new Image();
+        const loadBlurred = painting.blurredUrl !== undefined;
+        thumb.onload = function() {
+          painting.aspectRatio = thumb.height / thumb.width;
+          painting.loaded = true;
+          // console.log("loaded", painting, painting.key);
+          resolve();
+          base.src = painting.baseUrl;
+        };
+        thumb.onerror = thumb.onabort = function() {
+          reject(thumb);
+        }
+        base.onerror = base.onabort = function() {
+          reject(thumb);
+        }
+        thumb.src = painting.thumbUrl;
+        if (loadBlurred) {
+          const blurred = new Image();
+          blurred.onerror = blurred.onabort = function() {
+            reject(blurred);
+          }
+          blurred.src = painting.blurredUrl;
+        }
+        if (!wait) {
+          resolve();
+        }
+      }
     });
   }
 
-  function preloadThumbnails() {
-    var promises = [];
+  function preloadMainPaintings() {
+    const promises = [];
     for (var i = 0; i < mainPaintings.length; i++) {
-      promises.push(loadImage(mainPaintings[i].painting.thumbUrl));
+      promises.push(loadPainting(mainPaintings[i].painting, true));
+      // promises.push(loadImage(mainPaintings[i].painting.thumbUrl));
     }
     return Promise.all(promises);
+  }
+
+  function preloadTour(tour) {
+    // console.log("preload tour", tour);
+    if (tour.loaded) {
+      return Promise.resolve();
+    }
+    else {
+      const promises = [];
+      for (var i = 0; i < tour.steps.length; i++) {
+        const step = tour.steps[i];
+        if (step.objects !== undefined) {
+          const numObjects = step.objects.length;
+          for (var j = 0; j < numObjects; j++) {
+            if (step.objects[j].type == "painting") {
+              promises.push(loadPainting(tourPaintings[step.objects[j].key], true));
+            }
+          }
+        }
+
+      }
+      return Promise.all(promises).then(function() {
+        tour.loaded = true;
+      });
+    }
+  }
+
+  function preloadTourStep(step) {
+    // console.log("preload step", step);
+    if (step.loaded) {
+      console.log("step already loaded");
+      return Promise.resolve();
+    }
+    else {
+      const promises = [];
+      if (step.objects !== undefined) {
+        const numObjects = step.objects.length;
+        for (var j = 0; j < numObjects; j++) {
+          console.log(j, step.objects[j]);
+          if (step.objects[j].type == "painting") {
+
+            promises.push(loadPainting(tourPaintings[step.objects[j].key], true));
+          }
+        }
+      }
+      return Promise.all(promises).then(function() {
+        // console.log("all loaded for the first time");
+        step.loaded = true;
+      });
+    }
   }
 
 
@@ -424,7 +500,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
     var newPaintingFullImage = newPaintingBaseContainers.append("image")
       .attr("class", "painting-base")
       .attr("xlink:href", function(d) {
-        return d.painting.fullUrl;
+        return d.painting.baseUrl;
       })
       .attr("width", paintingHeight)
       .attr("height", function(d) {
@@ -453,6 +529,9 @@ d3.json("assets/json/paintings.json", function(paintingData) {
     var newPaintingTour = newPaintingContainers.append("g")
       .attr("class", "painting-tour-container");
 
+    newPaintingTour.append("g")
+      .attr("class", "painting-current-step");
+
     var newPaintingUI = newPaintingContainers.append("g")
       .attr("class", "painting-right-edge")
       .attr("transform", function(d) {
@@ -464,23 +543,27 @@ d3.json("assets/json/paintings.json", function(paintingData) {
     renderPaintingUI(newPaintingUI);
     renderPaintingTour(newPaintingTour);
 
-
     newPaintingContainers.attr("transform", transformConditional);
 
     //Exit
-    var exitingPaintings = paintings.exit();
+    const exitingPaintings = paintings.exit();
     exitingPaintings.remove();
 
     //All
-    var allPaintings = newPaintings.merge(paintings);
+    const allPaintings = newPaintings.merge(paintings);
     allPaintings
       .classed("inactive", paintingIsInactive)
       .classed("active", paintingIsActive);
 
-    var paintingBlur = allPaintings.select(".painting-blur")
+    const paintingBase = allPaintings.select(".base-container")
+      .classed("hidden", function(d) {
+        return paintingIsActive(d) && tourIsActive(d) && state.activeTour.data.steps[state.activeTour.step].hideMain;
+      });
+
+    const paintingBlur = allPaintings.select(".painting-blur")
       .classed("active", function(d) {
-        return paintingIsActive(d) && tourIsActive(d);
-      })
+        return paintingIsActive(d) && tourIsActive(d) && state.activeTour.data.steps[state.activeTour.step].blurMain;
+      });
 
 
     if (!state.showSplash) {
@@ -553,6 +636,96 @@ d3.json("assets/json/paintings.json", function(paintingData) {
   function renderPaintingTour(paintingTourSelection) {
     //Rebind
     paintingTourSelection.classed("active", tourIsActive);
+
+    const paintingCurrentStepContainer = paintingTourSelection.select(".painting-current-step");
+    renderPaintingTourObjects(paintingCurrentStepContainer);
+
+    renderPaintingTourStep(paintingTourSelection);
+
+    paintingVisibleTourBounds = root.selectAll("rect.outlined");
+  }
+
+  function renderPaintingTourObjects(paintingCurrentStepContainer) {
+    const paintingTourObjects = paintingCurrentStepContainer.selectAll(".tour-object")
+      .data(function(d) {
+
+        if (tourIsActive(d)) {
+          const currentObjects = state.activeTour.data.steps[state.activeTour.step].objects;
+          return currentObjects !== undefined ? currentObjects : [];
+        }
+        else {
+          return [];
+        }
+      }, function(d) {
+        return d.key;
+      });
+
+    if (state.activeTour !== undefined) {
+      preloadTourStep(state.activeTour.data.steps[state.activeTour.step])
+        .then(function() {
+          //Entry
+          const newPaintingTourObjects = paintingTourObjects.enter()
+            .append("g")
+            .attr("class", "tour-object active")
+            .append("g")
+            .attr("class", "tour-object-base-container")
+            .attr("transform", function(d) {
+              return "translate(" + d.x + ", " + d.y + ")";
+            });
+
+          newPaintingTourObjects.append("image")
+            .attr("class", "object-thumb")
+            .attr("xling:href", function(d) {
+              //TODO handle not found
+              return tourPaintings[d.key].thumbUrl;
+            })
+            .attr("width", paintingThumbHeight)
+            .attr("height", function(d) {
+              return tourPaintings[d.key].aspectRatio * paintingThumbHeight;
+            })
+            .attr("transform", function(d) {
+              if (tourPaintings[d.key].rotated) {
+                return "scale(" + d.height / paintingThumbHeight + ") translate(" + tourPaintings[d.key].aspectRatio * paintingThumbHeight + ",0) rotate (90)";
+              }
+              else {
+                // Thumbheight is actually the width of the unrotated painting
+                const thumbHeightActual = tourPaintings[d.key].aspectRatio * paintingThumbHeight;
+                return "scale(" + d.height / thumbHeightActual + ")";
+              }
+            })
+
+          // newPaintingTourObjects.append("image")
+          //   .attr("class", "object-base")
+          //   .attr("xling:href", function(d) {
+          //     console.log(d);
+          //     //TODO handle not found
+          //     return tourPaintings[d.key].baseUrl;
+          //   });
+          newPaintingTourObjects
+            .transition()
+            .duration(1)
+            .on("end", function() {
+              this.classList.add("active");
+            });
+
+          preloadTour(state.activeTour.data);
+        }).catch(reason => {
+          console.error("preload failed", reason)
+        });
+    }
+
+    //Exit
+    paintingTourObjects.exit()
+      .transition()
+      .duration(durationShort)
+      // .style("opacity", 0)
+      .on("start", function() {
+        this.classList.remove("active");
+      })
+      .remove();
+  }
+
+  function renderPaintingTourStep(paintingTourSelection) {
     var paintingTours = paintingTourSelection
       .selectAll(".painting-step")
       .data(function(d) {
@@ -568,8 +741,6 @@ d3.json("assets/json/paintings.json", function(paintingData) {
     paintingTours.exit().remove();
 
     if (state.activePainting !== undefined && state.activeTour !== undefined) {
-
-
       //Modification
 
       //Entry
@@ -579,16 +750,11 @@ d3.json("assets/json/paintings.json", function(paintingData) {
           return "painting-step step-" + i;
         });
 
-      //Defs
+      ///Defs
       var defs = newPaintingTours
         .append("defs")
         .attr("class", "tour-def");
 
-      var mask = defs
-        .append("mask")
-        .attr("id", function(d, i) {
-          return "cutout-mask-" + i;
-        });
 
       var newBoundsContainer = defs.append("g")
         .attr("class", "bounds-container")
@@ -606,62 +772,16 @@ d3.json("assets/json/paintings.json", function(paintingData) {
       var allPaintingTours = newPaintingTours.merge(paintingTours);
 
       //Tour Bounds
-      var tourBounds = allPaintingTours
-        .select(".bounds-container")
-        .selectAll("rect")
-        .data(function(d, i) {
-          if (stepIsActive(d, i)) {
-            return d.bounds;
-          }
-          else {
-            return [];
-          }
+      var tourBoundsContainer = allPaintingTours
+        .select(".bounds-container");
 
-        });
+      renderPaintingTourBounds(tourBoundsContainer);
 
-      //Entry
-      var newTourBounds = tourBounds
-        .enter()
-        .append("rect")
+      var mask = defs
+        .append("mask")
         .attr("id", function(d, i) {
-          return "bounds-" + i;
-        })
-        .attr("x", function(d) {
-          return d.x;
-        })
-        .attr("y", function(d) {
-          return d.y;
-        })
-        .attr("height", function(d) {
-          return d.height;
-        })
-        .attr("width", function(d) {
-          return d.width;
-        })
-        .attr("stroke-width", 3)
-        .attr("class", "painting-bounds")
-        .classed("outlined", function(d, i) {
-          return d.framed === true;
+          return "cutout-mask-" + i;
         });
-
-      newTourBounds
-        .transition()
-        .duration(1)
-        .on("end", function() {
-          this.classList.add("active");
-        });
-
-      //Exit
-      tourBounds.exit()
-        .transition()
-        .duration(durationShort)
-        // .style("opacity", 0)
-        .on("start", function() {
-          this.classList.remove("active");
-        })
-        .remove();
-
-
 
       mask.append("use")
         .attr("xlink:href", "#baserect-" + state.activePainting.data.painting.key)
@@ -673,7 +793,62 @@ d3.json("assets/json/paintings.json", function(paintingData) {
         })
         .attr("fill", "black");
     }
-    paintingVisibleTourBounds = root.selectAll("rect.outlined");
+  }
+
+  function renderPaintingTourBounds(boundsContainer) {
+    var tourBounds = boundsContainer
+      .selectAll("rect")
+      .data(function(d, i) {
+        if (stepIsActive(d, i)) {
+          return d.bounds;
+        }
+        else {
+          return [];
+        }
+
+      });
+
+    //Entry
+    var newTourBounds = tourBounds
+      .enter()
+      .append("rect")
+      .attr("id", function(d, i) {
+        return "bounds-" + i;
+      })
+      .attr("x", function(d) {
+        return d.x;
+      })
+      .attr("y", function(d) {
+        return d.y;
+      })
+      .attr("height", function(d) {
+        return d.height;
+      })
+      .attr("width", function(d) {
+        return d.width;
+      })
+      .attr("stroke-width", 3)
+      .attr("class", "painting-bounds")
+      .classed("outlined", function(d, i) {
+        return d.framed === true;
+      });
+
+    newTourBounds
+      .transition()
+      .duration(1)
+      .on("end", function() {
+        this.classList.add("active");
+      });
+
+    //Exit
+    tourBounds.exit()
+      .transition()
+      .duration(durationShort)
+      // .style("opacity", 0)
+      .on("start", function() {
+        this.classList.remove("active");
+      })
+      .remove();
   }
 
   function renderInterface() {
@@ -818,10 +993,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
 
   //---- Main
   loadFromUrl();
-  preloadThumbnails().then(function(imgs) {
-    for (var i = 0; i < imgs.length; i++) {
-      mainPaintings[i].painting.aspectRatio = (imgs[i].height / imgs[i].width);
-    }
+  preloadMainPaintings().then(function() {
     loaded = true;
     render();
     rezoom();

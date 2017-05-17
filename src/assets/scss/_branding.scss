@@ -145,6 +145,13 @@
     cursor: move;
     cursor: grab;
   }
+  .base-container {
+    opacity: 1;
+    transition: opacity 1s;
+  }
+  .base-container.hidden {
+    opacity: 0;
+  }
   .painting-blur {
     opacity: 0;
     visibility: hidden;
@@ -159,6 +166,15 @@
   }
   .intro-page.active ~ .svg-container .painting {
     cursor: auto;
+  }
+  .tour-object {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .5s, visibility .5s;
+  }
+  .tour-object.active {
+    opacity: 1;
+    visibility: visible;
   }
   // g.painting.active:active {
   //   cursor: grabbing;
