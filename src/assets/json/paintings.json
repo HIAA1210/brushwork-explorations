@@ -259,7 +259,7 @@
           }, {
             "type": "painting",
             "key": "painting_Wang-Wei_Attrib_Ogawa",
-            "x": 0 ,
+            "x": 0,
             "y": 2336,
             "height": 1024
           }]
@@ -272,8 +272,33 @@
             "x": 0,
             "y": 0,
             "width": 5271,
-            "height": 1024,
+            "height": 5088,
             "framed": false
+          }],
+          "objects": [{
+            "type": "painting",
+            "key": "painting_Wang-Wei_Attrib_NPM",
+            "x": 0,
+            "y": 1152,
+            "height": 785
+          }, {
+            "type": "crop",
+            "key": "crop_Wang-Wei_Attrib_Honolulu_like-NPM",
+            "x": 0,
+            "y": 2070,
+            "height": 906
+          }, {
+            "type": "painting",
+            "key": "painting_Wang-Wei_Attrib_Ogawa",
+            "x": 0,
+            "y": 3488,
+            "height": 808
+          }, {
+            "type": "crop",
+            "key": "crop_Wang-Wei_Attrib_Honolulu_like-Ogawa",
+            "x": 0,
+            "y": 4424,
+            "height": 664
           }]
         }, {
           "header": "<em>Winter Landscape</em>",
@@ -725,6 +750,26 @@
       "baseHeight": 757,
       "thumbUrl": "assets/img/Zhao-Lingrang/Tour/painting_Wang-Wei_Attrib_Ogawa_thumb.jpg",
       "baseUrl": "assets/img/Zhao-Lingrang/Tour/painting_Wang-Wei_Attrib_Ogawa_base.png"
+    }
+  },
+  "tourObjects": {
+    "crop_Wang-Wei_Attrib_Honolulu_like-NPM": {
+      "type": "crop",
+      "link": "painting_Wang-Wei_Attrib_Honolulu",
+      "key": "crop_Wang-Wei_Attrib_Honolulu_like-NPM",
+      "rotated": true,
+      "baseHeight": 1024,
+      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/crop_Wang-Wei_Attrib_Honolulu_like-NPM_thumb.jpg",
+      "baseUrl": "assets/img/Zhao-Lingrang/Tour/crop_Wang-Wei_Attrib_Honolulu_like-NPM_base.png"
+    },
+    "crop_Wang-Wei_Attrib_Honolulu_like-Ogawa": {
+      "type": "crop",
+      "link": "painting_Wang-Wei_Attrib_Honolulu",
+      "key": "crop_Wang-Wei_Attrib_Honolulu_like-Ogawa",
+      "rotated": true,
+      "baseHeight": 1024,
+      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/crop_Wang-Wei_Attrib_Honolulu_like-Ogawa_thumb.jpg",
+      "baseUrl": "assets/img/Zhao-Lingrang/Tour/crop_Wang-Wei_Attrib_Honolulu_like-Ogawa_base.png"
     }
   }
 }

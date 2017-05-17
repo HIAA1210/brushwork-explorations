@@ -143,7 +143,7 @@ function json() {
 // Copy images to the "dist" folder
 // In production, the images are compressed
 function images() {
-  gulp.src('src/assets/img/**/painting_*_base.{png,jpg}')
+  gulp.src('src/assets/img/**/{painting,crop}_*_base.{png,jpg}')
     .pipe($.changed(PATHS.dist))
     .pipe(parallel(
       $.imageResize({
@@ -172,11 +172,14 @@ function images() {
     .pipe(gulp.dest(PATHS.dist + '/assets/img'));
 
   return gulp.src('src/assets/img/**/*')
-    .pipe(parallel($.if(PRODUCTION, $.imagemin({
-        progressive: true
-      })),
-      8
-    ))
+    .pipe($.if(PRODUCTION, $.imagemin({
+      progressive: true
+    })))
+    // .pipe(parallel($.if(PRODUCTION, $.imagemin({
+    //     progressive: true
+    //   })),
+    //   8
+    // ))
     .pipe(gulp.dest(PATHS.dist + '/assets/img'));
 
   // return gulp.src('src/assets/img/**/*optimized.{png,jpg}')

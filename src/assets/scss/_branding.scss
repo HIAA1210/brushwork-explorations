@@ -1,11 +1,16 @@
 @mixin branding {
-  .bottom-bar {
+  #navbar.bottom-bar {
     background-color: rgba($black, .5);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    padding: 0;
+  }
+  .top-bar-title {
+    margin-left: 1rem;
+    margin-right: .5rem;
   }
   .menu-home {
-    font-family: $header-font-family
+    font-family: $header-font-family;
   }
   .menu-home>a {
     padding: $menu-item-padding;

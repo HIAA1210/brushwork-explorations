@@ -56,8 +56,19 @@ var loaded = false;
 d3.json("assets/json/paintings.json", function(paintingData) {
   const mainPaintings = paintingData.mainPaintings;
   const tourPaintings = paintingData.tourPaintings;
+  const tourObjects = paintingData.tourObjects;
+
+  function getTourObject(object) {
+    switch (object.type) {
+      case "painting":
+        return tourPaintings[object.key];
+      case "crop":
+        return tourObjects[object.key];
+    }
+  }
 
   function loadPainting(painting, wait) {
+    console.log(painting);
     return new Promise(function(resolve, reject) {
       if (painting.loaded) {
         resolve();
@@ -74,15 +85,18 @@ d3.json("assets/json/paintings.json", function(paintingData) {
           base.src = painting.baseUrl;
         };
         thumb.onerror = thumb.onabort = function() {
+          console.error("failed to preload thumbnail", painting);
           reject(thumb);
         }
         base.onerror = base.onabort = function() {
+          console.error("failed to preload base", painting);
           reject(thumb);
         }
         thumb.src = painting.thumbUrl;
         if (loadBlurred) {
           const blurred = new Image();
           blurred.onerror = blurred.onabort = function() {
+            console.error("failed to preload blurred", painting);
             reject(blurred);
           }
           blurred.src = painting.blurredUrl;
@@ -115,8 +129,8 @@ d3.json("assets/json/paintings.json", function(paintingData) {
         if (step.objects !== undefined) {
           const numObjects = step.objects.length;
           for (var j = 0; j < numObjects; j++) {
-            if (step.objects[j].type == "painting") {
-              promises.push(loadPainting(tourPaintings[step.objects[j].key], true));
+            if (step.objects[j].type === "painting" || step.objects[j].type === "crop") {
+              promises.push(loadPainting(getTourObject(step.objects[j]), true));
             }
           }
         }
@@ -139,9 +153,9 @@ d3.json("assets/json/paintings.json", function(paintingData) {
       if (step.objects !== undefined) {
         const numObjects = step.objects.length;
         for (var j = 0; j < numObjects; j++) {
-          // console.log(j, step.objects[j]);
-          if (step.objects[j].type == "painting") {
-            promises.push(loadPainting(tourPaintings[step.objects[j].key], true));
+          console.log(j, step.objects[j]);
+          if (step.objects[j].type === "painting" || step.objects[j].type === "crop") {
+            promises.push(loadPainting(getTourObject(step.objects[j]), true));
           }
         }
       }
@@ -658,17 +672,47 @@ d3.json("assets/json/paintings.json", function(paintingData) {
       }, function(d) {
         return d.key;
       });
-      
-    const t = d3.transition().duration(durationMed)
 
-    paintingTourObjects
-      .select(".tour-object-base-container")
-      .transition(t)
-      .attr("transform", function(d) {
-        return "translate(" + d.x + ", " + d.y + ")";
-      });
+    const t = d3.transition().duration(durationMed);
 
     if (state.activeTour !== undefined) {
+      paintingTourObjects
+        .select(".tour-object-base-container")
+        .transition(t)
+        .attr("transform", function(d) {
+          return "translate(" + d.x + ", " + d.y + ")";
+        });
+
+      //TODO: this should probably be done elsewhere
+      paintingTourObjects
+        .select(".object-thumb")
+        .transition(t)
+        .attr("transform", function(d) {
+          const tourObject = getTourObject(d);
+          if (tourObject.rotated) {
+            return "scale(" + d.height / paintingThumbHeight + ") translate(" + tourObject.aspectRatio * paintingThumbHeight + ",0) rotate (90)";
+          }
+          else {
+            // Thumbheight is actually the width of the unrotated painting
+            const thumbHeightActual = tourObject.aspectRatio * paintingThumbHeight;
+            return "scale(" + d.height / thumbHeightActual + ")";
+          }
+        });
+
+      paintingTourObjects
+        .select(".object-base")
+        .transition(t)
+        .attr("transform", function(d) {
+          const tourObject = getTourObject(d);
+          const height = (tourObject.baseHeight !== undefined) ? tourObject.baseHeight : paintingHeight;
+          if (tourObject.rotated) {
+            return "scale(" + d.height / height + ") translate(" + tourObject.aspectRatio * height + ",0) rotate (90)";
+          }
+          else {
+            return "scale(" + d.height / height + ")";
+          }
+        });
+
       preloadTourStep(state.activeTour.data.steps[state.activeTour.step])
         .then(function() {
           //Entry
@@ -686,50 +730,51 @@ d3.json("assets/json/paintings.json", function(paintingData) {
             .attr("class", "object-thumb")
             .attr("xlink:href", function(d) {
               //TODO handle not found
-              return tourPaintings[d.key].thumbUrl;
+              return getTourObject(d).thumbUrl;
             })
             .attr("width", paintingThumbHeight)
             .attr("height", function(d) {
-              return tourPaintings[d.key].aspectRatio * paintingThumbHeight;
+              return getTourObject(d).aspectRatio * paintingThumbHeight;
             })
             .attr("transform", function(d) {
-              if (tourPaintings[d.key].rotated) {
-                return "scale(" + d.height / paintingThumbHeight + ") translate(" + tourPaintings[d.key].aspectRatio * paintingThumbHeight + ",0) rotate (90)";
+              const tourObject = getTourObject(d);
+              if (tourObject.rotated) {
+                return "scale(" + d.height / paintingThumbHeight + ") translate(" + tourObject.aspectRatio * paintingThumbHeight + ",0) rotate (90)";
               }
               else {
                 // Thumbheight is actually the width of the unrotated painting
-                const thumbHeightActual = tourPaintings[d.key].aspectRatio * paintingThumbHeight;
+                const thumbHeightActual = tourObject.aspectRatio * paintingThumbHeight;
                 return "scale(" + d.height / thumbHeightActual + ")";
               }
-            })
+            });
 
           newPaintingBaseContainer.append("image")
             .attr("class", "object-base")
             .attr("xlink:href", function(d) {
               //TODO handle not found
-              return tourPaintings[d.key].baseUrl;
+              return getTourObject(d).baseUrl;
             })
             .attr("width", function(d) {
-              const painting = tourPaintings[d.key];
-              const height = (painting.baseHeight !== undefined) ? painting.baseHeight : paintingHeight;
-              return painting.rotated ? height : height / painting.aspectRatio;
+              const tourObject = getTourObject(d);
+              const height = (tourObject.baseHeight !== undefined) ? tourObject.baseHeight : paintingHeight;
+              return tourObject.rotated ? height : height / tourObject.aspectRatio;
             })
             .attr("height", function(d) {
-              const painting = tourPaintings[d.key];
-              const height = (painting.baseHeight !== undefined) ? painting.baseHeight : paintingHeight;
-              return painting.rotated ? painting.aspectRatio * height : height;
+              const tourObject = getTourObject(d);
+              const height = (tourObject.baseHeight !== undefined) ? tourObject.baseHeight : paintingHeight;
+              return tourObject.rotated ? tourObject.aspectRatio * height : height;
             })
             .attr("transform", function(d) {
-              const painting = tourPaintings[d.key];
-              const height = (painting.baseHeight !== undefined) ? painting.baseHeight : paintingHeight;
-              if (painting.rotated) {
-                return "scale(" + d.height / height + ") translate(" + painting.aspectRatio * height + ",0) rotate (90)";
+              const tourObject = getTourObject(d);
+              const height = (tourObject.baseHeight !== undefined) ? tourObject.baseHeight : paintingHeight;
+              if (tourObject.rotated) {
+                return "scale(" + d.height / height + ") translate(" + tourObject.aspectRatio * height + ",0) rotate (90)";
               }
               else {
                 return "scale(" + d.height / height + ")";
               }
-            })
-            
+            });
+
           newPaintingTourObjects
             .transition()
             .duration(1)
