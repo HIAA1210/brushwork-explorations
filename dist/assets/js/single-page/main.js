@@ -564,7 +564,7 @@ d3.json("assets/json/paintings.json", function (paintingData) {
           return "translate(" + d.x + ", " + d.y + ")";
         });
 
-        newPaintingBaseContainer.append("image").attr("class", "object-thumb").attr("xling:href", function (d) {
+        newPaintingBaseContainer.append("image").attr("class", "object-thumb").attr("xlink:href", function (d) {
           //TODO handle not found
           return tourPaintings[d.key].thumbUrl;
         }).attr("width", paintingThumbHeight).attr("height", function (d) {
@@ -579,13 +579,27 @@ d3.json("assets/json/paintings.json", function (paintingData) {
           }
         });
 
-        // newPaintingBaseContainer.append("image")
-        //   .attr("class", "object-base")
-        //   .attr("xling:href", function(d) {
-        //     console.log(d);
-        //     //TODO handle not found
-        //     return tourPaintings[d.key].baseUrl;
-        //   });
+        newPaintingBaseContainer.append("image").attr("class", "object-base").attr("xlink:href", function (d) {
+          //TODO handle not found
+          return tourPaintings[d.key].baseUrl;
+        }).attr("width", function (d) {
+          var painting = tourPaintings[d.key];
+          var height = painting.baseHeight !== undefined ? painting.baseHeight : paintingHeight;
+          return painting.rotated ? height : height / painting.aspectRatio;
+        }).attr("height", function (d) {
+          var painting = tourPaintings[d.key];
+          var height = painting.baseHeight !== undefined ? painting.baseHeight : paintingHeight;
+          return painting.rotated ? painting.aspectRatio * height : height;
+        }).attr("transform", function (d) {
+          var painting = tourPaintings[d.key];
+          var height = painting.baseHeight !== undefined ? painting.baseHeight : paintingHeight;
+          if (painting.rotated) {
+            return "scale(" + d.height / height + ") translate(" + painting.aspectRatio * height + ",0) rotate (90)";
+          } else {
+            return "scale(" + d.height / height + ")";
+          }
+        });
+
         newPaintingTourObjects.transition().duration(1).on("end", function () {
           this.classList.add("active");
         });

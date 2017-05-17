@@ -147,7 +147,7 @@
           }]
         }, {
           "header": "Copies and Compositions",
-          "html": "<p>There are no more reliably authenticated Wang Wei paintings today. But these three paintings attributed to Wang Wei share an odd relationship with our painting at RISD – they share compositions!</p>",
+          "html": "<p>There are no more reliably authenticated Wang Wei paintings today. But these three paintings attributed to Wang Wei have an odd relationship with our painting at RISD – they share compositions!</p>",
           "hideMain": false,
           "blurMain": false,
           "bounds": [{
@@ -295,9 +295,28 @@
           "bounds": [{
             "x": 0,
             "y": 0,
-            "width": 5271,
-            "height": 1024,
+            "width": 6509,
+            "height": 3434,
             "framed": false
+          }],
+          "objects": [{
+            "type": "painting",
+            "key": "painting_Zhao-Lingrang_River-Landscape-in-Autumn",
+            "x": 5439,
+            "y": 0,
+            "height": 1024
+          }, {
+            "type": "painting",
+            "key": "painting_Zhao-Lingrang_MFA",
+            "x": 0,
+            "y": 1152,
+            "height": 1077
+          }, {
+            "type": "painting",
+            "key": "painting_Zhao-Lingrang_Attrib_Met",
+            "x": 0,
+            "y": 2357,
+            "height": 1077
           }]
         }, {
           "header": "Mist II",
@@ -598,6 +617,7 @@
       "location": "Yamato Bunkakan, Nara",
       "key": "painting_Zhao-Lingrang_River-Landscape-in-Autumn",
       "rotated": false,
+      "baseHeight": 2185,
       "thumbUrl": "assets/img/Zhao-Lingrang/Tour/painting_Zhao-Lingrang_Attrib_River-Landscape-In-Autumn_thumb.jpg",
       "baseUrl": "assets/img/Zhao-Lingrang/Tour/painting_Zhao-Lingrang_Attrib_River-Landscape-In-Autumn_base.png"
     },
@@ -605,8 +625,9 @@
       "painter": "Zhao Lingrang",
       "name": "Willows and Geese",
       "location": "Unknown",
-      "key": "painting_Zhao-Lingrang_River-Landscape-in-Autumn",
+      "key": "painting_Zhao-Lingrang_Willows-and-Geese",
       "rotated": true,
+      "baseHeight": 675,
       "thumbUrl": "assets/img/Zhao-Lingrang/Tour/painting_Zhao-Lingrang_Willows-and-Geese_thumb.jpg",
       "baseUrl": "assets/img/Zhao-Lingrang/Tour/painting_Zhao-Lingrang_Willows-and-Geese_base.png"
     },
@@ -616,6 +637,7 @@
       "location": "Museum of Fine Arts, Boston",
       "key": "painting_Zhao-Lingrang_MFA",
       "rotated": true,
+      "baseHeight": 500,
       "thumbUrl": "assets/img/Zhao-Lingrang/Tour/painting_Zhao-Lingrang_MFA_Trimmed_thumb.jpg",
       "baseUrl": "assets/img/Zhao-Lingrang/Tour/painting_Zhao-Lingrang_MFA_Trimmed_base.png"
     },
@@ -626,6 +648,7 @@
       "location": "Metropolitan Museum of Art, New York",
       "key": "painting_Zhao-Lingrang_Attrib_Met",
       "rotated": true,
+      "baseHeight": 738,
       "thumbUrl": "assets/img/Zhao-Lingrang/Tour/painting_Zhao-Lingrang_Attrib_Met_Trimmed_thumb.jpg",
       "baseUrl": "assets/img/Zhao-Lingrang/Tour/painting_Zhao-Lingrang_Attrib_Met_Trimmed_base.png"
     },
@@ -635,6 +658,7 @@
       "location": "National Palace Museum, Taipei",
       "key": "painting_Zhao-Lingrang_Yellow-of-Oranges-and-Green-of-Tangerines",
       "rotated": true,
+      "baseHeight": 939,
       "thumbUrl": "assets/img/Zhao-Lingrang/Tour/painting_Zhao-Lingrang_Yellow-of-Oranges-and-Green-of-Tangerines_thumb.jpg",
       "baseUrl": "assets/img/Zhao-Lingrang/Tour/painting_Zhao-Lingrang_Yellow-of-Oranges-and-Green-of-Tangerines_base.png"
     },
@@ -645,6 +669,7 @@
       "location": "National Palace Museum, Taipei",
       "key": "painting_Zhao_Lingrang_Attrib_Travellers-by-a-Willow-shaded-Pavilion",
       "rotated": false,
+      "baseHeight": 836,
       "thumbUrl": "assets/img/Zhao-Lingrang/Tour/painting_Zhao-Lingrang_Attrib_Travellers-by-a-Willow-shaded-Pavilion_thumb.jpg",
       "baseUrl": "assets/img/Zhao-Lingrang/Tour/painting_Zhao-Lingrang_Attrib_Travellers-by-a-Willow-shaded-Pavilion_base.png"
     },
@@ -654,6 +679,7 @@
       "location": "Metropolitan Museum of Art, New York",
       "key": "painting_Zhao_Lingrang_Attrib_Travellers-by-a-Willow-shaded-Pavilion",
       "rotated": true,
+      "baseHeight": 600,
       "thumbUrl": "assets/img/Zhao-Lingrang/Tour/painting_Guo-Xi_Old-Trees-Level-Distance_thumb.jpg",
       "baseUrl": "assets/img/Zhao-Lingrang/Tour/painting_Guo-Xi_Old-Trees-Level-Distance_base.png"
     },
@@ -663,6 +689,7 @@
       "location": "National Palace Museum, Taipei",
       "key": "painting_Guo-Xi_Early-Spring",
       "rotated": false,
+      "baseHeight": 2048,
       "thumbUrl": "assets/img/Zhao-Lingrang/Tour/painting_Guo-Xi_Early-Spring_thumb.jpg",
       "baseUrl": "assets/img/Zhao-Lingrang/Tour/painting_Guo-Xi_Early-Spring_base.png"
     },
@@ -673,6 +700,7 @@
       "location": "Honolulu Museum of Art, Honolulu",
       "key": "painting_Wang-Wei_Attrib_Honolulu",
       "rotated": true,
+      "baseHeight": 1024,
       "thumbUrl": "assets/img/Zhao-Lingrang/Tour/painting_Wang-Wei_Attrib_Honolulu_thumb.jpg",
       "baseUrl": "assets/img/Zhao-Lingrang/Tour/painting_Wang-Wei_Attrib_Honolulu_base.png"
     },
@@ -683,6 +711,7 @@
       "location": "National Palace Museum, Taipei",
       "key": "painting_Wang-Wei_Attrib_NPM",
       "rotated": true,
+      "baseHeight": 760,
       "thumbUrl": "assets/img/Zhao-Lingrang/Tour/painting_Wang-Wei_Attrib_NPM_thumb.jpg",
       "baseUrl": "assets/img/Zhao-Lingrang/Tour/painting_Wang-Wei_Attrib_NPM_base.png"
     },
@@ -693,6 +722,7 @@
       "location": "Ogawa Family Collection, Kyoto",
       "key": "painting_Wang-Wei_Attrib_Ogawa",
       "rotated": true,
+      "baseHeight": 757,
       "thumbUrl": "assets/img/Zhao-Lingrang/Tour/painting_Wang-Wei_Attrib_Ogawa_thumb.jpg",
       "baseUrl": "assets/img/Zhao-Lingrang/Tour/painting_Wang-Wei_Attrib_Ogawa_base.png"
     }

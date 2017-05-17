@@ -684,7 +684,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
 
           newPaintingBaseContainer.append("image")
             .attr("class", "object-thumb")
-            .attr("xling:href", function(d) {
+            .attr("xlink:href", function(d) {
               //TODO handle not found
               return tourPaintings[d.key].thumbUrl;
             })
@@ -703,13 +703,33 @@ d3.json("assets/json/paintings.json", function(paintingData) {
               }
             })
 
-          // newPaintingBaseContainer.append("image")
-          //   .attr("class", "object-base")
-          //   .attr("xling:href", function(d) {
-          //     console.log(d);
-          //     //TODO handle not found
-          //     return tourPaintings[d.key].baseUrl;
-          //   });
+          newPaintingBaseContainer.append("image")
+            .attr("class", "object-base")
+            .attr("xlink:href", function(d) {
+              //TODO handle not found
+              return tourPaintings[d.key].baseUrl;
+            })
+            .attr("width", function(d) {
+              const painting = tourPaintings[d.key];
+              const height = (painting.baseHeight !== undefined) ? painting.baseHeight : paintingHeight;
+              return painting.rotated ? height : height / painting.aspectRatio;
+            })
+            .attr("height", function(d) {
+              const painting = tourPaintings[d.key];
+              const height = (painting.baseHeight !== undefined) ? painting.baseHeight : paintingHeight;
+              return painting.rotated ? painting.aspectRatio * height : height;
+            })
+            .attr("transform", function(d) {
+              const painting = tourPaintings[d.key];
+              const height = (painting.baseHeight !== undefined) ? painting.baseHeight : paintingHeight;
+              if (painting.rotated) {
+                return "scale(" + d.height / height + ") translate(" + painting.aspectRatio * height + ",0) rotate (90)";
+              }
+              else {
+                return "scale(" + d.height / height + ")";
+              }
+            })
+            
           newPaintingTourObjects
             .transition()
             .duration(1)
