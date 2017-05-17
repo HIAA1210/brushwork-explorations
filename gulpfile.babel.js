@@ -158,10 +158,12 @@ function images() {
       }),
       8
     ))
-    .pipe($.if(PRODUCTION, $.imagemin({
-      progressive: true
-    })))
-    .pipe($.rename(function (path) {
+    .pipe(parallel($.if(PRODUCTION, $.imagemin({
+        progressive: true
+      })),
+      8
+    ))
+    .pipe($.rename(function(path) {
       if (path.extname === ".jpeg") {
         path.extname = ".jpg";
         path.basename = path.basename.substr(0, path.basename.lastIndexOf("_base")) + "_thumb";
@@ -170,9 +172,11 @@ function images() {
     .pipe(gulp.dest(PATHS.dist + '/assets/img'));
 
   return gulp.src('src/assets/img/**/*')
-    .pipe($.if(PRODUCTION, $.imagemin({
-      progressive: true
-    })))
+    .pipe(parallel($.if(PRODUCTION, $.imagemin({
+        progressive: true
+      })),
+      8
+    ))
     .pipe(gulp.dest(PATHS.dist + '/assets/img'));
 
   // return gulp.src('src/assets/img/**/*optimized.{png,jpg}')
