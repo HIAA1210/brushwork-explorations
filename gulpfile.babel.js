@@ -4,6 +4,7 @@ import plugins from 'gulp-load-plugins';
 import yargs from 'yargs';
 import browser from 'browser-sync';
 import gulp from 'gulp';
+import parallel from 'concurrent-transform';
 import panini from 'panini';
 import rimraf from 'rimraf';
 import sherpa from 'style-sherpa';
@@ -12,6 +13,7 @@ import fs from 'fs';
 
 // Load all Gulp plugins into one variable
 const $ = plugins();
+console.log($);
 
 // Check for --production flag
 const PRODUCTION = !!(yargs.argv.production);
@@ -143,23 +145,26 @@ function json() {
 function images() {
   gulp.src('src/assets/img/**/painting_*_base.{png,jpg}')
     .pipe($.changed(PATHS.dist))
-    .pipe($.imageResize({
-      width: 512,
-      upscale: false,
-      quality: .4,
-      format: "jpeg",
-      filter: "Lanczos",
-      noProfile: true,
-      imageMagick: true,
-      background: "#000"
-    }))
+    .pipe(parallel(
+      $.imageResize({
+        width: 512,
+        upscale: false,
+        quality: .4,
+        format: "jpeg",
+        filter: "Lanczos",
+        noProfile: true,
+        imageMagick: true,
+        background: "#000"
+      }),
+      8
+    ))
     .pipe($.if(PRODUCTION, $.imagemin({
       progressive: true
     })))
-    .pipe($.rename(function(path) {
+    .pipe($.rename(function (path) {
       if (path.extname === ".jpeg") {
         path.extname = ".jpg";
-        path.basename = path.basename.substr(0,path.basename.lastIndexOf("_base")) + "_thumb";
+        path.basename = path.basename.substr(0, path.basename.lastIndexOf("_base")) + "_thumb";
       }
     }))
     .pipe(gulp.dest(PATHS.dist + '/assets/img'));
