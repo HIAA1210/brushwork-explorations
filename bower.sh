@@ -1,3 +1,3 @@
 #!/bin/bash
 npm install -g bower
-bower install
+bower install --allow-root
