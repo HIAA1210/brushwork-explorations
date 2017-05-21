@@ -643,8 +643,8 @@
       "key": "painting_Zhao-Lingrang_River-Landscape-in-Autumn",
       "rotated": false,
       "baseHeight": 2185,
-      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/painting_Zhao-Lingrang_Attrib_River-Landscape-In-Autumn_thumb.jpg",
-      "baseUrl": "assets/img/Zhao-Lingrang/Tour/painting_Zhao-Lingrang_Attrib_River-Landscape-In-Autumn_base.png"
+      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/Paintings/painting_Zhao-Lingrang_Attrib_River-Landscape-In-Autumn_thumb.jpg",
+      "baseUrl": "assets/img/Zhao-Lingrang/Tour/Paintings/painting_Zhao-Lingrang_Attrib_River-Landscape-In-Autumn_base.png"
     },
     "painting_Zhao-Lingrang_Willows-and-Geese": {
       "painter": "Zhao Lingrang",
@@ -653,8 +653,8 @@
       "key": "painting_Zhao-Lingrang_Willows-and-Geese",
       "rotated": true,
       "baseHeight": 675,
-      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/painting_Zhao-Lingrang_Willows-and-Geese_thumb.jpg",
-      "baseUrl": "assets/img/Zhao-Lingrang/Tour/painting_Zhao-Lingrang_Willows-and-Geese_base.png"
+      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/Paintings/painting_Zhao-Lingrang_Willows-and-Geese_thumb.jpg",
+      "baseUrl": "assets/img/Zhao-Lingrang/Tour/Paintings/painting_Zhao-Lingrang_Willows-and-Geese_base.png"
     },
     "painting_Zhao-Lingrang_MFA": {
       "painter": "Zhao Lingrang",
@@ -663,8 +663,8 @@
       "key": "painting_Zhao-Lingrang_MFA",
       "rotated": true,
       "baseHeight": 500,
-      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/painting_Zhao-Lingrang_MFA_Trimmed_thumb.jpg",
-      "baseUrl": "assets/img/Zhao-Lingrang/Tour/painting_Zhao-Lingrang_MFA_Trimmed_base.png"
+      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/Paintings/painting_Zhao-Lingrang_MFA_Trimmed_thumb.jpg",
+      "baseUrl": "assets/img/Zhao-Lingrang/Tour/Paintings/painting_Zhao-Lingrang_MFA_Trimmed_base.png"
     },
     "painting_Zhao-Lingrang_Attrib_Met": {
       "painter": "Zhao Lingrang",
@@ -674,8 +674,8 @@
       "key": "painting_Zhao-Lingrang_Attrib_Met",
       "rotated": true,
       "baseHeight": 738,
-      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/painting_Zhao-Lingrang_Attrib_Met_Trimmed_thumb.jpg",
-      "baseUrl": "assets/img/Zhao-Lingrang/Tour/painting_Zhao-Lingrang_Attrib_Met_Trimmed_base.png"
+      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/Paintings/painting_Zhao-Lingrang_Attrib_Met_Trimmed_thumb.jpg",
+      "baseUrl": "assets/img/Zhao-Lingrang/Tour/Paintings/painting_Zhao-Lingrang_Attrib_Met_Trimmed_base.png"
     },
     "painting_Zhao-Lingrang_Yellow-of-Oranges-and-Green-of-Tangerines": {
       "painter": "Zhao Lingrang",
@@ -684,8 +684,8 @@
       "key": "painting_Zhao-Lingrang_Yellow-of-Oranges-and-Green-of-Tangerines",
       "rotated": true,
       "baseHeight": 939,
-      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/painting_Zhao-Lingrang_Yellow-of-Oranges-and-Green-of-Tangerines_thumb.jpg",
-      "baseUrl": "assets/img/Zhao-Lingrang/Tour/painting_Zhao-Lingrang_Yellow-of-Oranges-and-Green-of-Tangerines_base.png"
+      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/Paintings/painting_Zhao-Lingrang_Yellow-of-Oranges-and-Green-of-Tangerines_thumb.jpg",
+      "baseUrl": "assets/img/Zhao-Lingrang/Tour/Paintings/painting_Zhao-Lingrang_Yellow-of-Oranges-and-Green-of-Tangerines_base.png"
     },
     "painting_Zhao_Lingrang_Attrib_Travellers-by-a-Willow-shaded-Pavilion": {
       "painter": "Zhao Lingrang",
@@ -695,8 +695,8 @@
       "key": "painting_Zhao_Lingrang_Attrib_Travellers-by-a-Willow-shaded-Pavilion",
       "rotated": false,
       "baseHeight": 836,
-      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/painting_Zhao-Lingrang_Attrib_Travellers-by-a-Willow-shaded-Pavilion_thumb.jpg",
-      "baseUrl": "assets/img/Zhao-Lingrang/Tour/painting_Zhao-Lingrang_Attrib_Travellers-by-a-Willow-shaded-Pavilion_base.png"
+      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/Paintings/painting_Zhao-Lingrang_Attrib_Travellers-by-a-Willow-shaded-Pavilion_thumb.jpg",
+      "baseUrl": "assets/img/Zhao-Lingrang/Tour/Paintings/painting_Zhao-Lingrang_Attrib_Travellers-by-a-Willow-shaded-Pavilion_base.png"
     },
     "painting_Guo-Xi_Old-Trees-Level-Distance": {
       "painter": "Guo Xi",
@@ -705,8 +705,8 @@
       "key": "painting_Zhao_Lingrang_Attrib_Travellers-by-a-Willow-shaded-Pavilion",
       "rotated": true,
       "baseHeight": 600,
-      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/painting_Guo-Xi_Old-Trees-Level-Distance_thumb.jpg",
-      "baseUrl": "assets/img/Zhao-Lingrang/Tour/painting_Guo-Xi_Old-Trees-Level-Distance_base.png"
+      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/Paintings/painting_Guo-Xi_Old-Trees-Level-Distance_thumb.jpg",
+      "baseUrl": "assets/img/Zhao-Lingrang/Tour/Paintings/painting_Guo-Xi_Old-Trees-Level-Distance_base.png"
     },
     "painting_Guo-Xi_Early-Spring": {
       "painter": "Guo Xi",
@@ -715,8 +715,8 @@
       "key": "painting_Guo-Xi_Early-Spring",
       "rotated": false,
       "baseHeight": 2048,
-      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/painting_Guo-Xi_Early-Spring_thumb.jpg",
-      "baseUrl": "assets/img/Zhao-Lingrang/Tour/painting_Guo-Xi_Early-Spring_base.png"
+      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/Paintings/painting_Guo-Xi_Early-Spring_thumb.jpg",
+      "baseUrl": "assets/img/Zhao-Lingrang/Tour/Paintings/painting_Guo-Xi_Early-Spring_base.png"
     },
     "painting_Wang-Wei_Attrib_Honolulu": {
       "painter": "Wang Wei",
@@ -726,8 +726,8 @@
       "key": "painting_Wang-Wei_Attrib_Honolulu",
       "rotated": true,
       "baseHeight": 1024,
-      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/painting_Wang-Wei_Attrib_Honolulu_thumb.jpg",
-      "baseUrl": "assets/img/Zhao-Lingrang/Tour/painting_Wang-Wei_Attrib_Honolulu_base.png"
+      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/Paintings/painting_Wang-Wei_Attrib_Honolulu_thumb.jpg",
+      "baseUrl": "assets/img/Zhao-Lingrang/Tour/Paintings/painting_Wang-Wei_Attrib_Honolulu_base.png"
     },
     "painting_Wang-Wei_Attrib_NPM": {
       "painter": "Wang Wei",
@@ -737,8 +737,8 @@
       "key": "painting_Wang-Wei_Attrib_NPM",
       "rotated": true,
       "baseHeight": 760,
-      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/painting_Wang-Wei_Attrib_NPM_thumb.jpg",
-      "baseUrl": "assets/img/Zhao-Lingrang/Tour/painting_Wang-Wei_Attrib_NPM_base.png"
+      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/Paintings/painting_Wang-Wei_Attrib_NPM_thumb.jpg",
+      "baseUrl": "assets/img/Zhao-Lingrang/Tour/Paintings/painting_Wang-Wei_Attrib_NPM_base.png"
     },
     "painting_Wang-Wei_Attrib_Ogawa": {
       "painter": "Wang Wei",
@@ -748,8 +748,8 @@
       "key": "painting_Wang-Wei_Attrib_Ogawa",
       "rotated": true,
       "baseHeight": 757,
-      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/painting_Wang-Wei_Attrib_Ogawa_thumb.jpg",
-      "baseUrl": "assets/img/Zhao-Lingrang/Tour/painting_Wang-Wei_Attrib_Ogawa_base.png"
+      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/Paintings/painting_Wang-Wei_Attrib_Ogawa_thumb.jpg",
+      "baseUrl": "assets/img/Zhao-Lingrang/Tour/Paintings/painting_Wang-Wei_Attrib_Ogawa_base.png"
     }
   },
   "tourObjects": {
@@ -759,8 +759,8 @@
       "key": "crop_Wang-Wei_Attrib_Honolulu_like-NPM",
       "rotated": true,
       "baseHeight": 1024,
-      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/crop_Wang-Wei_Attrib_Honolulu_like-NPM_thumb.jpg",
-      "baseUrl": "assets/img/Zhao-Lingrang/Tour/crop_Wang-Wei_Attrib_Honolulu_like-NPM_base.png"
+      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/Crops/crop_Wang-Wei_Attrib_Honolulu_like-NPM_thumb.jpg",
+      "baseUrl": "assets/img/Zhao-Lingrang/Tour/Crops/crop_Wang-Wei_Attrib_Honolulu_like-NPM_base.png"
     },
     "crop_Wang-Wei_Attrib_Honolulu_like-Ogawa": {
       "type": "crop",
@@ -768,8 +768,8 @@
       "key": "crop_Wang-Wei_Attrib_Honolulu_like-Ogawa",
       "rotated": true,
       "baseHeight": 1024,
-      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/crop_Wang-Wei_Attrib_Honolulu_like-Ogawa_thumb.jpg",
-      "baseUrl": "assets/img/Zhao-Lingrang/Tour/crop_Wang-Wei_Attrib_Honolulu_like-Ogawa_base.png"
+      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/Crops/crop_Wang-Wei_Attrib_Honolulu_like-Ogawa_thumb.jpg",
+      "baseUrl": "assets/img/Zhao-Lingrang/Tour/Crops/crop_Wang-Wei_Attrib_Honolulu_like-Ogawa_base.png"
     }
   }
 }

@@ -928,11 +928,17 @@ d3.json("assets/json/paintings.json", function(paintingData) {
     var navMenu = d3.select("#menu-painters")
       .selectAll("li")
       .data(mainPaintings);
-
-    navMenu.enter()
+      
+    if(!state.showSplash) {
+       navMenu.enter()
       .append("li").append("a").text(function(d) {
         return d.painting.painter;
       }).merge(navMenu).classed("active", paintingIsActive).on("click", selectPainting.bind(undefined));
+    }
+    
+    navMenu.exit().remove();
+
+   
 
     d3.select(".overlay")
       .classed("active", function() {
