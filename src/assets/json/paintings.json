@@ -313,7 +313,7 @@
             "framed": false
           }]
         }, {
-          "header": "Mist I",
+          "header": "Mist connections",
           "html": "<p>Perhaps the biggest difference between <em>Winter Landscape</em> and Zhao Lingrang’s other paintings is the lack of mist. As mentioned, sinous, atmospheric mist is a hallmark of the &ldquo;small landscape&rdquo; style Zhao Lingrang focused on, so it’s unusual to see a complete lack of it in a painting with as atmospheric of a context as winter and snow.</p>",
           "hideMain": false,
           "blurMain": false,
@@ -344,8 +344,8 @@
             "height": 1077
           }]
         }, {
-          "header": "Mist II",
-          "html": "<p>The way <em>Winter Landscape</em> fades into nothingness on the right hand side of the composition may also give us pause. Maybe this copy is part of a longer composition, and this section is a transition between two components of a landscape? Maybe this section is supposed evoke a feeling of fading into mistiness? Perhaps this edge of the original painting was damaged and the artists copying it did not know what to paint in this area?</p>",
+          "header": "Mysterious corners",
+          "html": "<p>The way <em>Winter Landscape</em> emerges from nothingness on the right hand side of the composition (remember, Chinese scrolls are read from right to left) may also give us pause. Maybe this copy is part of a longer composition, and this section is a transition between two components of a landscape? Maybe this section is supposed to evoke a feeling of fading into mistiness? Perhaps this edge of the original painting was damaged and the artists copying it did not know what to paint in this area?</p>",
           "hideMain": false,
           "blurMain": true,
           "bounds": [{
@@ -356,7 +356,7 @@
             "framed": true
           }]
         }, {
-          "header": "Mist III",
+          "header": "Misplaced suspicion",
           "html": "<p>However, this fading away isn’t necessarily suspicious – in <em>River Village in Autumn</em>, the composition similarly fades into mist on the right side (and this misty side actually takes up half of the composition). And in <em>Whiling Away the Summer by a Lakeside Retreat</em> the line of trees appears out of a blanket of mist on the left edge.</p>",
           "hideMain": false,
           "blurMain": true,
@@ -380,7 +380,7 @@
             "framed": true
           }]
         }, {
-          "header": "Branches",
+          "header": "Branching off",
           "html": "<p>In <em>Winter Landscape</em>, delicate tree branches extend above leafy trees.</p><p>We see similar kinds of delicate branches extending above leaves in pieces attributed to Zhao Lingrang, such as in <em>Whiling Away the Summer by a Lakeside Retreat</em> and in <em>River Village in Autumn.</em></p>",
           "hideMain": false,
           "blurMain": true,
