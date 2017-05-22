@@ -423,13 +423,28 @@ d3.json("assets/json/paintings.json", function(error, paintingData) {
               state.activeTour.step = step;
             }
           }
+          else {
+            state.activeTour = undefined;
+          }
+        }
+        else {
+          state.activeTour = undefined;
         }
       }
+      else {
+        state.activePainting = undefined;
+        state.activeTour = undefined;
+      }
 
+    }
+    else {
+      state.activePainting = undefined;
+      state.activeTour = undefined;
     }
   }
 
   function updateUrl() {
+    window.history.pushState(null, "", "");
     if (state.activePainting !== undefined) {
       Url.updateSearchParam("activePainting", state.activePainting.data.painting.key);
       if (state.activeTour !== undefined) {
@@ -930,17 +945,17 @@ d3.json("assets/json/paintings.json", function(error, paintingData) {
     var navMenu = d3.select("#menu-painters")
       .selectAll("li")
       .data(mainPaintings);
-      
-    if(!state.showSplash) {
-       navMenu.enter()
-      .append("li").append("a").text(function(d) {
-        return d.painting.painter;
-      }).merge(navMenu).classed("active", paintingIsActive).on("click", selectPainting.bind(undefined));
+
+    if (!state.showSplash) {
+      navMenu.enter()
+        .append("li").append("a").text(function(d) {
+          return d.painting.painter;
+        }).merge(navMenu).classed("active", paintingIsActive).on("click", selectPainting.bind(undefined));
     }
-    
+
     navMenu.exit().remove();
 
-   
+
 
     d3.select(".overlay")
       .classed("active", function() {
@@ -1077,8 +1092,15 @@ d3.json("assets/json/paintings.json", function(error, paintingData) {
   resize();
   preloadMainPaintings().then(function() {
     loaded = true;
+
+    window.onpopstate = function() {
+      loadFromUrl();
+      render();
+      rezoom();
+    }
+
     render();
     rezoom();
   });
- 
+
 })
