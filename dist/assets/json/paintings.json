@@ -403,7 +403,7 @@
             "width": 1504,
             "height": 165,
             "framed": true
-          },{
+          }, {
             "x": 2399,
             "y": 1152,
             "width": 1504,
@@ -430,14 +430,14 @@
             "framed": true
           }, {
             "x": 2399,
-            "y": 1152,
+            "y": 239,
             "width": 1504,
             "height": 120,
             "framed": true
           }],
           "objects": [{
-            "type": "painting",
-            "key": "painting_Wang-Wei_Attrib_NPM",
+            "type": "crop",
+            "key": "crop_Wang-Wei_Attrib_NPM_birds",
             "x": 0,
             "y": 1152,
             "height": 785
@@ -830,7 +830,10 @@
   "tourObjects": {
     "crop_Wang-Wei_Attrib_Honolulu_like-NPM": {
       "type": "crop",
-      "link": "painting_Wang-Wei_Attrib_Honolulu",
+      "link": {
+        "type": "painting",
+        "key": "painting_Wang-Wei_Attrib_Honolulu"
+      },
       "key": "crop_Wang-Wei_Attrib_Honolulu_like-NPM",
       "rotated": true,
       "baseHeight": 1024,
@@ -839,12 +842,31 @@
     },
     "crop_Wang-Wei_Attrib_Honolulu_like-Ogawa": {
       "type": "crop",
-      "link": "painting_Wang-Wei_Attrib_Honolulu",
+      "link": {
+        "type": "painting",
+        "key": "painting_Wang-Wei_Attrib_Honolulu"
+      },
       "key": "crop_Wang-Wei_Attrib_Honolulu_like-Ogawa",
       "rotated": true,
       "baseHeight": 1024,
       "thumbUrl": "assets/img/Zhao-Lingrang/Tour/Crops/crop_Wang-Wei_Attrib_Honolulu_like-Ogawa_thumb.jpg",
       "baseUrl": "assets/img/Zhao-Lingrang/Tour/Crops/crop_Wang-Wei_Attrib_Honolulu_like-Ogawa_base.png"
+    },
+    "crop_Wang-Wei_Attrib_NPM_birds": {
+      "type": "crop",
+      "link": {
+        "type": "painting",
+        "key": "painting_Wang-Wei_Attrib_NPM",
+        "x": 3129.39,
+        "y": 0,
+        "width": 1961.94,
+        "height": 156.54
+      },
+      "key": "crop_Wang-Wei_Attrib_NPM_birds",
+      "rotated": true,
+      "baseHeight": 1024,
+      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/Crops/crop_Wang-Wei_Attrib_NPM_birds_thumb.jpg",
+      "baseUrl": "assets/img/Zhao-Lingrang/Tour/Crops/crop_Wang-Wei_Attrib_NPM_birds_base.png"
     }
   }
 }

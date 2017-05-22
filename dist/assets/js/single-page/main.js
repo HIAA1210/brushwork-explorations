@@ -349,7 +349,6 @@ d3.json("assets/json/paintings.json", function (error, paintingData) {
 
   function getActiveTourNode() {
     if (state.activeTour.node === undefined) {
-
       state.activeTour.node = d3.select(getActivePaintingNode()).select(".painting-tour-container").node();
       if (state.activeTour.node === null) {
         state.activeTour.node === undefined;
