@@ -53,7 +53,8 @@ function getRootElementFontSize() {
 
 //---- Load
 var loaded = false;
-d3.json("assets/json/paintings.json", function(paintingData) {
+d3.json("assets/json/paintings.json", function(error, paintingData) {
+  console.log(error);
   const mainPaintings = paintingData.mainPaintings;
   const tourPaintings = paintingData.tourPaintings;
   const tourObjects = paintingData.tourObjects;
@@ -173,7 +174,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
   const svgContainer = d3.select(".svg-container");
   const svgContainerNode = svgContainer.node();
 
-  var width, height;
+  var svgWidth, svgHeight, navBarHeight;
 
   const svg = d3.select(".svg-fullscreen");
   const root = svg.select(".root");
@@ -184,8 +185,9 @@ d3.json("assets/json/paintings.json", function(paintingData) {
 
   function resize() {
     const rect = svgContainerNode.getBoundingClientRect();
-    width = rect.width;
-    height = rect.height;
+    svgWidth = rect.width;
+    svgHeight = rect.height;
+    navBarHeight = document.getElementById("navbar").offsetHeight;
 
     if (state.showSplash) {
       rezoom();
@@ -210,9 +212,9 @@ d3.json("assets/json/paintings.json", function(paintingData) {
       dy = bounds.height,
       x = (bounds.x + bounds.width / 2),
       y = (bounds.y + bounds.height / 2),
-      scale = Math.max(minScale, Math.min(maxScale, 1 / Math.max(dx / width, dy / height))),
-      translateX = (width / 2) / scale - x,
-      translateY = (height / 2) / scale - y;
+      scale = Math.max(minScale, Math.min(maxScale, 1 / Math.max(dx / svgWidth, dy / svgHeight))),
+      translateX = (svgWidth / 2) / scale - x,
+      translateY = (svgHeight / 2) / scale - y;
 
     function transform() {
       return d3.zoomIdentity.scale(scale).translate(translateX, translateY);
@@ -232,11 +234,11 @@ d3.json("assets/json/paintings.json", function(paintingData) {
       textBounds = d3.select(this).select(".painting-ui-container").node().getBBox(),
       dx = paintingBounds.width,
       dy = paintingBounds.height,
-      scale = Math.max(minScale, Math.min(maxScale, 1 / (dy / height))),
+      scale = Math.max(minScale, Math.min(maxScale, 1 / (dy / svgHeight))),
       x = anchorBounds.x + dx + textBounds.width / scale + paintingUIWidthPadding * 2.5,
       y = (anchorBounds.y + dy / 2),
-      translateX = (width) / scale - x,
-      translateY = (height / 2) / scale - y;
+      translateX = (svgWidth) / scale - x,
+      translateY = (svgHeight / 2) / scale - y;
 
     function transform() {
       return d3.zoomIdentity.scale(scale).translate(translateX, translateY);
@@ -257,9 +259,9 @@ d3.json("assets/json/paintings.json", function(paintingData) {
       dy = bounds.height,
       x = (bounds.x + bounds.width / 2) + paintingBounds.x,
       y = (bounds.y + bounds.height / 2) + paintingBounds.y,
-      scale = Math.max(minScale, Math.min(maxScale, 1 / Math.max(dx / (width - 2 * zoomTourMargin), dy / (height - 2 * zoomTourMargin)))),
-      translateX = (width / 2) / scale - x,
-      translateY = (height / 2) / scale - y;
+      scale = Math.max(minScale, Math.min(maxScale, 1 / Math.max(dx / (svgWidth - 2 * zoomTourMargin), dy / ((svgHeight - navBarHeight) - 2 * zoomTourMargin)))),
+      translateX = (svgWidth / 2) / scale - x,
+      translateY = (((svgHeight - navBarHeight) / 2) / scale - y);
 
     function transform() {
       return d3.zoomIdentity.scale(scale).translate(translateX, translateY);
@@ -397,7 +399,7 @@ d3.json("assets/json/paintings.json", function(paintingData) {
   function loadFromUrl() {
     const queries = Url.parseQuery();
     const activePaintingKey = queries["activePainting"];
-    if (activePaintingKey) {
+    if (!!activePaintingKey) {
       const activePaintingData = _.find(mainPaintings, function(mainPainting) {
         return mainPainting.painting.key === activePaintingKey;
       });
@@ -1072,10 +1074,11 @@ d3.json("assets/json/paintings.json", function(paintingData) {
 
   //---- Main
   loadFromUrl();
+  resize();
   preloadMainPaintings().then(function() {
     loaded = true;
     render();
     rezoom();
   });
-  resize();
+ 
 })
