@@ -345,7 +345,7 @@
           }]
         }, {
           "header": "Mysterious corners",
-          "html": "<p>The way <em>Winter Landscape</em> emerges from nothingness on the right hand side of the composition (remember, Chinese scrolls are read from right to left) may also give us pause. Maybe this copy is part of a longer composition, and this section is a transition between two components of a landscape? Maybe this section is supposed to evoke a feeling of fading into mistiness? Perhaps this edge of the original painting was damaged and the artists copying it did not know what to paint in this area?</p>",
+          "html": "<p>The way <em>Winter Landscape</em> emerges from nothingness on the right hand side of the composition (remember, Chinese scrolls are read from right to left) may also give us pause. Maybe this copy is part of a longer composition, and this section is a transition between two components of a landscape? Maybe this section is supposed to evoke a feeling of fading from mistiness? Perhaps this edge of the original painting was damaged and the artists copying it did not know what to paint in this area?</p>",
           "hideMain": false,
           "blurMain": true,
           "bounds": [{
@@ -416,10 +416,16 @@
             "x": 0,
             "y": 1152,
             "height": 785
+          }, {
+            "type": "crop",
+            "key": "crop_Wang-Wei_Attrib_NPM_birds",
+            "x": 2399,
+            "y": 1152,
+            "height": 120
           }]
         }, {
           "header": "Birds of a Feather",
-          "html": "<p>In fact, when you compare the two side-by-side, the two paintings appear to be the same type of birds. Both are painted using single dots for the heads, and curvy &lsquo;v&rsquo; strokes for bodies and wings.</p><p>We aren’t really sure which painting came first, whether either is the original composition, or even whether one painting was copied from the other. But similarities between the two in even minute details suggest that both are, at the very least, quite closely related.</p>",
+          "html": "<p>In fact, when you compare the two side-by-side, they appear to be the same type of birds. Both are painted using single dots for the heads, and curvy &lsquo;v&rsquo; strokes for bodies and wings.</p><p>We aren’t really sure which painting came first, whether either is the original composition, or even whether one painting was copied from the other. But these similarities in even minute details suggest that both are, at the very least, quite closely related.</p>",
           "hideMain": false,
           "blurMain": true,
           "bounds": [{
@@ -438,13 +444,13 @@
           "objects": [{
             "type": "crop",
             "key": "crop_Wang-Wei_Attrib_NPM_birds",
-            "x": 0,
-            "y": 1152,
-            "height": 785
+            "x": 2399,
+            "y": 239,
+            "height": 120
           }]
         }, {
-          "header": "The dove is in the details",
-          "html": "<p>We find birds depicted in the same manner in <em>River Landscape in Autumn</em>. The birds there, however, are in a more organic formation, with variations in tone suggesting that some birds are closer to the viewer and some birds are further away.</p><p>By contrast, the birds in <em>Winter Landscape</em> are all the same tone, making them seem as if they are all the same distance from the viewer. They are more a pattern of squiggles than a formation of individual, carefully painted birds.</p><p>Keep an eye out for this formulaic quality in other parts of <em>Winter Landscape</em>, which suggest that this painting was created when Zhao Lingrang’s style had been formalized and made standard – suspicious for a painting which purports to be painted by Zhao Lingrang himself.</p>",
+          "header": "Flock Together?",
+          "html": "<p>We find birds depicted in the same manner in <em>River Landscape in Autumn</em>. The birds there, however, are in a more organic formation, with variations in tone suggesting that some birds are closer to the viewer and some birds are further away.</p><p>By contrast, the birds in <em>Winter Landscape</em> are all the same tone, making them seem as if they are all the same distance from the viewer. They are more a pattern of squiggles than a formation of individual, carefully painted birds.</p>",
           "hideMain": false,
           "blurMain": true,
           "bounds": [{
@@ -453,10 +459,35 @@
             "width": 651,
             "height": 165,
             "framed": true
+          }, {
+            "x": 2399,
+            "y": 239,
+            "width": 651,
+            "height": 303,
+            "framed": true
+          }],
+          "objects": [{
+            "type": "crop",
+            "key": "crop_Zhao-Lingrang_Attrib_River-Landscape-In-Autumn_birds",
+            "x": 2399,
+            "y": 239,
+            "height": 303
           }]
         }, {
-          "header": "Birds I",
-          "html": "<p>Shifting our attention away from the birds in flight, we see a similar situation between these birds in the trees, and the birds of <em>Whiling Away the Summer by a Lakeside Retreat</em>.<p></p>Again, they appear to be the same type of bird, but the birds in <em>Whiling Away the Summer[…]</em> are painted with much more detail. Each bird seems unique, and the strokework for each bird done is contextual to its pose, whereas in <em>Winter Landscape</em> the birds are more formulaic – a dot for the head, separated by a larger dot for the body – similar to how <em>Winter Landscape</em>’s birds in flight are depicted.</p>",
+          "header": "Trendsetters and Copycats",
+          "html": "<p>Keep an eye out for this formulaic quality in other parts of <em>Winter Landscape</em>, which suggest that this painting was created when Zhao Lingrang’s style had been formalized and made standard – suspicious for a painting which purports to be painted by Zhao Lingrang himself.</p>",
+          "hideMain": false,
+          "blurMain": false,
+          "bounds": [{
+            "x": 0,
+            "y": 0,
+            "width": 5271,
+            "height": 1024,
+            "framed": false
+          }]
+        }, {
+          "header": "The dove is in the details",
+          "html": "<p>Shifting our attention away from the birds in flight, we see a similar situation between these birds in the trees, and the birds of <em>Whiling Away the Summer by a Lakeside Retreat</em>.<p></p>Again, they appear to be the same type of bird, but the birds in <em>Whiling Away the Summer</em> are painted with much more detail. Each bird seems unique, and the strokework for each bird done is contextual to its pose, whereas in <em>Winter Landscape</em> the birds are more formulaic – a dot for the head, separated by a larger dot for the body – similar to how <em>Winter Landscape</em>’s birds in flight are depicted.</p>",
           "hideMain": false,
           "blurMain": true,
           "bounds": [{
@@ -465,6 +496,19 @@
             "width": 187,
             "height": 176,
             "framed": true
+          },{
+            "x": 2056,
+            "y": 320,
+            "width": 187,
+            "height": 222,
+            "framed": true
+          }],
+          "objects": [{
+            "type": "crop",
+            "key": "crop_Zhao-Lingrang_MFA_birds",
+            "x": 2056,
+            "y": 320,
+            "height": 222
           }]
         }, {
           "header": "Tree Trunks",
@@ -867,6 +911,38 @@
       "baseHeight": 1024,
       "thumbUrl": "assets/img/Zhao-Lingrang/Tour/Crops/crop_Wang-Wei_Attrib_NPM_birds_thumb.jpg",
       "baseUrl": "assets/img/Zhao-Lingrang/Tour/Crops/crop_Wang-Wei_Attrib_NPM_birds_base.png"
+    },
+    "crop_Zhao-Lingrang_Attrib_River-Landscape-In-Autumn_birds": {
+      "type": "crop",
+      "link": {
+        "type": "painting",
+        "key": "painting_Zhao-Lingrang_Attrib_River-Landscape-In-Autumn",
+        "x": 274,
+        "y": 21,
+        "width": 649,
+        "height": 303
+      },
+      "key": "crop_Zhao-Lingrang_Attrib_River-Landscape-In-Autumn_birds",
+      "rotated": false,
+      "baseHeight": 117,
+      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/Crops/crop_Zhao-Lingrang_Attrib_River-Landscape-In-Autumn_birds_thumb.jpg",
+      "baseUrl": "assets/img/Zhao-Lingrang/Tour/Crops/crop_Zhao-Lingrang_Attrib_River-Landscape-In-Autumn_birds_base.png"
+    },
+    "crop_Zhao-Lingrang_MFA_birds": {
+      "type": "crop",
+      "link": {
+        "type": "painting",
+        "key": "painting_Zhao-Lingrang_MFA",
+        "x": 4018,
+        "y": 92.91,
+        "width": 125.71,
+        "height": 149.25
+      },
+      "key": "crop_Zhao-Lingrang_MFA_birds",
+      "rotated": false,
+      "baseHeight": 1045,
+      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/Crops/crop_Zhao-Lingrang_MFA_birds_thumb.jpg",
+      "baseUrl": "assets/img/Zhao-Lingrang/Tour/Crops/crop_Zhao-Lingrang_MFA_birds_base.png"
     }
   }
 }
