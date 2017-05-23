@@ -496,7 +496,7 @@
             "width": 187,
             "height": 176,
             "framed": true
-          },{
+          }, {
             "x": 2056,
             "y": 320,
             "width": 187,
@@ -521,6 +521,19 @@
             "width": 1096,
             "height": 685,
             "framed": true
+          }, {
+            "x": 1684,
+            "y": 855,
+            "width": 1096,
+            "height": 685,
+            "framed": true
+          }],
+          "objects": [{
+            "type": "crop",
+            "key": "crop_Zhao-Lingrang_MFA_trunks",
+            "x": 1684,
+            "y": 855,
+            "height": 685
           }]
         }, {
           "header": "Branching Off",
@@ -943,6 +956,22 @@
       "baseHeight": 1045,
       "thumbUrl": "assets/img/Zhao-Lingrang/Tour/Crops/crop_Zhao-Lingrang_MFA_birds_thumb.jpg",
       "baseUrl": "assets/img/Zhao-Lingrang/Tour/Crops/crop_Zhao-Lingrang_MFA_birds_base.png"
+    },
+    "crop_Zhao-Lingrang_MFA_trunks": {
+      "type": "crop",
+      "link": {
+        "type": "painting",
+        "key": "painting_Zhao-Lingrang_MFA",
+        "x": 1178.79,
+        "y": 224.14,
+        "width": 290.71,
+        "height": 181.71
+      },
+      "key": "crop_Zhao-Lingrang_MFA_trunks",
+      "rotated": false,
+      "baseHeight": 763,
+      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/Crops/crop_Zhao-Lingrang_MFA_trunks_thumb.jpg",
+      "baseUrl": "assets/img/Zhao-Lingrang/Tour/Crops/crop_Zhao-Lingrang_MFA_trunks_base.png"
     }
   }
 }
