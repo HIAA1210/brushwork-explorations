@@ -574,7 +574,7 @@
           }]
         },{
           "header": "Different Strokes",
-          "html": "<p>Whereas the tree trunks in these three paintings formerly attributed to Zhao Lingrang have far more pronounced outlines.</p>",
+          "html": "<p>On the other hand, the tree trunks in these three paintings, formerly attributed to Zhao Lingrang, have far more pronounced outlines.</p>",
           "hideMain": false,
           "blurMain": true,
           "bounds": [{
@@ -967,6 +967,39 @@
       "baseHeight": 2111,
       "thumbUrl": "assets/img/Zhao-Lingrang/Tour/Paintings/painting_Li-Anzhong_Signed_Cleveland_thumb.jpg",
       "baseUrl": "assets/img/Zhao-Lingrang/Tour/Paintings/painting_Li-Anzhong_Signed_Cleveland_base.png"
+    },
+    "painting_Zhao-Lingrang_Attrib_Cottage-Among-Trees-by-a-Lakeside": {
+      "painter": "Zhao Lingrang",
+      "painterNote": "attributed",
+      "name": "Cottage Among Trees by a Lakeside",
+      "location": "Museum of Fine Arts, Boston",
+      "key": "painting_Zhao-Lingrang_Attrib_Cottage-Among-Trees-by-a-Lakeside",
+      "rotated": false,
+      "baseHeight": 1541,
+      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/Paintings/painting_Zhao-Lingrang_Attrib_Cottage-Among-Trees-by-a-Lakeside_thumb.jpg",
+      "baseUrl": "assets/img/Zhao-Lingrang/Tour/Paintings/painting_Zhao-Lingrang_Attrib_Cottage-Among-Trees-by-a-Lakeside_base.png"
+    },
+    "painting_Zhao-Lingrang_Attrib_Flock-of-Birds-Returning-to-Wintry-Woods": {
+      "painter": "Zhao Lingrang",
+      "painterNote": "attributed",
+      "name": "Flock of Birds Returning to Wintry Woods",
+      "location": "Museum of Fine Arts, Boston",
+      "key": "painting_Zhao-Lingrang_Attrib_Flock-of-Birds-Returning-to-Wintry-Woods",
+      "rotated": false,
+      "baseHeight": 1600,
+      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/Paintings/painting_Zhao-Lingrang_Attrib_Flock-of-Birds-Returning-to-Wintry-Woods_thumb.jpg",
+      "baseUrl": "assets/img/Zhao-Lingrang/Tour/Paintings/painting_Zhao-Lingrang_Attrib_Flock-of-Birds-Returning-to-Wintry-Woods_base.png"
+    },
+    "painting_Zhao-Lingrang_Attrib_Lake-Retreat-Among-Willow-Trees": {
+      "painter": "Zhao Lingrang",
+      "painterNote": "attributed",
+      "name": "Lake Retreat Among Willow Trees",
+      "location": "Museum of Fine Arts, Boston",
+      "key": "painting_Zhao-Lingrang_Attrib_Lake-Retreat-Among-Willow-Trees",
+      "rotated": false,
+      "baseHeight": 943,
+      "thumbUrl": "assets/img/Zhao-Lingrang/Tour/Paintings/painting_Zhao-Lingrang_Attrib_Lake-Retreat-Among-Willow-Trees_thumb.jpg",
+      "baseUrl": "assets/img/Zhao-Lingrang/Tour/Paintings/painting_Zhao-Lingrang_Attrib_Lake-Retreat-Among-Willow-Trees_base.png"
     }
   },
   "tourObjects": {
