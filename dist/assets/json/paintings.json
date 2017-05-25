@@ -535,7 +535,7 @@
                         "framed": true
                     }, {
                         "x": 2009,
-                        "y": 837.5,
+                        "y": 89,
                         "width": 548,
                         "height": 342.5,
                         "framed": true
@@ -544,7 +544,7 @@
                         "type": "crop",
                         "key": "crop_Zhao-Lingrang_MFA_trunks",
                         "x": 2009,
-                        "y": 837.5,
+                        "y": 89,
                         "height": 342.5
                     }]
                 }, {
@@ -560,13 +560,13 @@
                         "framed": true
                     }, {
                         "x": 2009,
-                        "y": 837.5,
+                        "y": 89,
                         "width": 548,
                         "height": 342.5,
                         "framed": true
                     }, {
                         "x": 2589,
-                        "y": 463,
+                        "y": 89,
                         "width": 773,
                         "height": 717,
                         "framed": false
@@ -575,13 +575,13 @@
                         "type": "crop",
                         "key": "crop_Zhao-Lingrang_MFA_trunks",
                         "x": 2009,
-                        "y": 837.5,
+                        "y": 89,
                         "height": 342.5
                     }, {
                         "type": "painting",
                         "key": "painting_Li-Anzhong_Signed_Cleveland",
                         "x": 2589,
-                        "y": 463,
+                        "y": 89,
                         "height": 717
                     }]
                 }, {
@@ -597,29 +597,53 @@
                         "framed": true
                     }, {
                         "x": 2009,
-                        "y": 837.5,
+                        "y": 89,
                         "width": 548,
                         "height": 342.5,
                         "framed": true
                     }, {
                         "x": 2589,
-                        "y": 463,
+                        "y": 89,
                         "width": 773,
                         "height": 717,
+                        "framed": false
+                    }, {
+                        "x": 2009,
+                        "y": 838,
+                        "width": 3241.96,
+                        "height": 1024,
                         "framed": false
                     }],
                     "objects": [{
                         "type": "crop",
                         "key": "crop_Zhao-Lingrang_MFA_trunks",
                         "x": 2009,
-                        "y": 837.5,
+                        "y": 89,
                         "height": 342.5
                     }, {
                         "type": "painting",
                         "key": "painting_Li-Anzhong_Signed_Cleveland",
                         "x": 2589,
-                        "y": 463,
+                        "y": 89,
                         "height": 717
+                    }, {
+                        "type": "painting",
+                        "key": "painting_Zhao-Lingrang_Attrib_Cottage-Among-Trees-by-a-Lakeside",
+                        "x": 2009,
+                        "y": 838,
+                        "height": 1024
+                    }, {
+                        "type": "painting",
+                        "key": "painting_Zhao-Lingrang_Attrib_Flock-of-Birds-Returning-to-Wintry-Woods",
+                        "x": 3104,
+                        "y": 838,
+                        "height": 1024
+                    }, {
+                        "type": "painting",
+                        "key": "painting_Zhao-Lingrang_Attrib_Lake-Retreat-Among-Willow-Trees",
+                        "x": 4139,
+                        "y": 838,
+                        "height": 1024
                     }]
                 }, {
                     "header": "Branching Off",
