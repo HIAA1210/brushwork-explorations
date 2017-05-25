@@ -69,7 +69,7 @@ d3.json("assets/json/paintings.json", function(error, paintingData) {
   }
 
   function loadPainting(painting, wait) {
-    console.log(painting);
+    // console.log(painting);
     return new Promise(function(resolve, reject) {
       if (painting.loaded) {
         resolve();
@@ -154,7 +154,7 @@ d3.json("assets/json/paintings.json", function(error, paintingData) {
       if (step.objects !== undefined) {
         const numObjects = step.objects.length;
         for (var j = 0; j < numObjects; j++) {
-          console.log(j, step.objects[j]);
+          // console.log(j, step.objects[j]);
           if (step.objects[j].type === "painting" || step.objects[j].type === "crop") {
             promises.push(loadPainting(getTourObject(step.objects[j]), true));
           }
@@ -514,7 +514,7 @@ d3.json("assets/json/paintings.json", function(error, paintingData) {
       });
 
     var newPaintingThumbImage = newPaintingBaseContainers.append("image")
-      .attr("class", "painting-thumb")
+      .attr("class", "painting-thumb thumb")
       .attr("xlink:href", function(d) {
         return d.painting.thumbUrl;
       })
@@ -526,7 +526,7 @@ d3.json("assets/json/paintings.json", function(error, paintingData) {
         return "scale(" + paintingThumbScale + ") translate(" + d.painting.aspectRatio * paintingThumbHeight + ",0) rotate (90)";
       });
 
-    var newPaintingFullImage = newPaintingBaseContainers.append("image")
+    var newPaintingBaseImage = newPaintingBaseContainers.append("image")
       .attr("class", "painting-base")
       .attr("xlink:href", function(d) {
         return d.painting.baseUrl;
@@ -537,6 +537,9 @@ d3.json("assets/json/paintings.json", function(error, paintingData) {
       })
       .attr("transform", function(d) {
         return "scale(" + paintingScale + ") translate(" + d.painting.aspectRatio * paintingHeight + ",0) rotate (90)";
+      })
+      .on("load", function(d) {
+        d3.select(this.parentNode).select(".thumb").remove();
       });
 
     var newPaintingBlurImage = newPaintingBaseContainers
@@ -743,7 +746,7 @@ d3.json("assets/json/paintings.json", function(error, paintingData) {
             });
 
           newPaintingBaseContainer.append("image")
-            .attr("class", "object-thumb")
+            .attr("class", "object-thumb thumb")
             .attr("xlink:href", function(d) {
               //TODO handle not found
               return getTourObject(d).thumbUrl;
@@ -789,7 +792,10 @@ d3.json("assets/json/paintings.json", function(error, paintingData) {
               else {
                 return "scale(" + d.height / height + ")";
               }
-            });
+            })
+            .on("load", function(d) {
+              d3.select(this.parentNode).select(".thumb").remove();
+            });;
 
           newPaintingTourObjects
             .transition()
